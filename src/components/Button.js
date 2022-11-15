@@ -4,8 +4,8 @@ import { Button as AhaButton } from "@ahaui/react";
 const Button = () => {
   return (
     <div>
-      <AhaButton variant="primary">
-        <AhaButton.label>Hello</AhaButton.label>
+      <AhaButton variant="accent">
+        <AhaButton.Label>Hello</AhaButton.Label>
       </AhaButton>
     </div>
   );

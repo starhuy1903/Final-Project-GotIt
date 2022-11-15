@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import '@ahaui/css/dist/index.min.css';
+import '@ahaui/css/dist/index.min.css';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
