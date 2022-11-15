@@ -14,13 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "noImplicitAny": false,
-    // Generate d.ts files
-    "declaration": true,
-    // This compiler run should
-    // only output d.ts files
-    "emitDeclarationOnly": true
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }

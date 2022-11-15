@@ -4,15 +4,14 @@ import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [current, setCurrent] = useState("home");
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   return (
-    <Header fullWidth>
+    <Header fullWidth className="u-shadowMedium">
       <Header.Brand>
         <Link to="/">
           <Logo
             onClick={() => setCurrent("home")}
             src="https://vn.got-it.ai/assets/images/logo-1fa722c62e.svg"
-            variant="original"
             height={40}
           />
         </Link>
@@ -27,7 +26,7 @@ const Navbar: React.FC = () => {
               </Link>
             </TopMenu.Item>
             <TopMenu.Item eventKey="management">
-              <Link to="/category" style={{ textDecoration: "none" }}>
+              <Link to="/categories" style={{ textDecoration: "none" }}>
                 Management
               </Link>
             </TopMenu.Item>
