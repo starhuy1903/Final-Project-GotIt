@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [current, setCurrent] = useState("home");
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <Header fullWidth>
       <Header.Brand>
@@ -43,7 +43,10 @@ const Navbar: React.FC = () => {
               <Dropdown.Container className="u-paddingVerticalExtraSmall">
                 <Dropdown.Item>
                   <Icon name="setting" size="small" />
-                  <Link to="/profile">
+                  <Link
+                    to="/profile"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
                     <span className="u-marginLeftExtraSmall u-cursorPointer">
                       My Profile
                     </span>
@@ -51,9 +54,14 @@ const Navbar: React.FC = () => {
                 </Dropdown.Item>
                 <Dropdown.Item>
                   <Icon name="power" size="small" />
-                  <span className="u-marginLeftExtraSmall u-cursorPointer">
-                    Logout
-                  </span>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <span className="u-marginLeftExtraSmall u-cursorPointer">
+                      Logout
+                    </span>
+                  </Link>
                 </Dropdown.Item>
               </Dropdown.Container>
             </Dropdown>
