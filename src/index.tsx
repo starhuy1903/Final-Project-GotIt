@@ -5,16 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@ahaui/css/dist/index.min.css';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-
-// const store = createStore()
+import { BrowserRouter } from "react-router-dom";
 
 const root = document.getElementById('root') as HTMLElement
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <Provider store={store}> */}
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
     {/* </Provider> */}
   </React.StrictMode>, root
 );

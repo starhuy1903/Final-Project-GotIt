@@ -1,17 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Button from './components/Button';
-// import { Button } from '@ahaui/react';
+import { Route, Routes } from "react-router-dom";
+import Layout from './components/layout/Layout';
 
 function App() {
-  const a = 0;
+  
   return (
-    <div className="App">
-     {/* <Button></Button> */}
-     Hello World
-     <Button />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* public routes */}
+
+        {/* protected routes */}
+      </Route>
+
+    </Routes>
   );
 }
 
