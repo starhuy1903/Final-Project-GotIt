@@ -6,15 +6,15 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem("token"),
 };
 
 const reducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {
     case ActionType.AUTH_USER:
-      return { token: action.payload, errorMsg: null };
-    case ActionType.AUTH_ERROR:
-      return { token: null, errorMsg: action.payload };
+      return { token: action.payload };
+    case ActionType.AUTH_RESET:
+      return { token: null };
     default:
       return state;
   }

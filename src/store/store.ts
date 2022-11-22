@@ -5,15 +5,20 @@ import {
   AnyAction,
 } from "redux";
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 import authReducer from "./reducers/authReducer";
-// import notiMsgReducer from "./reducers/notiMsgReducer";
+import notiMsgReducer from "./reducers/notiMsgReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  // notiMsg: notiMsgReducer,
+  notiMsg: notiMsgReducer,
 });
 
-export const store = createStore(rootReducer, {}, applyMiddleware(thunk));
+export const store = createStore(
+  rootReducer,
+  {},
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 export type AppDispatch = typeof store.dispatch;
 export type ReduxState = ReturnType<typeof rootReducer>;

@@ -27,9 +27,8 @@ const LoginPage: React.FC = () => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (user, { resetForm }) => {
+    onSubmit: (user) => {
       handleSubmit(user);
-      resetForm();
     },
 
     validationSchema: schema,
@@ -45,8 +44,6 @@ const LoginPage: React.FC = () => {
       navigate("/");
     }
   };
-
-  // console.log(formik);
 
   return (
     <div

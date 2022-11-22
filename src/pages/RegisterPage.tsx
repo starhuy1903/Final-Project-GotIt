@@ -29,16 +29,14 @@ const RegisterPage = () => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (user, { resetForm }) => {
+    onSubmit: (user) => {
       handleSubmit(user);
-      resetForm();
     },
 
     validationSchema: schema,
     validateOnChange: false,
     validateOnBlur: true,
   });
-  // console.log(formik.isSubmitting);
 
   const handleSubmit = async (user: any) => {
     setLoading(true);
