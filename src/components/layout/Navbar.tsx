@@ -1,5 +1,5 @@
 import { Header, Logo, TopMenu, Dropdown, Icon, Button } from "@ahaui/react";
-import { useAppSelector, useThunkDispatch } from "hooks";
+import { useAppSelector, useTypedDispatch } from "hooks";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signOut } from "store/actions";
@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const token = useAppSelector(selectToken);
   const location = useLocation();
-  const dispatch = useThunkDispatch();
+  const dispatch = useTypedDispatch();
 
   useEffect(() => {
     if (location.pathname !== current) {

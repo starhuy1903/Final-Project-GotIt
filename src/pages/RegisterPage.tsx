@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Form, Button, Loader } from "@ahaui/react";
-import { useThunkDispatch } from "../hooks";
+import { useTypedDispatch } from "../hooks";
 import { signUp } from "../store/actions";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,7 +22,7 @@ interface SignUpFormValues {
 }
 
 const RegisterPage = () => {
-  const dispatch = useThunkDispatch();
+  const dispatch = useTypedDispatch();
   const initialValues: SignUpFormValues = { email: "", password: "", name: "" };
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();

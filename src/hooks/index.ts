@@ -1,2 +1,2 @@
 export * from "./useAppSelector";
-export * from "./useThunkDispatch";
+export * from "./useTypedDispatch";

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Form, Button, Loader } from "@ahaui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useThunkDispatch } from "../hooks";
-import { signIn } from "../store/actions/authActions";
+import { useTypedDispatch } from "../../hooks";
+import { signIn } from "../../store/actions/authActions";
 import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -20,7 +20,7 @@ interface LoginFormValues {
 }
 
 const LoginPage: React.FC = () => {
-  const dispatch = useThunkDispatch();
+  const dispatch = useTypedDispatch();
   const initialValues: LoginFormValues = { email: "", password: "" };
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const LoginPage: React.FC = () => {
     validateOnBlur: true,
   });
 
-  const handleSubmit = async (user: any) => {
+  const handleSubmit = async (user: LoginFormValues) => {
     setLoading(true);
     const res = await dispatch(signIn(user));
     setLoading(false);
