@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Form, Button } from "@ahaui/react";
+import { Form, Button, Loader } from "@ahaui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import useThunkDispatch from "../hooks/useThunkDispatch";
+import { useThunkDispatch } from "../hooks";
 import { signIn } from "../store/actions/authActions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup
@@ -23,12 +23,12 @@ const LoginPage: React.FC = () => {
   const dispatch = useThunkDispatch();
   const initialValues: LoginFormValues = { email: "", password: "" };
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues,
     onSubmit: (user, { resetForm }) => {
-      dispatch(signIn(user));
-      // signIn(user);
+      handleSubmit(user);
       resetForm();
     },
 
@@ -36,6 +36,17 @@ const LoginPage: React.FC = () => {
     validateOnChange: false,
     validateOnBlur: true,
   });
+
+  const handleSubmit = async (user: any) => {
+    setLoading(true);
+    const res = await dispatch(signIn(user));
+    setLoading(false);
+    if (res) {
+      navigate("/");
+    }
+  };
+
+  // console.log(formik);
 
   return (
     <div
@@ -54,9 +65,7 @@ const LoginPage: React.FC = () => {
           <Form.Group controlId="exampleForm.State5">
             <Form.Label>Email</Form.Label>
             <Form.Input
-              isInvalid={Boolean(
-                formik.touched.password && formik.errors.password
-              )}
+              isInvalid={Boolean(formik.touched.email && formik.errors.email)}
               type="email"
               placeholder="Enter email"
               name="email"
@@ -87,9 +96,13 @@ const LoginPage: React.FC = () => {
               </Form.Feedback>
             )}
           </Form.Group>
-          <Button variant="primary" disabled={formik.isSubmitting}>
-            <Button.Label>Login</Button.Label>
-          </Button>
+          {loading ? (
+            <Loader duration={500} />
+          ) : (
+            <Button variant="primary">
+              <Button.Label>Login</Button.Label>
+            </Button>
+          )}
         </form>
         <p className="u-marginTopSmall u-text100 text-center text-gray-400">
           Don't have an account yet?{" "}

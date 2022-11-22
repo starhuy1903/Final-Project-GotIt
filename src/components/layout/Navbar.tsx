@@ -1,16 +1,29 @@
 import { Header, Logo, TopMenu, Dropdown, Icon, Button } from "@ahaui/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useAppSelector, useThunkDispatch } from "hooks";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { signOut } from "store/actions";
+import { selectToken } from "store/reducers/authReducer";
 
 const Navbar: React.FC = () => {
-  const [current, setCurrent] = useState("home");
-  const isLoggedIn = false;
+  const [current, setCurrent] = useState("/");
+  const navigate = useNavigate();
+  const token = useAppSelector(selectToken);
+  const location = useLocation();
+  const dispatch = useThunkDispatch();
+
+  useEffect(() => {
+    if (location.pathname !== current) {
+      setCurrent(location.pathname);
+    }
+  }, [location]);
+
   return (
     <Header fullWidth className="u-shadowMedium">
       <Header.Brand>
         <Link to="/">
           <Logo
-            onClick={() => setCurrent("home")}
+            onClick={() => setCurrent("/")}
             src="https://vn.got-it.ai/assets/images/logo-1fa722c62e.svg"
             height={40}
           />
@@ -19,22 +32,20 @@ const Navbar: React.FC = () => {
 
       <Header.Main>
         <Header.AbsoluteCenter>
-          <TopMenu current={current} onSelect={setCurrent}>
-            <TopMenu.Item eventKey="home">
-              <Link to="/" style={{ textDecoration: "none" }}>
-                Home
-              </Link>
-            </TopMenu.Item>
-            <TopMenu.Item eventKey="management">
-              <Link to="/categories" style={{ textDecoration: "none" }}>
-                Management
-              </Link>
-            </TopMenu.Item>
+          <TopMenu
+            current={current}
+            onSelect={(e) => {
+              setCurrent(e);
+              navigate(e);
+            }}
+          >
+            <TopMenu.Item eventKey="/">Home</TopMenu.Item>
+            <TopMenu.Item eventKey="/management">Management</TopMenu.Item>
           </TopMenu>
         </Header.AbsoluteCenter>
 
         <Header.Right className="u-marginRightSmall">
-          {isLoggedIn ? (
+          {token ? (
             <Dropdown alignRight className="u-marginLeftExtraSmall">
               <Dropdown.Toggle className="u-textLight u-lineHeightNone">
                 <Icon name="contact" size="large" />
@@ -56,6 +67,7 @@ const Navbar: React.FC = () => {
                   <Link
                     to="/"
                     style={{ textDecoration: "none", color: "black" }}
+                    onClick={() => dispatch(signOut())}
                   >
                     <span className="u-marginLeftExtraSmall u-cursorPointer">
                       Logout

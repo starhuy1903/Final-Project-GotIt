@@ -6,16 +6,18 @@ import {
 } from "redux";
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import authReducer from "./reducers/authReducer";
+// import notiMsgReducer from "./reducers/notiMsgReducer";
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
   auth: authReducer,
+  // notiMsg: notiMsgReducer,
 });
 
-export const store = createStore(reducers, {}, applyMiddleware(thunk));
+export const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
 export type AppDispatch = typeof store.dispatch;
-export type ReduxState = ReturnType<typeof reducers>;
-export type RootState = ReturnType<typeof reducers>;
+export type ReduxState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
 export type TypedDispatch = ThunkDispatch<ReduxState, any, AnyAction>;
 export type TypedThunk<ReturnType = void> = ThunkAction<
   ReturnType,
