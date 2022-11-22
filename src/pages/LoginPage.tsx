@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
           className=" u-flex u-flexColumn u-alignItemsCenter"
         >
           <h1 className="u-text700 u-marginBottomSmall">Sign in</h1>
-          <Form.Group controlId="exampleForm.State5">
+          <Form.Group controlId="email-control">
             <Form.Label>Email</Form.Label>
             <Form.Input
               isInvalid={Boolean(formik.touched.email && formik.errors.email)}
@@ -75,7 +75,7 @@ const LoginPage: React.FC = () => {
               </Form.Feedback>
             )}
           </Form.Group>
-          <Form.Group controlId="exampleForm.State5">
+          <Form.Group controlId="password-control">
             <Form.Label>Password</Form.Label>
             <Form.Input
               isInvalid={Boolean(
