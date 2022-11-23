@@ -9,7 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import authReducer from "./reducers/authReducer";
 import notiMsgReducer from "./reducers/notiMsgReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   auth: authReducer,
   notiMsg: notiMsgReducer,
 });
