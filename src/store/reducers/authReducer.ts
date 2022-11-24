@@ -1,19 +1,21 @@
 import { RootState } from "store/store";
-import { ActionType, AuthAction } from "../actions/authActions";
+import { AuthActionType, AuthAction } from "../actions/authActions";
 
 interface AuthState {
   token: string | null;
 }
 
-const initialState: AuthState = {
-  token: localStorage.getItem("token"),
+export const initialState: AuthState = {
+  // Initial state should be null,
+  // Please get item from local storage in another place and call update action
+  token: null,
 };
 
 const reducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {
-    case ActionType.AUTH_USER:
+    case AuthActionType.AUTH_USER:
       return { token: action.payload };
-    case ActionType.AUTH_RESET:
+    case AuthActionType.AUTH_RESET:
       return { token: null };
     default:
       return state;
