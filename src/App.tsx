@@ -4,8 +4,8 @@ import React from "react";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import AuthRoute from "AuthRoute";
-import NotiMessage from "components/common/NotiMessage";
+import AuthRoute from "./AuthRoute";
+import NotiMessage from "./components/common/NotiMessage";
 
 const App: React.FC = () => {
   return (

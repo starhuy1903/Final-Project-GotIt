@@ -1,19 +1,19 @@
 import { Dispatch } from "redux";
 import authAPI from "../../api/authAPI";
-import { NotiMsgType, setNotiMsg } from "./notiMsgActions";
+import { NotiMsgType } from "./notiMsgActions";
 
-export enum ActionType {
+export enum AuthActionType {
   AUTH_USER = "auth_user",
   AUTH_RESET = "auth_reset",
 }
 
 interface AuthSuccessAction {
-  type: ActionType.AUTH_USER;
+  type: AuthActionType.AUTH_USER;
   payload: string;
 }
 
 interface AuthResetAction {
-  type: ActionType.AUTH_RESET;
+  type: AuthActionType.AUTH_RESET;
   payload: string;
 }
 
@@ -25,7 +25,7 @@ export const signIn =
     try {
       const { access_token: token } = await authAPI.signIn(email, password);
       localStorage.setItem("token", token);
-      dispatch({ type: ActionType.AUTH_USER, payload: token });
+      dispatch({ type: AuthActionType.AUTH_USER, payload: token });
       return token;
     } catch (err: any) {
       dispatch({
@@ -53,7 +53,7 @@ export const signUp =
       await authAPI.signUp(email, password, name);
       const { access_token: token } = await authAPI.signIn(email, password);
       localStorage.setItem("token", token);
-      dispatch({ type: ActionType.AUTH_USER, payload: token });
+      dispatch({ type: AuthActionType.AUTH_USER, payload: token });
       return token;
     } catch (err: any) {
       dispatch({
@@ -68,5 +68,5 @@ export const signUp =
 
 export const signOut = () => (dispatch: Dispatch) => {
   localStorage.removeItem("token");
-  dispatch({ type: ActionType.AUTH_RESET });
+  dispatch({ type: AuthActionType.AUTH_RESET });
 };
