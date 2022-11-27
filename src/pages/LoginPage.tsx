@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Form, Button, Loader } from "@ahaui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useTypedDispatch } from "../../hooks";
-import { signIn } from "../../store/actions/authActions";
+import { useTypedDispatch } from "../hooks";
+import { signIn } from "../store/actions/authActions";
 import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
