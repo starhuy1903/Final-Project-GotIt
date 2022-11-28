@@ -14,7 +14,7 @@ const App: React.FC = () => {
   return (
     <>
       <NotiMessage />
-      {openPopup && <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} />}
+      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
