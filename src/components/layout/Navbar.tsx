@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
             }}
           >
             <TopMenu.Item eventKey="/">Home</TopMenu.Item>
-            <TopMenu.Item eventKey="/management">Management</TopMenu.Item>
+            <TopMenu.Item eventKey="/categories">Management</TopMenu.Item>
           </TopMenu>
         </Header.AbsoluteCenter>
 

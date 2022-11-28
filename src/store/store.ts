@@ -8,10 +8,12 @@ import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import authReducer from "./reducers/authReducer";
 import notiMsgReducer from "./reducers/notiMsgReducer";
+import popupReducer from "./reducers/popupReducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
   notiMsg: notiMsgReducer,
+  popup: popupReducer,
 });
 
 export const store = createStore(

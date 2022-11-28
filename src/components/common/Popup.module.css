@@ -1,4 +1,9 @@
-.modalOverlay {
+.popupWrapper {
+  transition: all 0.2s;
+  transition: all 0.3s ease-in-out;
+}
+
+.popupOverlay {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 9;
 }
