@@ -8,7 +8,6 @@ type PaginationProps = {
   siblingCount?: number;
   currentPage: number;
   pageSize: number;
-  className?: string;
 };
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -16,8 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({
   totalCount,
   siblingCount = 1,
   currentPage,
-  pageSize,
-  className,
+  pageSize
 }) => {
   const paginationRange =
     usePagination({
@@ -33,20 +31,23 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   const onNext = () => {
+    if (currentPage === lastPage) return;
+
     onPageChange(currentPage + 1);
   };
 
   const onPrevious = () => {
+    if (currentPage === 1) return;
     onPageChange(currentPage - 1);
   };
 
-  const lastPage = paginationRange[paginationRange.length - 1];
+  const lastPage = +paginationRange[paginationRange.length - 1];
   return (
-    <AhaPagination>
+    <AhaPagination className="u-textRight">
       <AhaPagination.Prev disabled={currentPage === 1} onClick={onPrevious} />
       {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
-          return <div key={index}>&#8230;</div>;
+          return <AhaPagination.Ellipsis key={index} />;
         }
         return (
           <AhaPagination.Item

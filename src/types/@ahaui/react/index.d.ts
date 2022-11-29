@@ -853,6 +853,7 @@ declare module "@ahaui/react" {
     Item: React.FC<PaginationItemProps>;
     Next: React.FC<PaginationItemProps>;
     Prev: React.FC<PaginationItemProps>;
+    Ellipsis: React.FC<PaginationItemProps>;
   };
 
   export interface ProblemInfoProps extends BasicProps {
