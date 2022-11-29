@@ -1,13 +1,17 @@
 import { RootState } from "../store";
 import { PopupActionType } from "../actions/popupActions";
 
-export interface PopupState {
-  isLoading: boolean;
-  isOpen: boolean;
+type PopupPropsType = {
   title: string;
   children: React.ReactNode;
+  isLoading: boolean;
+  isOpen: boolean;
   footer?: React.ReactNode;
   closeHandler: () => void;
+};
+export interface PopupState {
+  popupKey: string | null;
+  popupProps: PopupPropsType;
 }
 
 type Action = {
@@ -16,12 +20,14 @@ type Action = {
 };
 
 const initialState: PopupState = {
-  isLoading: false,
-  isOpen: false,
-  children: null,
-  footer: null,
-  title: "",
-  closeHandler: () => null,
+  popupKey: null,
+  popupProps: {
+    title: "",
+    children: null,
+    isOpen: false,
+    isLoading: false,
+    closeHandler: () => null,
+  },
 };
 
 const popupReducer = (state = initialState, action: Action): PopupState => {
@@ -35,19 +41,19 @@ const popupReducer = (state = initialState, action: Action): PopupState => {
     case PopupActionType.CLOSE_POPUP:
       return {
         ...state,
-        isOpen: false,
+        popupProps: { ...state.popupProps, isOpen: false },
       };
 
     case PopupActionType.OPEN_POPUP:
       return {
         ...state,
-        isOpen: true,
+        popupProps: { ...state.popupProps, isOpen: true },
       };
 
     case PopupActionType.POPUP_LOADING:
       return {
         ...state,
-        isLoading: true,
+        popupProps: { ...state.popupProps, isLoading: true },
       };
 
     case PopupActionType.RESET_POPUP:

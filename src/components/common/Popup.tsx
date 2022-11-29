@@ -6,8 +6,8 @@ import { useAppSelector } from "hooks";
 import { popupSelector } from "store/reducers/popupReducer";
 
 const Popup: React.FC = () => {
-  const { title, isOpen, children, footer, closeHandler } =
-    useAppSelector(popupSelector);
+  const { popupProps } = useAppSelector(popupSelector);
+  const { title, isOpen, children, footer, closeHandler } = popupProps;
 
   return (
     <div>

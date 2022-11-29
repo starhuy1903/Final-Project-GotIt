@@ -31,11 +31,14 @@ const CategoryDetailPage: React.FC = () => {
     console.log("create");
     dispatch(
       setPopup({
-        children: <h1>Hello World</h1>,
-        isLoading: false,
-        isOpen: true,
-        title: "Welcome",
-        closeHandler: closeModalHandler,
+        popupKey: "Hello",
+        popupProps: {
+          children: <h1>Hello World</h1>,
+          isLoading: false,
+          isOpen: true,
+          title: "Welcome",
+          closeHandler: closeModalHandler,
+        },
       })
     );
   };
