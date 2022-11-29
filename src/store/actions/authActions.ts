@@ -1,3 +1,4 @@
+import { TOKEN_KEY } from "../../constants";
 import { Dispatch } from "redux";
 import authAPI from "../../api/authAPI";
 import { NotiMsgType } from "./notiMsgActions";
@@ -24,7 +25,7 @@ export const signIn =
   async (dispatch: Dispatch) => {
     try {
       const { access_token: token } = await authAPI.signIn(email, password);
-      localStorage.setItem("token", token);
+      localStorage.setItem(TOKEN_KEY, token);
       dispatch({ type: AuthActionType.AUTH_USER, payload: token });
       return token;
     } catch (err: any) {
@@ -52,7 +53,7 @@ export const signUp =
     try {
       await authAPI.signUp(email, password, name);
       const { access_token: token } = await authAPI.signIn(email, password);
-      localStorage.setItem("token", token);
+      localStorage.setItem(TOKEN_KEY, token);
       dispatch({ type: AuthActionType.AUTH_USER, payload: token });
       return token;
     } catch (err: any) {
@@ -67,6 +68,6 @@ export const signUp =
   };
 
 export const signOut = () => (dispatch: Dispatch) => {
-  localStorage.removeItem("token");
+  localStorage.removeItem(TOKEN_KEY);
   dispatch({ type: AuthActionType.AUTH_RESET });
 };
