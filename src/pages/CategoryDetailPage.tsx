@@ -1,10 +1,11 @@
 import { Button, Icon } from "@ahaui/react";
 import categoryAPI from "api/categoryAPI";
-import CategoryForm from "components/common/CategoryForm";
+import CategoryForm from "components/CategoryForm";
 import PaginationTable from "components/common/PaginationTable";
 import { useTypedDispatch } from "hooks";
 import React, { useState } from "react";
 import { closePopup, setPopup } from "store/actions/popupActions";
+import { PopupType } from "store/reducers/popupReducer";
 import { DataTable } from "types/table";
 import { camelCaseObjKeys } from "utils/convertObject";
 import { categoryTableConstants } from "utils/renderCategoryRow";
@@ -33,15 +34,14 @@ const CategoryDetailPage: React.FC = () => {
   };
 
   const handleCreate = () => {
-    console.log("create");
     dispatch(
       setPopup({
-        popupKey: "Hello",
+        popupKey: PopupType.FORM_POPUP,
         popupProps: {
           children: <CategoryForm />,
           isLoading: false,
           isOpen: true,
-          title: "Welcome",
+          title: "Add Category",
           closeHandler: closeModalHandler,
         },
       })

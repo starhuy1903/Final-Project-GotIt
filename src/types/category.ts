@@ -4,3 +4,9 @@ export type Category = {
   imageUrl: string;
   name: string;
 };
+
+export type CategorySubmit = {
+  description: string;
+  imageUrl: string;
+  name: string;
+};

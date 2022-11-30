@@ -9,8 +9,13 @@ type PopupPropsType = {
   footer?: React.ReactNode;
   closeHandler: () => void;
 };
+
+export enum PopupType {
+  FORM_POPUP = "formPopup",
+  CONFIRM_POPUP = "confirmPopup",
+}
 export interface PopupState {
-  popupKey: string | null;
+  popupKey: string;
   popupProps: PopupPropsType;
 }
 
@@ -20,7 +25,7 @@ type Action = {
 };
 
 const initialState: PopupState = {
-  popupKey: null,
+  popupKey: "",
   popupProps: {
     title: "",
     children: null,
