@@ -1,10 +1,12 @@
 import { Button, Icon } from "@ahaui/react";
 import categoryAPI from "api/categoryAPI";
+import CategoryForm from "components/common/CategoryForm";
 import PaginationTable from "components/common/PaginationTable";
 import { useTypedDispatch } from "hooks";
 import React, { useState } from "react";
 import { closePopup, setPopup } from "store/actions/popupActions";
 import { DataTable } from "types/table";
+import { camelCaseObjKeys } from "utils/convertObject";
 import { categoryTableConstants } from "utils/renderCategoryRow";
 
 const LIMIT = 20;
@@ -21,7 +23,10 @@ const CategoryDetailPage: React.FC = () => {
     try {
       const res = await categoryAPI.fetchCategoriesList(offset, LIMIT);
 
-      setData({ totalItems: res?.data.total_items, items: res?.data.items });
+      const data = camelCaseObjKeys(res?.data);
+      const { totalItems, items } = data;
+
+      setData({ totalItems, items });
     } catch (err) {
       console.log(err);
     }
@@ -33,7 +38,7 @@ const CategoryDetailPage: React.FC = () => {
       setPopup({
         popupKey: "Hello",
         popupProps: {
-          children: <h1>Hello World</h1>,
+          children: <CategoryForm />,
           isLoading: false,
           isOpen: true,
           title: "Welcome",
