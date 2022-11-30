@@ -1,13 +1,6 @@
-import { CategoryPayload } from "types/category";
+import { Category, CategoryPayload } from "types/category";
 import { snakeCaseObjKeys } from "utils/convertObject";
 import api from ".";
-
-export type Category = {
-  id: number;
-  name: string;
-  description: string;
-  imageUrl: string;
-};
 
 export type Categories = {
   totalCategories: number;

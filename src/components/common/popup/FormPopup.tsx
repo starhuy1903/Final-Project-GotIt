@@ -15,8 +15,9 @@ const FormPopup: React.FC<PopupProps> = ({
       {isOpen && (
         <div
           className={classNames(
-            "u-positionAbsolute u-positionTop u-positionBottom u-positionLeft u-positionRight u-flex u-justifyContentCenter u-alignItemsCenter",
-            styles.popupOverlay
+            "u-positionFixed u-widthFull u-heightFull u-positionTop u-positionBottom u-positionLeft u-positionRight u-flex u-justifyContentCenter u-alignItemsCenter",
+            styles.popupOverlay,
+            styles.popupWrapper
           )}
         >
           <Modal size="large" relative style={{ zIndex: "999" }}>
