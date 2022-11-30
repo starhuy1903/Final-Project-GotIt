@@ -6,6 +6,7 @@ import { useTypedDispatch } from "hooks";
 import React, { useState } from "react";
 import { closePopup, setPopup } from "store/actions/popupActions";
 import { PopupType } from "store/reducers/popupReducer";
+import { CategoryPayload } from "types/category";
 import { DataTable } from "types/table";
 import { camelCaseObjKeys } from "utils/convertObject";
 import { categoryTableConstants } from "utils/renderCategoryRow";
@@ -48,8 +49,19 @@ const CategoryDetailPage: React.FC = () => {
     );
   };
 
-  const handleUpdate = (num: number) => {
-    console.log("edit");
+  const handleUpdate = (id: number, item: CategoryPayload) => {
+    dispatch(
+      setPopup({
+        popupKey: PopupType.FORM_POPUP,
+        popupProps: {
+          children: <CategoryForm id={id} item={item} />,
+          isLoading: false,
+          isOpen: true,
+          title: "Update Category",
+          closeHandler: closeModalHandler,
+        },
+      })
+    );
   };
 
   const handleDelete = (num: number) => {

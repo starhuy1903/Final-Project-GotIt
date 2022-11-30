@@ -1,10 +1,10 @@
 import { Icon } from "@ahaui/react";
-import { Category } from "types/category";
+import { Category, CategoryPayload } from "types/category";
 import { TableColumnType } from "types/table";
 
 // This is the table constant/settings which needed to render table elements
 export const categoryTableConstants = (
-  handleUpdate: (id: number) => void,
+  handleUpdate: (id: number, item: CategoryPayload) => void,
   handleDelete: (id: number) => void
 ): TableColumnType[] => {
   return [
@@ -51,7 +51,10 @@ export const categoryTableConstants = (
           <>
             <div
               className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
-              onClick={() => handleUpdate(rowData.id)}
+              onClick={() => {
+                const { id, ...others } = rowData;
+                handleUpdate(id, others);
+              }}
               onKeyPress={() => null}
               role="button"
               tabIndex={0}

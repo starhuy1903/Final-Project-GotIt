@@ -1,3 +1,5 @@
+import { CategoryPayload } from "types/category";
+import { snakeCaseObjKeys } from "utils/convertObject";
 import api from ".";
 
 export type Category = {
@@ -23,9 +25,21 @@ const categoryAPI = {
     });
   },
 
-  //   createCategory: async () => {},
+  createCategory: async (item: CategoryPayload) => {
+    return await api.request({
+      url: "/categories",
+      method: "POST",
+      data: JSON.stringify(snakeCaseObjKeys(item)),
+    });
+  },
 
-  //   updateCategory: async () => {},
+  updateCategory: async (id: number, item: CategoryPayload) => {
+    return await api.request({
+      url: `/categories/${id}`,
+      method: "PUT",
+      data: JSON.stringify(snakeCaseObjKeys(item)),
+    });
+  },
 };
 
 export default categoryAPI;

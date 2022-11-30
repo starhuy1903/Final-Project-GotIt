@@ -5,8 +5,9 @@ export type Category = {
   name: string;
 };
 
-export type CategorySubmit = {
+export type CategoryPayload = {
   description: string;
   imageUrl: string;
   name: string;
 };
+

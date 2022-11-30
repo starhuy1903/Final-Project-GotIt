@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { Form, Loader, Button } from "@ahaui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { CategorySubmit } from "types/category";
+import categoryAPI from "api/categoryAPI";
+import { useTypedDispatch } from "hooks";
+import { NotiMsgType } from "store/actions/notiMsgActions";
+import { Category, CategoryPayload } from "types/category";
+import { closePopup } from "store/actions/popupActions";
 
 type CategoryFormProps = {
-  onSubmit: () => void;
-  onCancel: () => void;
+  id?: number;
+  item?: CategoryPayload | null;
 };
 
 const schema = yup.object().shape({
@@ -15,17 +19,18 @@ const schema = yup.object().shape({
   imageUrl: yup.string().required("No image url provided."),
 });
 
-const initialValues = {
+const initialValues: CategoryPayload = {
   name: "",
   description: "",
   imageUrl: "",
 };
 
-const CategoryForm: React.FC = () => {
+const CategoryForm: React.FC<CategoryFormProps> = ({ id, item }) => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useTypedDispatch();
 
   const formik = useFormik({
-    initialValues,
+    initialValues: item ? item : initialValues,
     onSubmit: (category) => {
       handleSubmit(category);
     },
@@ -35,8 +40,38 @@ const CategoryForm: React.FC = () => {
     validateOnBlur: true,
   });
 
-  const handleSubmit = (category: CategorySubmit) => {
-    console.log(category);
+  const handleSubmit = async (category: CategoryPayload) => {
+    try {
+      setLoading(true);
+
+      if (id && item) {
+        await categoryAPI.updateCategory(id, category);
+        dispatch(closePopup());
+      } else {
+        await categoryAPI.createCategory(category);
+      }
+
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          msg: "Operation Successfully",
+          status: 201,
+        },
+      });
+    } catch (err: any) {
+      console.log(err);
+      formik.resetForm({ values: formik.values });
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          error: { message: "Something went wrong" },
+          status: err.response.status,
+        },
+      });
+    } finally {
+      setLoading(false);
+      formik.resetForm();
+    }
   };
 
   return (
