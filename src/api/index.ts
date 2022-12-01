@@ -3,14 +3,17 @@ import { TOKEN_KEY } from "../constants";
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
+  headers: { "Content-Type": "application/json" },
 });
 
 api.interceptors.request.use((config) => {
-  config.headers = {
-    ...config.headers,
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem(TOKEN_KEY),
-  };
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (token) {
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
   return config;
 });
 
