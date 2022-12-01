@@ -8,7 +8,7 @@ import { closePopup, setPopup } from "store/actions/popupActions";
 import { PopupType } from "store/reducers/popupReducer";
 import { CategoryPayload } from "types/category";
 import { DataTable } from "types/table";
-import { camelCaseObjKeys } from "utils/convertObject";
+import { convertSnakeCaseToCamelCase } from "utils/convertObject";
 import { categoryTableConstants } from "utils/renderCategoryRow";
 
 const LIMIT = 20;
@@ -25,7 +25,7 @@ const CategoryDetailPage: React.FC = () => {
     try {
       const res = await categoryAPI.fetchCategoriesList(offset, LIMIT);
 
-      const data = camelCaseObjKeys(res?.data);
+      const data = convertSnakeCaseToCamelCase(res?.data);
       const { totalItems, items } = data;
 
       setData({ totalItems, items });

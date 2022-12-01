@@ -5,12 +5,12 @@ import * as yup from "yup";
 import categoryAPI from "api/categoryAPI";
 import { useTypedDispatch } from "hooks";
 import { NotiMsgType } from "store/actions/notiMsgActions";
-import { Category, CategoryPayload } from "types/category";
+import { CategoryPayload } from "types/category";
 import { closePopup } from "store/actions/popupActions";
 
 type CategoryFormProps = {
   id?: number;
-  item?: CategoryPayload | null;
+  item?: CategoryPayload;
 };
 
 const schema = yup.object().shape({
@@ -128,7 +128,11 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ id, item }) => {
         <Loader duration={500} />
       ) : (
         <div className="u-flex u-alignItemsCenter u-justifyContentBetween u-widthFull">
-          <Button onClick={formik.handleReset} variant="secondary">
+          <Button
+            type="button"
+            onClick={() => formik.resetForm({ values: initialValues })}
+            variant="secondary"
+          >
             <Button.Label>Reset</Button.Label>
           </Button>
           <Button variant="primary">

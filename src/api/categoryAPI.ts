@@ -1,5 +1,5 @@
 import { Category, CategoryPayload } from "types/category";
-import { snakeCaseObjKeys } from "utils/convertObject";
+import { convertCamelCaseToSnakeCase } from "utils/convertObject";
 import api from ".";
 
 export type Categories = {
@@ -22,7 +22,7 @@ const categoryAPI = {
     return await api.request({
       url: "/categories",
       method: "POST",
-      data: JSON.stringify(snakeCaseObjKeys(item)),
+      data: JSON.stringify(convertCamelCaseToSnakeCase(item)),
     });
   },
 
@@ -30,7 +30,7 @@ const categoryAPI = {
     return await api.request({
       url: `/categories/${id}`,
       method: "PUT",
-      data: JSON.stringify(snakeCaseObjKeys(item)),
+      data: JSON.stringify(convertCamelCaseToSnakeCase(item)),
     });
   },
 };
