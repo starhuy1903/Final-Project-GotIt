@@ -21,7 +21,6 @@ export const fetchCategoriesList = (offset: number, limit: number) => async (dis
     }
 }
 
-
 export const createCategory = (item: CategoryPayload) => async (dispatch: Dispatch) => {
     try {
         const res = await categoryAPI.createCategory(item);

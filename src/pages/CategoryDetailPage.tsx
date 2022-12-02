@@ -15,7 +15,7 @@ const CategoryDetailPage: React.FC = () => {
   const dispatch = useTypedDispatch();
   const [data, setData] = useState<DataTable>();
 
-  const closeModalHandler = () => {
+  const closePopupHandler = () => {
     dispatch(closePopup());
   };
 
@@ -31,7 +31,7 @@ const CategoryDetailPage: React.FC = () => {
         popupKey: PopupType.CATEGORY_FORM,
         popupProps: {        
           title: "Add Category",
-          closeHandler: closeModalHandler,
+          closeHandler: closePopupHandler,
           onSubmit: (category) => handleCreate(category),
         },
       })
@@ -45,7 +45,7 @@ const CategoryDetailPage: React.FC = () => {
         popupProps: {        
           title: "Update Category",
           item: category,
-          closeHandler: closeModalHandler,
+          closeHandler: closePopupHandler,
           onSubmit: (category) => handleUpdate(id, category),
         },
       })
@@ -59,7 +59,7 @@ const CategoryDetailPage: React.FC = () => {
         popupProps: {        
           title: "Delete Category",
           item: category,
-          closeHandler: closeModalHandler,
+          closeHandler: closePopupHandler,
           onSubmit: (id) => handleDelete(id),
         },
       })
@@ -78,7 +78,7 @@ const CategoryDetailPage: React.FC = () => {
     const res = await dispatch(updateCategory(id, category))
     if(res?.status === 200) {
       // console.log(res);
-      closeModalHandler();
+      closePopupHandler();
       fetchData(0);
     }
   };
@@ -87,7 +87,7 @@ const CategoryDetailPage: React.FC = () => {
     const res = await dispatch(deleteCategory(id))
     if(res?.status === 200) {
       // console.log(res);
-      closeModalHandler();
+      closePopupHandler();
       fetchData(0);
     }
   };

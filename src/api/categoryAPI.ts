@@ -1,11 +1,6 @@
-import { Category, CategoryPayload } from "types/category";
+import { CategoryPayload } from "types/category";
 import { convertCamelCaseToSnakeCase } from "utils/convertObject";
 import api from ".";
-
-export type Categories = {
-  totalCategories: number;
-  categoriesList: Category[];
-};
 
 const categoryAPI = {
   fetchCategoriesList: async (offset: number, limit: number) => {

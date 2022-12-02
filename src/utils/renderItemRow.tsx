@@ -1,24 +1,23 @@
 import { Icon } from "@ahaui/react";
-import { Link } from "react-router-dom";
-import { Category, CategoryPayload } from "types/category";
+import { Item, ItemPayload } from "types/item";
 import { TableColumnType } from "types/table";
 
 // This is the table constant/settings which needed to render table elements
-export const categoryTableConstants = (
-  handleUpdate: (id: number, item: CategoryPayload) => void,
-  handleDelete: (item: CategoryPayload) => void
+export const itemTableConstants = (
+  handleUpdate: (id: number, item: ItemPayload) => void,
+  handleDelete: (item: ItemPayload) => void
 ): TableColumnType[] => {
   return [
     {
       title: "ID",
-      render: (rowData: Category) => {
+      render: (rowData: Item) => {
         return <span>{rowData.id}</span>;
       },
     },
     {
       title: "Image",
       width: "10%",
-      render: (rowData: Category) => {
+      render: (rowData: Item) => {
         return (
           <img
             width="100%"
@@ -31,30 +30,30 @@ export const categoryTableConstants = (
       },
     },
     {
-      title: "Name",
-      width: "30%",
-      render: (rowData: Category) => {
-        return <Link to={`${rowData.id}`}>{rowData.name}</Link>;
+      title: "Description",
+      width: "40%",
+      render: (rowData: Item) => {
+        return <span>{rowData.description}</span>;
       },
     },
     {
-      title: "Description",
-      width: "40%",
-      render: (rowData: Category) => {
-        return <span>{rowData.description}</span>;
+      title: "Author",
+      width: "10%",
+      render: (rowData: Item) => {
+        return <span>{rowData.author.name}</span>;
       },
     },
     {
       title: "Actions",
       width: "15%",
-      render: (rowData: Category) => {
+      render: (rowData: Item) => {
         return (
           <>
             <div
               className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
               onClick={() => {
                 const { id, ...others } = rowData;
-                handleUpdate(id, others);
+                handleUpdate(id, {description: others.description, imageUrl: others.imageUrl});
               }}
               onKeyPress={() => null}
               role="button"
