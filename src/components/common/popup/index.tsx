@@ -1,27 +1,20 @@
 import { useAppSelector } from "hooks";
 import { popupSelector, PopupType } from "store/reducers/popupReducer";
-import FormPopup from "./FormPopup";
-
-export type PopupProps = {
-  title: string;
-  isOpen: boolean;
-  children: React.ReactNode;
-  closeHandler: () => void;
-};
+import CategoryForm, { CategoryFormProps } from "./CategoryForm";
 
 type PopupMapType = {
-  [PopupType.FORM_POPUP]: React.FC<PopupProps>;
+  [PopupType.CATEGORY_FORM]: React.FC<CategoryFormProps>;
 };
 
 const PopupMap: PopupMapType = {
-  [PopupType.FORM_POPUP]: FormPopup,
+  [PopupType.CATEGORY_FORM]: CategoryForm,
 };
 
-const PopupWrapper = () => {
+const PopupMapping = () => {
   const { popupKey, popupProps } = useAppSelector(popupSelector);
   const Popup = PopupMap[popupKey as keyof PopupMapType];
 
-  return <div>{popupKey ? <Popup {...popupProps} /> : null}</div>;
+  return popupKey ? <Popup {...popupProps} /> : null;
 };
 
-export default PopupWrapper;
+export default PopupMapping;

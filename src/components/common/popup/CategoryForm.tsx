@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { Form, Loader, Button } from "@ahaui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import categoryAPI from "api/categoryAPI";
-import { useTypedDispatch } from "hooks";
-import { NotiMsgType } from "store/actions/notiMsgActions";
 import { CategoryPayload } from "types/category";
-import { closePopup } from "store/actions/popupActions";
+import PopupWrapper from "./PopupWrapper";
 
-type CategoryFormProps = {
-  id?: number;
+export type CategoryFormProps = {
   item?: CategoryPayload;
+  title: string;
+  onSubmit: (...params: any[]) => void;
+  closeHandler: () => void;
 };
 
 const schema = yup.object().shape({
@@ -25,9 +24,8 @@ const initialValues: CategoryPayload = {
   imageUrl: "",
 };
 
-const CategoryForm: React.FC<CategoryFormProps> = ({ id, item }) => {
+const CategoryForm: React.FC<CategoryFormProps> = ({item, title, onSubmit, closeHandler }) => {
   const [loading, setLoading] = useState(false);
-  const dispatch = useTypedDispatch();
 
   const formik = useFormik({
     initialValues: item ? item : initialValues,
@@ -43,38 +41,17 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ id, item }) => {
   const handleSubmit = async (category: CategoryPayload) => {
     try {
       setLoading(true);
-
-      if (id && item) {
-        await categoryAPI.updateCategory(id, category);
-        dispatch(closePopup());
-      } else {
-        await categoryAPI.createCategory(category);
-      }
-
-      dispatch({
-        type: NotiMsgType.SET_MSG,
-        payload: {
-          msg: "Operation Successfully",
-          status: 201,
-        },
-      });
-    } catch (err: any) {
-      console.log(err);
-      formik.resetForm({ values: formik.values });
-      dispatch({
-        type: NotiMsgType.SET_MSG,
-        payload: {
-          error: { message: "Something went wrong" },
-          status: err.response.status,
-        },
-      });
-    } finally {
+      await onSubmit(category);
       setLoading(false);
-      formik.resetForm();
+      formik.resetForm({ values: initialValues });
+    } catch (err: any) {
+      setLoading(false);
+      formik.resetForm({ values: formik.values });
     }
   };
 
   return (
+    <PopupWrapper title={title} closeHandler={closeHandler}  >
     <form
       onSubmit={formik.handleSubmit}
       className=" u-flex u-flexColumn u-alignItemsStart u-widthFull"
@@ -141,6 +118,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ id, item }) => {
         </div>
       )}
     </form>
+    </PopupWrapper>
   );
 };
 

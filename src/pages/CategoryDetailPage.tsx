@@ -1,10 +1,10 @@
 import { Button, Icon } from "@ahaui/react";
 import categoryAPI from "api/categoryAPI";
-import CategoryForm from "components/CategoryForm";
 import PaginationTable from "components/common/PaginationTable";
 import { useTypedDispatch } from "hooks";
 import React, { useState } from "react";
-import { closePopup, setPopup } from "store/actions/popupActions";
+import { createCategory, updateCategory } from "store/actions/categoryActions";
+import { closePopup, openPopup } from "store/actions/popupActions";
 import { PopupType } from "store/reducers/popupReducer";
 import { CategoryPayload } from "types/category";
 import { DataTable } from "types/table";
@@ -34,34 +34,48 @@ const CategoryDetailPage: React.FC = () => {
     }
   };
 
-  const handleCreate = () => {
+  const openCreatePopup = () => {
     dispatch(
-      setPopup({
-        popupKey: PopupType.FORM_POPUP,
-        popupProps: {
-          children: <CategoryForm />,
-          isLoading: false,
-          isOpen: true,
+      openPopup({
+        popupKey: PopupType.CATEGORY_FORM,
+        popupProps: {        
           title: "Add Category",
           closeHandler: closeModalHandler,
+          onSubmit: (category) => handleCreate(category),
         },
       })
     );
+  }
+
+  const openUpdatePopup = (id: number, category: CategoryPayload) => {
+    dispatch(
+      openPopup({
+        popupKey: PopupType.CATEGORY_FORM,
+        popupProps: {        
+          title: "Update Category",
+          item: category,
+          closeHandler: closeModalHandler,
+          onSubmit: (category) => handleUpdate(id, category),
+        },
+      })
+    );
+  }
+
+  const handleCreate = async (category: CategoryPayload) => {
+    const res = await dispatch(createCategory(category))
+    if(res?.status === 201) {
+      // console.log(res);
+      fetchData(0);
+    }
   };
 
-  const handleUpdate = (id: number, item: CategoryPayload) => {
-    dispatch(
-      setPopup({
-        popupKey: PopupType.FORM_POPUP,
-        popupProps: {
-          children: <CategoryForm id={id} item={item} />,
-          isLoading: false,
-          isOpen: true,
-          title: "Update Category",
-          closeHandler: closeModalHandler,
-        },
-      })
-    );
+  const handleUpdate = async (id: number, category: CategoryPayload) => {
+    const res = await dispatch(updateCategory(id, category))
+    if(res?.status === 200) {
+      // console.log(res);
+      closeModalHandler();
+      fetchData(0);
+    }
   };
 
   const handleDelete = (num: number) => {
@@ -73,11 +87,11 @@ const CategoryDetailPage: React.FC = () => {
       <PaginationTable
         data={data}
         tableName="Category"
-        cols={categoryTableConstants(handleUpdate, handleDelete)}
+        cols={categoryTableConstants(openUpdatePopup, handleDelete)}
         fetchData={fetchData}
         pageSize={LIMIT}
         CreateButton={
-          <Button onClick={handleCreate}>
+          <Button onClick={openCreatePopup}>
             <Button.Icon>
               <Icon size="medium" name="plus" />
             </Button.Icon>

@@ -18,16 +18,16 @@ const Table: React.FC<TableProps> = ({ list, cols }) => {
           >
             <thead>
               <tr>
-                {cols.map((headerItem, index) => (
-                  <th key={index}>{headerItem.title}</th>
+                {cols.map((headerItem) => (
+                  <th key={headerItem.title}>{headerItem.title}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {list.map((item, index) => (
-                <tr key={index}>
-                  {cols.map((col, key) => (
-                    <td width={col.width} key={key}>{col.render(item)}</td>
+              {list.map((item) => (
+                <tr key={item.id}>
+                  {cols.map((col) => (
+                    <td width={col.width} key={`${item.id} ${col.title}`}>{col.render(item)}</td>
                   ))}
                 </tr>
               ))}          

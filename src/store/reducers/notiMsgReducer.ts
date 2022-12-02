@@ -2,7 +2,7 @@ import { NotiMsgAction, NotiMsgType } from "store/actions/notiMsgActions";
 import { RootState } from "store/store";
 
 export interface NotiMsgState {
-  status?: number | null;
+  status: number | null;
   msg?: string;
   error?: {
     message?: string;

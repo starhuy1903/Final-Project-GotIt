@@ -8,14 +8,14 @@ import AuthRoute from "./AuthRoute";
 import NotiMessage from "./components/common/NotiMessage";
 // import Popup from "components/common/Popup";
 import CategoryDetailPage from "pages/CategoryDetailPage";
-import PopupWrapper from "components/common/popup/index";
+import PopupMapping from "components/common/popup/index";
 
 const App: React.FC = () => {
   return (
     <>
       <NotiMessage />
       {/* <Popup /> */}
-      <PopupWrapper />
+      <PopupMapping />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />

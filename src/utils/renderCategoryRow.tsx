@@ -40,7 +40,7 @@ export const categoryTableConstants = (
       title: "Description",
       width: "40%",
       render: (rowData: Category) => {
-        return <span>{rowData.name}</span>;
+        return <span>{rowData.description}</span>;
       },
     },
     {

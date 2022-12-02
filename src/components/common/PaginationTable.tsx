@@ -22,8 +22,8 @@ const PaginationTable: React.FC<PaginationTableProps> = ({
   pageSize,
   CreateButton,
 }) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFetchData = async () => {
     setIsLoading(true);
