@@ -1,14 +1,12 @@
 import { Button, Icon } from "@ahaui/react";
-import categoryAPI from "api/categoryAPI";
 import PaginationTable from "components/common/PaginationTable";
 import { useTypedDispatch } from "hooks";
 import React, { useState } from "react";
-import { createCategory, updateCategory } from "store/actions/categoryActions";
+import { createCategory, fetchCategoriesList, updateCategory } from "store/actions/categoryActions";
 import { closePopup, openPopup } from "store/actions/popupActions";
 import { PopupType } from "store/reducers/popupReducer";
 import { CategoryPayload } from "types/category";
 import { DataTable } from "types/table";
-import { convertSnakeCaseToCamelCase } from "utils/convertObject";
 import { categoryTableConstants } from "utils/renderCategoryRow";
 
 const LIMIT = 20;
@@ -22,16 +20,9 @@ const CategoryDetailPage: React.FC = () => {
   };
 
   const fetchData = async (offset: number) => {
-    try {
-      const res = await categoryAPI.fetchCategoriesList(offset, LIMIT);
-
-      const data = convertSnakeCaseToCamelCase(res?.data);
+      const data = await dispatch(fetchCategoriesList(offset, LIMIT))
       const { totalItems, items } = data;
-
       setData({ totalItems, items });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const openCreatePopup = () => {
