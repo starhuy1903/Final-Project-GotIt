@@ -53,7 +53,7 @@ export const updateCategory = (id: number, item: CategoryPayload) => async (disp
         type: NotiMsgType.SET_MSG,
         payload: {
           msg: "Update Successfully",
-          status: 201,
+          status: res.status,
         },
       });
       return res;
@@ -62,6 +62,29 @@ export const updateCategory = (id: number, item: CategoryPayload) => async (disp
         type: NotiMsgType.SET_MSG,
         payload: {
           error: { message: "Update failed" },
+          status: err.response.status,
+        },
+      });
+    }
+}
+
+export const deleteCategory = (id: number) => async (dispatch: Dispatch) => {
+    try {
+        const res = await categoryAPI.deleteCategory(id);
+
+        dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          msg: "Delete Successfully",
+          status: res.status,
+        },
+      });
+      return res;
+    } catch (err: any) {
+        dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          error: { message: "Delete failed" },
           status: err.response.status,
         },
       });

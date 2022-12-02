@@ -33,6 +33,13 @@ const categoryAPI = {
       data: JSON.stringify(convertCamelCaseToSnakeCase(item)),
     });
   },
+
+  deleteCategory: async (id: number) => {
+    return await api.request({
+      url: `/categories/${id}`,
+      method: "DELETE",
+    });
+  },
 };
 
 export default categoryAPI;

@@ -2,7 +2,7 @@ import { Button, Icon } from "@ahaui/react";
 import PaginationTable from "components/common/PaginationTable";
 import { useTypedDispatch } from "hooks";
 import React, { useState } from "react";
-import { createCategory, fetchCategoriesList, updateCategory } from "store/actions/categoryActions";
+import { createCategory, deleteCategory, fetchCategoriesList, updateCategory } from "store/actions/categoryActions";
 import { closePopup, openPopup } from "store/actions/popupActions";
 import { PopupType } from "store/reducers/popupReducer";
 import { CategoryPayload } from "types/category";
@@ -69,8 +69,13 @@ const CategoryDetailPage: React.FC = () => {
     }
   };
 
-  const handleDelete = (num: number) => {
-    console.log("delete");
+  const handleDelete = async (id: number) => {
+    const res = await dispatch(deleteCategory(id))
+    if(res?.status === 200) {
+      // console.log(res);
+      closeModalHandler();
+      fetchData(0);
+    }
   };
 
   return (
