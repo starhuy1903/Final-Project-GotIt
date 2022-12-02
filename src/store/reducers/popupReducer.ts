@@ -10,6 +10,7 @@ type PopupPropsType = {
 
 export enum PopupType {
   CATEGORY_FORM = "Category Form",
+  DELETE_CONFIRM = "Delete Confirm",
 }
 export interface PopupState {
   popupKey: string;

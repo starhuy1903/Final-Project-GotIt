@@ -5,7 +5,7 @@ import { TableColumnType } from "types/table";
 // This is the table constant/settings which needed to render table elements
 export const categoryTableConstants = (
   handleUpdate: (id: number, item: CategoryPayload) => void,
-  handleDelete: (id: number) => void
+  handleDelete: (item: CategoryPayload) => void
 ): TableColumnType[] => {
   return [
     {
@@ -65,7 +65,7 @@ export const categoryTableConstants = (
 
             <div
               className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
-              onClick={() => handleDelete(rowData.id)}
+              onClick={() => handleDelete(rowData)}
               onKeyPress={() => null}
               role="button"
               tabIndex={0}

@@ -52,6 +52,20 @@ const CategoryDetailPage: React.FC = () => {
     );
   }
 
+  const openDeleteConfirmPopup = (category: CategoryPayload) => {
+    dispatch(
+      openPopup({
+        popupKey: PopupType.DELETE_CONFIRM,
+        popupProps: {        
+          title: "Delete Category",
+          item: category,
+          closeHandler: closeModalHandler,
+          onSubmit: (id) => handleDelete(id),
+        },
+      })
+    );
+  }
+
   const handleCreate = async (category: CategoryPayload) => {
     const res = await dispatch(createCategory(category))
     if(res?.status === 201) {
@@ -83,7 +97,7 @@ const CategoryDetailPage: React.FC = () => {
       <PaginationTable
         data={data}
         tableName="Category"
-        cols={categoryTableConstants(openUpdatePopup, handleDelete)}
+        cols={categoryTableConstants(openUpdatePopup, openDeleteConfirmPopup)}
         fetchData={fetchData}
         pageSize={LIMIT}
         CreateButton={
