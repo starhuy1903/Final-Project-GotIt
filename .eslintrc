@@ -3,8 +3,31 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "extends": [
-    "eslint:recommended",
+    "airbnb",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
-  ]
+  ],
+  "rules": {
+    "import/no-unresolved": 0,
+    "import/no-named-as-default": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/function-component-definition": 0,
+    "react/jsx-props-no-multi-spaces": 0,
+    "import/extensions": 0,
+    "react/require-default-props": 0,
+    "no-param-reassign": 0,
+    "react/jsx-no-useless-fragment": "warn",
+    "default-param-last": 0,
+    "@typescript-eslint/no-explicit-any": "warn"
+  }
 }

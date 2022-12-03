@@ -1,12 +1,14 @@
-import { Header, Logo, TopMenu, Dropdown, Icon, Button } from "@ahaui/react";
-import { useAppSelector, useTypedDispatch } from "hooks";
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { signOut } from "store/actions";
-import { selectToken } from "store/reducers/authReducer";
+import React, { useEffect, useState } from 'react';
+import {
+  Header, Logo, TopMenu, Dropdown, Icon, Button,
+} from '@ahaui/react';
+import { useAppSelector, useTypedDispatch } from 'hooks';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { signOut } from 'store/actions';
+import { selectToken } from 'store/reducers/authReducer';
 
 const Navbar: React.FC = () => {
-  const [current, setCurrent] = useState("/");
+  const [current, setCurrent] = useState('/');
   const navigate = useNavigate();
   const token = useAppSelector(selectToken);
   const location = useLocation();
@@ -23,7 +25,7 @@ const Navbar: React.FC = () => {
       <Header.Brand>
         <Link to="/">
           <Logo
-            onClick={() => setCurrent("/")}
+            onClick={() => setCurrent('/')}
             src="https://vn.got-it.ai/assets/images/logo-1fa722c62e.svg"
             height={40}
           />
@@ -55,7 +57,7 @@ const Navbar: React.FC = () => {
                   <Icon name="setting" size="small" />
                   <Link
                     to="/profile"
-                    style={{ textDecoration: "none", color: "black" }}
+                    style={{ textDecoration: 'none', color: 'black' }}
                   >
                     <span className="u-marginLeftExtraSmall u-cursorPointer">
                       My Profile
@@ -66,7 +68,7 @@ const Navbar: React.FC = () => {
                   <Icon name="power" size="small" />
                   <Link
                     to="/"
-                    style={{ textDecoration: "none", color: "black" }}
+                    style={{ textDecoration: 'none', color: 'black' }}
                     onClick={() => dispatch(signOut())}
                   >
                     <span className="u-marginLeftExtraSmall u-cursorPointer">
@@ -81,9 +83,9 @@ const Navbar: React.FC = () => {
               <Button variant="primary_outline" className="u-marginRightSmall">
                 <Button.Label>
                   <Link
-                    onClick={() => setCurrent("")}
+                    onClick={() => setCurrent('')}
                     to="/register"
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: 'none' }}
                   >
                     Sign up
                   </Link>
@@ -92,9 +94,9 @@ const Navbar: React.FC = () => {
               <Button variant="primary">
                 <Button.Label>
                   <Link
-                    onClick={() => setCurrent("")}
+                    onClick={() => setCurrent('')}
                     to="/login"
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ textDecoration: 'none', color: 'white' }}
                   >
                     Login
                   </Link>

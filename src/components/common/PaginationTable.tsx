@@ -1,9 +1,9 @@
-import { Loader } from "@ahaui/react";
-import classNames from "classnames";
-import React, { useEffect, useState } from "react";
-import { DataTable, TableColumnType } from "types/table";
-import Pagination from "./Pagination";
-import Table from "./Table";
+import React, { useEffect, useState } from 'react';
+import { Loader } from '@ahaui/react';
+import classNames from 'classnames';
+import { DataTable, TableColumnType } from 'types/table';
+import Pagination from './Pagination';
+import Table from './Table';
 
 type PaginationTableProps = {
   data: DataTable | undefined;
@@ -39,7 +39,7 @@ const PaginationTable: React.FC<PaginationTableProps> = ({
     <div>
       <div
         className={classNames(
-          "u-shadowMedium u-backgroundWhite u-roundedMedium"
+          'u-shadowMedium u-backgroundWhite u-roundedMedium',
         )}
       >
         <header className="u-flex u-justifyContentBetween u-alignItemsCenter u-backgroundLightest u-paddingHorizontalMedium u-paddingVerticalTiny u-textPrimaryDarker">
