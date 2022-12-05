@@ -16,13 +16,13 @@ const PopupMap: PopupMapType = {
   [PopupType.DELETE_CONFIRM]: DeleteConfirm,
 };
 
-const PopupMapping = () => {
+const CustomPopup = () => {
   const { popupKey, popupProps } = useAppSelector(popupSelector);
   if(!popupKey) return null;
-  
+
   const Popup = PopupMap[popupKey as keyof PopupMapType];
 
   return <Popup {...popupProps} />;
 };
 
-export default PopupMapping;
+export default CustomPopup;

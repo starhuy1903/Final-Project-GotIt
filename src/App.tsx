@@ -7,7 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import AuthRoute from "./AuthRoute";
 import NotiMessage from "./components/common/NotiMessage";
 import CategoryDetailPage from "pages/CategoryDetailPage";
-import PopupMapping from "components/common/popup/index";
+import CustomPopup from "components/common/popup/index";
 import ItemList from "pages/ItemList";
 import ItemDetail from "pages/ItemDetail";
 import { TOKEN_KEY } from "./constants";
@@ -23,7 +23,7 @@ const App: React.FC = () => {
   return (
     <>
       <NotiMessage />
-      <PopupMapping />
+      <CustomPopup />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
