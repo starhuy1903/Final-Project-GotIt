@@ -13,7 +13,12 @@ const authAPI = {
       url: "/users",
       method: "POST",
       data: JSON.stringify({ email, password, name }),
+    }),
+    fetchUserInfo: () => api.request({
+      url: "/users/me",
+      method: "GET",
     })
+
 };
 
 export default authAPI;

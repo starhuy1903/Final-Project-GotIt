@@ -3,7 +3,7 @@ import { Form, Button, Loader } from "@ahaui/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTypedDispatch } from "../hooks";
-import { signIn } from "../store/actions/authActions";
+import { fetchUserInfo, signIn } from "../store/actions/authActions";
 import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -38,10 +38,12 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (user: LoginFormValues) => {
     setLoading(true);
-    const res = await dispatch(signIn(user));
-    setLoading(false);
-    if (res) {
-      navigate("/");
+    const hasSignInSucceed = await dispatch(signIn(user));
+    if (hasSignInSucceed) {
+      const hasFetchSucceed = await dispatch(fetchUserInfo());
+      hasFetchSucceed && navigate("/");
+    } else {
+      setLoading(false);
     }
   };
 

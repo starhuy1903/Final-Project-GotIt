@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Form, Button, Loader } from "@ahaui/react";
 import { useTypedDispatch } from "../hooks";
-import { signIn, signUp } from "../store/actions";
+import { fetchUserInfo, signIn, signUp } from "../store/actions";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -41,12 +41,16 @@ const RegisterPage = () => {
 
   const handleSubmit = async (user: any) => {
     setLoading(true);
-    const hasSignUpSucceed = await dispatch(signUp(user)); // after user sign up successfully, then sign in after that.
+    const hasSignUpSucceed = await dispatch(signUp(user)); 
     if (hasSignUpSucceed) {
       const hasSignInSucceed = await dispatch(signIn(user));
-      hasSignInSucceed && navigate("/");
+      if(hasSignInSucceed) {
+        const hasFetchSucceed = await dispatch(fetchUserInfo());
+      hasFetchSucceed && navigate("/");
+      }
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

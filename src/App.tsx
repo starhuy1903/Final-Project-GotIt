@@ -12,13 +12,14 @@ import ItemList from "pages/ItemList";
 import ItemDetail from "pages/ItemDetail";
 import { TOKEN_KEY } from "./constants";
 import { useTypedDispatch } from "hooks";
-import { AuthActionType } from "store/actions";
+import { AuthActionType, fetchUserInfo } from "store/actions";
 
 const App: React.FC = () => {
   const token = localStorage.getItem(TOKEN_KEY)
   const dispatch = useTypedDispatch();
   if(token) {
-    dispatch({type: AuthActionType.AUTH_USER, payload: token})
+    dispatch({type: AuthActionType.AUTH_TOKEN, payload: token})
+    dispatch(fetchUserInfo())
   }
   return (
     <>

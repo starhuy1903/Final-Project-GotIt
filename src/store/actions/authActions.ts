@@ -5,13 +5,19 @@ import authAPI from "../../api/authAPI";
 import { NotiMsgType } from "./notiMsgActions";
 
 export enum AuthActionType {
+  AUTH_TOKEN = "auth_token",
   AUTH_USER = "auth_user",
   AUTH_RESET = "auth_reset",
 }
 
 interface AuthSuccessAction {
-  type: AuthActionType.AUTH_USER;
+  type: AuthActionType.AUTH_TOKEN;
   payload: string;
+}
+
+interface AuthUserInfoAction {
+  type: AuthActionType.AUTH_USER;
+  payload: {name: string, id: number};
 }
 
 interface AuthResetAction {
@@ -19,7 +25,7 @@ interface AuthResetAction {
   payload: string;
 }
 
-export type AuthAction = AuthSuccessAction | AuthResetAction;
+export type AuthAction = AuthSuccessAction | AuthUserInfoAction | AuthResetAction;
 
 export const signIn =
   ({ email, password }: { email: string; password: string }) =>
@@ -28,8 +34,8 @@ export const signIn =
       const res = await authAPI.signIn(email, password);
       const { accessToken: token } = convertSnakeCaseToCamelCase(res.data);
       localStorage.setItem(TOKEN_KEY, token);
-      dispatch({ type: AuthActionType.AUTH_USER, payload: token });
-      return token;
+      dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
+      return res.status === 200;
     } catch (err: any) {
       dispatch({
         type: NotiMsgType.SET_MSG,
@@ -55,6 +61,25 @@ export const signUp =
     try {
       const res = await authAPI.signUp(email, password, name);
       return res.status === 201;
+    } catch (err: any) {
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          error: { message: err.response.data.message },
+          status: err.response.status,
+        },
+      });
+    }
+  };
+
+  export const fetchUserInfo =
+  () =>
+  async (dispatch: Dispatch) => {
+    try {
+      const res = await authAPI.fetchUserInfo();
+      const {id, name} = res.data;
+      dispatch({type: AuthActionType.AUTH_USER, payload: {id, name}})
+      return res.status === 200;
     } catch (err: any) {
       dispatch({
         type: NotiMsgType.SET_MSG,

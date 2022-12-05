@@ -4,7 +4,7 @@ import authReducer, { initialState } from '../authReducer';
 describe('authReducer', () => {
   it('should update correctly', () => {
     const authState = authReducer(initialState, {
-      type: AuthActionType.AUTH_USER,
+      type: AuthActionType.AUTH_TOKEN,
       payload: 'token',
     });
 

@@ -23,18 +23,16 @@ const ItemList:React.FC = () => {
   };
 
   const fetchData = async (offset: number) => {
-
       const data = await dispatch(fetchItemsList(offset, LIMIT, categoryIdNum))
       const { totalItems, items } = data;
       setData({ totalItems, items });
-    
   };
 
   const openCreatePopup = () => {
     dispatch(
       openPopup({
         popupKey: PopupType.ITEM_FORM,
-        popupProps: {        
+        popupProps: {
           title: "Add Item",
           closeHandler: closePopupHandler,
           onSubmit: (item) => handleCreate(item),
@@ -47,7 +45,7 @@ const ItemList:React.FC = () => {
     dispatch(
       openPopup({
         popupKey: PopupType.ITEM_FORM,
-        popupProps: {        
+        popupProps: {
           title: "Update Item",
           item: item,
           closeHandler: closePopupHandler,
@@ -61,7 +59,7 @@ const ItemList:React.FC = () => {
     dispatch(
       openPopup({
         popupKey: PopupType.DELETE_CONFIRM,
-        popupProps: {        
+        popupProps: {
           title: "Delete Item",
           item: item,
           closeHandler: closePopupHandler,
@@ -94,7 +92,7 @@ const ItemList:React.FC = () => {
       fetchData(0);
     }
   };
-  
+
   return (
      <div className="u-textCenter">
       <PaginationTable
