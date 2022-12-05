@@ -3,7 +3,7 @@ import { convertCamelCaseToSnakeCase } from 'utils/convertObject';
 import api from '.';
 
 const categoryAPI = {
-  fetchCategoriesList: async (offset: number, limit: number) => await api.request({
+  fetchCategoriesList: (offset: number, limit: number) => api.request({
     url: '/categories',
     params: {
       offset,
@@ -11,19 +11,19 @@ const categoryAPI = {
     },
   }),
 
-  createCategory: async (item: CategoryPayload) => await api.request({
+  createCategory: (item: CategoryPayload) => api.request({
     url: '/categories',
     method: 'POST',
     data: JSON.stringify(convertCamelCaseToSnakeCase(item)),
   }),
 
-  updateCategory: async (id: number, item: CategoryPayload) => await api.request({
+  updateCategory: (id: number, item: CategoryPayload) => api.request({
     url: `/categories/${id}`,
     method: 'PUT',
     data: JSON.stringify(convertCamelCaseToSnakeCase(item)),
   }),
 
-  deleteCategory: async (id: number) => await api.request({
+  deleteCategory: (id: number) => api.request({
     url: `/categories/${id}`,
     method: 'DELETE',
   }),

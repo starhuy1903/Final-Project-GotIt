@@ -3,8 +3,8 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Form, Button, Loader } from "@ahaui/react";
 import { useTypedDispatch } from "../hooks";
-import { signUp } from "../store/actions";
-import { Link, useNavigate } from "react-router-dom";
+import { signIn, signUp } from "../store/actions";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().email("The email is not valid"),
@@ -26,6 +26,7 @@ const RegisterPage = () => {
   const initialValues: SignUpFormValues = { email: "", password: "", name: "" };
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const formik = useFormik({
     initialValues,
@@ -40,11 +41,12 @@ const RegisterPage = () => {
 
   const handleSubmit = async (user: any) => {
     setLoading(true);
-    const isLoggedIn = await dispatch(signUp(user)); // after user sign up successfully, then sign in after that.
-    setLoading(false);
-    if (isLoggedIn) {
-      navigate("/");
+    const hasSignUpSucceed = await dispatch(signUp(user)); // after user sign up successfully, then sign in after that.
+    if (hasSignUpSucceed) {
+      const hasSignInSucceed = await dispatch(signIn(user));
+      hasSignInSucceed && navigate("/");
     }
+    setLoading(false);
   };
 
   return (

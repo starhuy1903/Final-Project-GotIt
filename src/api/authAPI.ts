@@ -1,21 +1,19 @@
 import api from ".";
 
 const authAPI = {
-  signIn: async (email: string, password: string) => {
-    const res = await api.request({
+  signIn: (email: string, password: string) => (
+   api.request({
       url: "/auth",
       method: "POST",
       data: JSON.stringify({ email, password }),
-    });
-    return res.data; // token
-  },
-  signUp: async (email: string, password: string, name: string) => {
-    await api.request({
+    })
+  ),
+  signUp: (email: string, password: string, name: string) =>
+     api.request({
       url: "/users",
       method: "POST",
       data: JSON.stringify({ email, password, name }),
-    });
-  },
+    })
 };
 
 export default authAPI;

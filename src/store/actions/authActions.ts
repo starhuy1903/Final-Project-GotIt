@@ -1,3 +1,4 @@
+import { convertSnakeCaseToCamelCase } from './../../utils/convertObject';
 import { TOKEN_KEY } from "../../constants";
 import { Dispatch } from "redux";
 import authAPI from "../../api/authAPI";
@@ -24,7 +25,8 @@ export const signIn =
   ({ email, password }: { email: string; password: string }) =>
   async (dispatch: Dispatch) => {
     try {
-      const { access_token: token } = await authAPI.signIn(email, password);
+      const res = await authAPI.signIn(email, password);
+      const { accessToken: token } = convertSnakeCaseToCamelCase(res.data);
       localStorage.setItem(TOKEN_KEY, token);
       dispatch({ type: AuthActionType.AUTH_USER, payload: token });
       return token;
@@ -51,11 +53,8 @@ export const signUp =
   }) =>
   async (dispatch: Dispatch) => {
     try {
-      await authAPI.signUp(email, password, name);
-      const { access_token: token } = await authAPI.signIn(email, password);
-      localStorage.setItem(TOKEN_KEY, token);
-      dispatch({ type: AuthActionType.AUTH_USER, payload: token });
-      return token;
+      const res = await authAPI.signUp(email, password, name);
+      return res.status === 201;
     } catch (err: any) {
       dispatch({
         type: NotiMsgType.SET_MSG,
