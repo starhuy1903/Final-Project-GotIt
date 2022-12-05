@@ -7,7 +7,7 @@ type TableProps = {
 };
 
 const Table: React.FC<TableProps> = ({ list, cols }) => {
-  if(list?.length === 0 || !list) return <div>No data</div>
+  if(!list?.length) return <div>No data</div>
 
     return (
     <div>

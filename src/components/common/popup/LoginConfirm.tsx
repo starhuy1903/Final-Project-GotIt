@@ -4,7 +4,7 @@ import PopupWrapper from './PopupWrapper';
 
 export type LoginConfirmProps = {
   title: string;
-  onSubmit: (...params: any[]) => void;
+  onSubmit: () => void;
   closeHandler: () => void;
 }
 
@@ -20,7 +20,7 @@ const LoginConfirm :React.FC<LoginConfirmProps> = ({
         <Button variant="secondary" onClick={closeHandler}>
           <Button.Label>Cancel</Button.Label>
         </Button>
-        <Button variant="primary" onClick={() => onSubmit()}>
+        <Button variant="primary" onClick={onSubmit}>
           <Button.Label>Login</Button.Label>
         </Button>
       </div>

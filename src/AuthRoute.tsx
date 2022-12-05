@@ -6,13 +6,9 @@ import { selectToken } from './store/reducers/authReducer';
 const AuthRoute = () => {
   const token = useAppSelector(selectToken);
 
-  return (
-    <>
-      {
-    token ? <Navigate to="/" /> : <Outlet />
-  }
-    </>
-  );
+  return token ? <Navigate to="/" /> : <Outlet />
+
+  ;
 };
 
 export default AuthRoute;
