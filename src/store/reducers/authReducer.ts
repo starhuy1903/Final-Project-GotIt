@@ -17,10 +17,10 @@ const reducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {
     case AuthActionType.AUTH_TOKEN:
       return { ...state, token: action.payload };
-      case AuthActionType.AUTH_USER: {
-        const {id, name} = action.payload;
-        return {...state, name, id}
-      }
+    case AuthActionType.AUTH_USER: {
+      const {id, name} = action.payload;
+      return {...state, name, id}
+    }
     case AuthActionType.AUTH_RESET:
       return initialState;
     default:
