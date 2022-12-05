@@ -67,26 +67,23 @@ const CategoryList: React.FC = () => {
   }
 
   const handleCreate = async (category: CategoryPayload) => {
-    const res = await dispatch(createCategory(category))
-    if(res?.status === 201) {
-      // console.log(res);
+    const hasSucceeded = await dispatch(createCategory(category))
+    if(hasSucceeded) {
       fetchData(0);
     }
   };
 
   const handleUpdate = async (id: number, category: CategoryPayload) => {
-    const res = await dispatch(updateCategory(id, category))
-    if(res?.status === 200) {
-      // console.log(res);
+    const hasSucceeded = await dispatch(updateCategory(id, category))
+    if(hasSucceeded) {
       closePopupHandler();
       fetchData(0);
     }
   };
 
   const handleDelete = async (id: number) => {
-    const res = await dispatch(deleteCategory(id))
-    if(res?.status === 200) {
-      // console.log(res);
+    const hasSucceeded = await dispatch(deleteCategory(id))
+    if(hasSucceeded) {
       closePopupHandler();
       fetchData(0);
     }

@@ -16,8 +16,8 @@ const DeleteConfirm :React.FC<DeleteConfirmProps> = ({
     <div className="u-flex u-flexColumn u-alignItemsCenter u-widthFull">
       <p>
         Are you sure to delete
-        <span className="u-fontBold">{item.name}</span>
-        {' '}
+        <span className="u-fontBold"> {item.name}</span>
+       
         ?
       </p>
       <div className="u-flex u-alignItemsCenter u-justifyContentBetween u-widthFull">

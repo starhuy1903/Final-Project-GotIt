@@ -29,10 +29,10 @@ export const createCategory = (item: CategoryPayload) => async (dispatch: Dispat
         type: NotiMsgType.SET_MSG,
         payload: {
           msg: "Create Successfully",
-          status: 201,
+          status: res.status,
         },
       });
-      return res;
+      return res.status === 201
     } catch (err: any) {
         dispatch({
         type: NotiMsgType.SET_MSG,
@@ -55,7 +55,7 @@ export const updateCategory = (id: number, item: CategoryPayload) => async (disp
           status: res.status,
         },
       });
-      return res;
+      return res.status === 200
     } catch (err: any) {
         dispatch({
         type: NotiMsgType.SET_MSG,
@@ -78,7 +78,7 @@ export const deleteCategory = (id: number) => async (dispatch: Dispatch) => {
           status: res.status,
         },
       });
-      return res;
+      return res.status === 200;
     } catch (err: any) {
         dispatch({
         type: NotiMsgType.SET_MSG,

@@ -23,15 +23,14 @@ export const fetchItemsList = (offset: number, limit: number, categoryId: number
 export const createItem = (categoryId: number, item: ItemPayload) => async (dispatch: Dispatch) => {
     try {
         const res = await itemAPI.createItem(categoryId, item);
-
         dispatch({
         type: NotiMsgType.SET_MSG,
         payload: {
-          msg: "Create Item Successfully",
-          status: 201,
+          msg: res.statusText,
+          status: res.status,
         },
       });
-      return res;
+      return res.status === 201;
     } catch (err: any) {
         dispatch({
         type: NotiMsgType.SET_MSG,
@@ -47,15 +46,14 @@ export const createItem = (categoryId: number, item: ItemPayload) => async (disp
 export const updateItem = (itemId: number, categoryId: number, item: ItemPayload) => async (dispatch: Dispatch) => {
     try {
         const res = await itemAPI.updateItem(itemId, categoryId, item);
-
         dispatch({
         type: NotiMsgType.SET_MSG,
         payload: {
-          msg: "Update Item Successfully",
-          status: 200,
+          msg: res.statusText,
+          status: res.status,
         },
       });
-      return res;
+      return res.status === 200;
     } catch (err: any) {
         dispatch({
         type: NotiMsgType.SET_MSG,
@@ -70,15 +68,14 @@ export const updateItem = (itemId: number, categoryId: number, item: ItemPayload
 export const deleteItem = (itemId: number, categoryId: number) => async (dispatch: Dispatch) => {
     try {
         const res = await itemAPI.deleteItem(itemId, categoryId);
-
         dispatch({
         type: NotiMsgType.SET_MSG,
         payload: {
-          msg: "Delete Item Successfully",
+          msg: res.statusText,
           status: res.status,
         },
       });
-      return res;
+      return res.status === 200;
     } catch (err: any) {
         dispatch({
         type: NotiMsgType.SET_MSG,

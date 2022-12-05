@@ -70,24 +70,23 @@ const ItemList:React.FC = () => {
   }
 
   const handleCreate = async (item: ItemPayload) => {
-    const res = await dispatch(createItem(categoryIdNum, item))
-    if(res?.status === 201) {
+    const hasSucceeded = await dispatch(createItem(categoryIdNum, item))
+    if(hasSucceeded) {
       fetchData(0);
     }
   };
 
   const handleUpdate = async (itemId: number, item: ItemPayload) => {
-    const res = await dispatch(updateItem(itemId, categoryIdNum, item))
-    if(res?.status === 200) {
+    const hasSucceeded = await dispatch(updateItem(itemId, categoryIdNum, item))
+    if(hasSucceeded) {
       closePopupHandler();
       fetchData(0);
     }
   };
 
   const handleDelete = async (id: number) => {
-    const res = await dispatch(deleteItem(id, categoryIdNum))
-    if(res?.status === 200) {
-      // console.log(res);
+    const hasSucceeded = await dispatch(deleteItem(id, categoryIdNum))
+    if(hasSucceeded) {
       closePopupHandler();
       fetchData(0);
     }
