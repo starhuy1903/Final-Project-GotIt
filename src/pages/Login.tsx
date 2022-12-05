@@ -1,32 +1,29 @@
 import React, { useState } from "react";
-import * as yup from "yup";
-import { useFormik } from "formik";
 import { Form, Button, Loader } from "@ahaui/react";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import { useTypedDispatch } from "../hooks";
-import { fetchUserInfo, signIn, signUp } from "../store/actions";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { fetchUserInfo, signIn } from "../store/actions/authActions";
+import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-  email: yup.string().email("The email is not valid"),
-  password: yup
+  email: yup
     .string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    .required("No email provided.")
+    .email("The email is not valid"),
+  password: yup.string().required("No password provided."),
 });
 
-interface SignUpFormValues {
+interface LoginFormValues {
   email: string;
   password: string;
-  name: string;
 }
 
-const RegisterPage = () => {
+const Login: React.FC = () => {
   const dispatch = useTypedDispatch();
-  const initialValues: SignUpFormValues = { email: "", password: "", name: "" };
+  const initialValues: LoginFormValues = { email: "", password: "" };
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const formik = useFormik({
     initialValues,
@@ -39,15 +36,12 @@ const RegisterPage = () => {
     validateOnBlur: true,
   });
 
-  const handleSubmit = async (user: any) => {
+  const handleSubmit = async (user: LoginFormValues) => {
     setLoading(true);
-    const hasSignUpSucceed = await dispatch(signUp(user)); 
-    if (hasSignUpSucceed) {
-      const hasSignInSucceed = await dispatch(signIn(user));
-      if(hasSignInSucceed) {
-        const hasFetchSucceed = await dispatch(fetchUserInfo());
+    const hasSignInSucceed = await dispatch(signIn(user));
+    if (hasSignInSucceed) {
+      const hasFetchSucceed = await dispatch(fetchUserInfo());
       hasFetchSucceed && navigate("/");
-      }
     } else {
       setLoading(false);
     }
@@ -66,7 +60,7 @@ const RegisterPage = () => {
           onSubmit={formik.handleSubmit}
           className=" u-flex u-flexColumn u-alignItemsCenter"
         >
-          <h1 className="u-text700 u-marginBottomSmall">Sign up</h1>
+          <h1 className="u-text700 u-marginBottomSmall">Sign in</h1>
           <Form.Group controlId="email-control">
             <Form.Label>Email</Form.Label>
             <Form.Input
@@ -101,34 +95,21 @@ const RegisterPage = () => {
               </Form.Feedback>
             )}
           </Form.Group>
-          <Form.Group controlId="name-control">
-            <Form.Label>Name</Form.Label>
-            <Form.Input
-              isInvalid={Boolean(formik.touched.name && formik.errors.name)}
-              placeholder="Enter name"
-              name="name"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            ></Form.Input>
-            {formik.touched.name && formik.errors.name && (
-              <Form.Feedback type="invalid">{formik.errors.name}</Form.Feedback>
-            )}
-          </Form.Group>
           {loading ? (
             <Loader duration={500} />
           ) : (
             <Button variant="primary">
-              <Button.Label>Sign up</Button.Label>
+              <Button.Label>Login</Button.Label>
             </Button>
           )}
         </form>
         <p className="u-marginTopSmall u-text100 text-center text-gray-400">
           Don't have an account yet?{" "}
           <Link
-            to="/login"
+            to="/register"
             className="text-blue-500 focus:outline-none focus:underline hover:underline"
           >
-            Sign in
+            Sign up
           </Link>
           .
         </p>
@@ -137,4 +118,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default Login;

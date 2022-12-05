@@ -11,7 +11,7 @@ import { categoryTableConstants } from "utils/renderCategoryRow";
 
 const LIMIT = 20;
 
-const CategoryDetailPage: React.FC = () => {
+const CategoryList: React.FC = () => {
   const dispatch = useTypedDispatch();
   const [data, setData] = useState<DataTable>();
 
@@ -29,7 +29,7 @@ const CategoryDetailPage: React.FC = () => {
     dispatch(
       openPopup({
         popupKey: PopupType.CATEGORY_FORM,
-        popupProps: {        
+        popupProps: {
           title: "Add Category",
           closeHandler: closePopupHandler,
           onSubmit: (category) => handleCreate(category),
@@ -42,7 +42,7 @@ const CategoryDetailPage: React.FC = () => {
     dispatch(
       openPopup({
         popupKey: PopupType.CATEGORY_FORM,
-        popupProps: {        
+        popupProps: {
           title: "Update Category",
           item: category,
           closeHandler: closePopupHandler,
@@ -56,7 +56,7 @@ const CategoryDetailPage: React.FC = () => {
     dispatch(
       openPopup({
         popupKey: PopupType.DELETE_CONFIRM,
-        popupProps: {        
+        popupProps: {
           title: "Delete Category",
           item: category,
           closeHandler: closePopupHandler,
@@ -113,4 +113,4 @@ const CategoryDetailPage: React.FC = () => {
   );
 };
 
-export default CategoryDetailPage;
+export default CategoryList;

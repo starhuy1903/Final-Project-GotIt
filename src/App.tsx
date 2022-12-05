@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import React from "react";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import AuthRoute from "./AuthRoute";
 import NotiMessage from "./components/common/NotiMessage";
-import CategoryDetailPage from "pages/CategoryDetailPage";
+import CategoryList from "pages/CategoryList";
 import CustomPopup from "components/common/popup/index";
 import ItemList from "pages/ItemList";
 import ItemDetail from "pages/ItemDetail";
@@ -27,14 +27,14 @@ const App: React.FC = () => {
       <CustomPopup />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="categories" element={<CategoryDetailPage />} />
+          <Route index element={<Home />} />
+          <Route path="categories" element={<CategoryList />} />
           <Route path="categories/:categoryId" element={<ItemList />} />
           <Route path="categories/:categoryId/items/:itemId" element={<ItemDetail />} />
 
           <Route element={<AuthRoute />}>
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
           </Route>
         </Route>
       </Routes>
