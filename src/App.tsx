@@ -6,20 +6,30 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AuthRoute from "./AuthRoute";
 import NotiMessage from "./components/common/NotiMessage";
-// import Popup from "components/common/Popup";
 import CategoryDetailPage from "pages/CategoryDetailPage";
 import PopupMapping from "components/common/popup/index";
+import ItemList from "pages/ItemList";
+import ItemDetail from "pages/ItemDetail";
+import { TOKEN_KEY } from "./constants";
+import { useTypedDispatch } from "hooks";
+import { AuthActionType } from "store/actions";
 
 const App: React.FC = () => {
+  const token = localStorage.getItem(TOKEN_KEY)
+  const dispatch = useTypedDispatch();
+  if(token) {
+    dispatch({type: AuthActionType.AUTH_USER, payload: token})
+  }
   return (
     <>
       <NotiMessage />
-      {/* <Popup /> */}
       <PopupMapping />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="categories" element={<CategoryDetailPage />} />
+          <Route path="categories/:categoryId" element={<ItemList />} />
+          <Route path="categories/:categoryId/items/:itemId" element={<ItemDetail />} />
 
           <Route element={<AuthRoute />}>
             <Route path="login" element={<LoginPage />} />

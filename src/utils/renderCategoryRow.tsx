@@ -12,7 +12,7 @@ export const categoryTableConstants = (
     {
       title: "ID",
       render: (rowData: Category) => {
-        return <span>{rowData.id}</span>;
+        return <Link to={`${rowData.id}`}>{rowData.id}</Link>;
       },
     },
     {
@@ -34,7 +34,7 @@ export const categoryTableConstants = (
       title: "Name",
       width: "30%",
       render: (rowData: Category) => {
-        return <Link to={`${rowData.id}`}>{rowData.name}</Link>;
+        return <span>{rowData.name}</span>;
       },
     },
     {

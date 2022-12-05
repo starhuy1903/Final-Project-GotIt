@@ -36,6 +36,13 @@ const itemAPI = {
       method: "DELETE",
     });
   },
+
+  fetchItemDetail: async(itemId: number, categoryId: number) => {
+     return await api.request({
+      url: `/categories/${categoryId}/items/${itemId}`,
+      method: "GET",
+    });
+  }
 };
 
 export default itemAPI;

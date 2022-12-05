@@ -89,3 +89,19 @@ export const deleteItem = (itemId: number, categoryId: number) => async (dispatc
       });
     }
 }
+
+export const fetchItemDetail = (itemId: number, categoryId: number) => async (dispatch: Dispatch) => {
+     try {
+      const res = await itemAPI.fetchItemDetail(itemId, categoryId);
+      const data = convertSnakeCaseToCamelCase(res?.data);
+      return data;
+    } catch (err: any) {
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          error: { message: "Fetch item detail failed" },
+          status: err.response.status,
+        },
+      });
+    }
+}

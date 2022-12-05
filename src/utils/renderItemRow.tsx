@@ -1,4 +1,5 @@
 import { Icon } from "@ahaui/react";
+import { Link } from "react-router-dom";
 import { Item, ItemPayload } from "types/item";
 import { TableColumnType } from "types/table";
 
@@ -11,7 +12,7 @@ export const itemTableConstants = (
     {
       title: "ID",
       render: (rowData: Item) => {
-        return <span>{rowData.id}</span>;
+        return <Link to={`items/${rowData.id}`}>{rowData.id}</Link>;
       },
     },
     {
