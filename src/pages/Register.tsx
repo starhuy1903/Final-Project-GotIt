@@ -46,7 +46,7 @@ const Register = () => {
       const hasSignInSucceed = await dispatch(signIn(user));
       if(hasSignInSucceed) {
         const hasFetchSucceed = await dispatch(fetchUserInfo());
-      hasFetchSucceed && navigate("/");
+      hasFetchSucceed && navigate(location?.state?.prevPath || "/");
       }
     } else {
       setLoading(false);

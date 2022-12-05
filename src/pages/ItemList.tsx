@@ -1,12 +1,13 @@
 import { Button, Icon } from '@ahaui/react';
 import PaginationTable from 'components/common/PaginationTable';
-import { useTypedDispatch } from 'hooks';
+import { useAppSelector, useTypedDispatch } from 'hooks';
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { createItem, deleteItem, fetchItemsList, updateItem } from 'store/actions/itemActions';
 import { closePopup, openPopup } from 'store/actions/popupActions';
+import { selectToken, selectUserId } from 'store/reducers/authReducer';
 import { PopupType } from 'store/reducers/popupReducer';
-import { ItemPayload } from 'types/item';
+import { Item, ItemPayload } from 'types/item';
 import { DataTable } from 'types/table';
 import { itemTableConstants } from 'utils/renderItemRow';
 
@@ -17,6 +18,9 @@ const ItemList:React.FC = () => {
     const categoryIdNum = Number(categoryId);
     const dispatch = useTypedDispatch();
     const [data, setData] = useState<DataTable>();
+    const navigate = useNavigate();
+    const token = useAppSelector(selectToken)
+    const userId = useAppSelector(selectUserId)
 
   const closePopupHandler = () => {
     dispatch(closePopup());
@@ -28,7 +32,29 @@ const ItemList:React.FC = () => {
       setData({ totalItems, items });
   };
 
+  const handleNavigateLogin = () => {
+    navigate("/login", {state: {prevPath: `/categories/${categoryIdNum}`}})
+    dispatch(closePopup());
+  }
+
+  const openLoginPopup = () => {
+    dispatch(
+      openPopup({
+        popupKey: PopupType.LOGIN_CONFIRM,
+        popupProps: {
+          title: "Action is not allowed?",
+          closeHandler: closePopupHandler,
+          onSubmit: () => handleNavigateLogin(),
+        },
+      })
+    );
+  }
+
   const openCreatePopup = () => {
+     if(!token) {
+      openLoginPopup()
+      return
+    }
     dispatch(
       openPopup({
         popupKey: PopupType.ITEM_FORM,
@@ -41,7 +67,28 @@ const ItemList:React.FC = () => {
     );
   }
 
-  const openUpdatePopup = (itemId: number, item: ItemPayload) => {
+  const checkCreatorPermission = (itemAuthorId: number) => {
+         if(!token) {
+      openLoginPopup()
+      return
+    }
+    if(userId && userId !== itemAuthorId) {
+      dispatch(openPopup({
+        popupKey: PopupType.NOTIFICATION_MESSAGE,
+        popupProps: {
+          title: "Warning Message",
+          closeHandler: closePopupHandler,
+          onSubmit: () => closePopupHandler(),
+        },
+      }))
+      return false;
+    }
+    return true;
+  }
+
+  const openUpdatePopup = (item: Item) => {
+    if(!checkCreatorPermission(item.author.id)) return;
+
     dispatch(
       openPopup({
         popupKey: PopupType.ITEM_FORM,
@@ -49,13 +96,15 @@ const ItemList:React.FC = () => {
           title: "Update Item",
           item: item,
           closeHandler: closePopupHandler,
-          onSubmit: (item) => handleUpdate(itemId, item),
+          onSubmit: (item) => handleUpdate(item.id, item),
         },
       })
     );
   }
 
-  const openDeleteConfirmPopup = (item: ItemPayload) => {
+  const openDeleteConfirmPopup = (item: Item) => {
+    if(!checkCreatorPermission(item.author.id)) return;
+
     dispatch(
       openPopup({
         popupKey: PopupType.DELETE_CONFIRM,

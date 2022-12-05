@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTypedDispatch } from "../hooks";
 import { fetchUserInfo, signIn } from "../store/actions/authActions";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup
@@ -24,6 +24,7 @@ const Login: React.FC = () => {
   const initialValues: LoginFormValues = { email: "", password: "" };
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const formik = useFormik({
     initialValues,
@@ -41,7 +42,7 @@ const Login: React.FC = () => {
     const hasSignInSucceed = await dispatch(signIn(user));
     if (hasSignInSucceed) {
       const hasFetchSucceed = await dispatch(fetchUserInfo());
-      hasFetchSucceed && navigate("/");
+      hasFetchSucceed && navigate(location?.state?.prevPath || "/");
     } else {
       setLoading(false);
     }

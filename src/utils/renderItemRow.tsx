@@ -5,8 +5,8 @@ import { TableColumnType } from "types/table";
 
 // This is the table constant/settings which needed to render table elements
 export const itemTableConstants = (
-  handleUpdate: (id: number, item: ItemPayload) => void,
-  handleDelete: (item: ItemPayload) => void
+  handleUpdate: (item: Item) => void,
+  handleDelete: (item: Item) => void
 ): TableColumnType[] => {
   return [
     {
@@ -52,10 +52,7 @@ export const itemTableConstants = (
           <>
             <div
               className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
-              onClick={() => {
-                const { id, ...others } = rowData;
-                handleUpdate(id, {description: others.description, imageUrl: others.imageUrl});
-              }}
+              onClick={() => handleUpdate(rowData)}
               onKeyPress={() => null}
               role="button"
               tabIndex={0}

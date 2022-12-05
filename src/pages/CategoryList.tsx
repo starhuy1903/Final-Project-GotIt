@@ -1,9 +1,11 @@
 import { Button, Icon } from "@ahaui/react";
 import PaginationTable from "components/common/PaginationTable";
-import { useTypedDispatch } from "hooks";
+import { useAppSelector, useTypedDispatch } from "hooks";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { createCategory, deleteCategory, fetchCategoriesList, updateCategory } from "store/actions/categoryActions";
 import { closePopup, openPopup } from "store/actions/popupActions";
+import { selectToken } from "store/reducers/authReducer";
 import { PopupType } from "store/reducers/popupReducer";
 import { CategoryPayload } from "types/category";
 import { DataTable } from "types/table";
@@ -14,6 +16,8 @@ const LIMIT = 20;
 const CategoryList: React.FC = () => {
   const dispatch = useTypedDispatch();
   const [data, setData] = useState<DataTable>();
+  const navigate = useNavigate();
+  const token = useAppSelector(selectToken)
 
   const closePopupHandler = () => {
     dispatch(closePopup());
@@ -25,7 +29,29 @@ const CategoryList: React.FC = () => {
       setData({ totalItems, items });
   };
 
+  const handleNavigateLogin = () => {
+    navigate("/login", {state: {prevPath: "/categories"}})
+    dispatch(closePopup());
+  }
+
+  const openLoginPopup = () => {
+    dispatch(
+      openPopup({
+        popupKey: PopupType.LOGIN_CONFIRM,
+        popupProps: {
+          title: "Action is not allowed?",
+          closeHandler: closePopupHandler,
+          onSubmit: () => handleNavigateLogin(),
+        },
+      })
+    );
+  }
+
   const openCreatePopup = () => {
+    if(!token) {
+openLoginPopup()
+return
+    }
     dispatch(
       openPopup({
         popupKey: PopupType.CATEGORY_FORM,
@@ -39,6 +65,10 @@ const CategoryList: React.FC = () => {
   }
 
   const openUpdatePopup = (id: number, category: CategoryPayload) => {
+    if(!token) {
+openLoginPopup()
+return
+    }
     dispatch(
       openPopup({
         popupKey: PopupType.CATEGORY_FORM,
@@ -53,6 +83,10 @@ const CategoryList: React.FC = () => {
   }
 
   const openDeleteConfirmPopup = (category: CategoryPayload) => {
+    if(!token) {
+openLoginPopup()
+return
+    }
     dispatch(
       openPopup({
         popupKey: PopupType.DELETE_CONFIRM,
