@@ -29,6 +29,7 @@
     "react/jsx-no-useless-fragment": "warn",
     "default-param-last": 0,
     "@typescript-eslint/no-explicit-any": "warn",
-    "max-len": 0
+    "max-len": 0,
+    "import/prefer-default-export": 0
   }
 }
