@@ -3,6 +3,7 @@
     "javascript": "javascriptreact"
   },
   "editor.tabSize": 2,
+  "editor.autoIndent": "brackets",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
