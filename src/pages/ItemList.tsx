@@ -1,5 +1,5 @@
 import { Button, Icon } from '@ahaui/react';
-import PaginationTable from 'components/common/PaginationTable';
+import PaginationTable from 'components/common/table/PaginationTable';
 import { useAppSelector, useTypedDispatch } from 'hooks';
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
