@@ -16,11 +16,13 @@ export const rootReducer = combineReducers({
   popup: popupReducer,
 });
 
-export const store = createStore(
+export const configureStore = (preloadedState = {}) => createStore(
   rootReducer,
-  {},
-  composeWithDevTools(applyMiddleware(thunk)),
+  preloadedState,
+  composeWithDevTools(applyMiddleware((thunk as any).default || thunk)),
 );
+
+export const store = configureStore();
 
 export type AppDispatch = typeof store.dispatch;
 export type ReduxState = ReturnType<typeof rootReducer>;
