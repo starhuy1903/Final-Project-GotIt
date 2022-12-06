@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Form, Button, Loader } from "@ahaui/react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { useTypedDispatch } from "../hooks";
-import { fetchUserInfo, signIn } from "../store/actions/authActions";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Form, Button, Loader } from '@ahaui/react';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useTypedDispatch from 'hooks/useTypedDispatch';
+import { fetchUserInfo, signIn } from '../store/actions/authActions';
 
 const schema = yup.object().shape({
   email: yup
     .string()
-    .required("No email provided.")
-    .email("The email is not valid"),
-  password: yup.string().required("No password provided."),
+    .required('No email provided.')
+    .email('The email is not valid'),
+  password: yup.string().required('No password provided.'),
 });
 
 interface LoginFormValues {
@@ -21,10 +21,21 @@ interface LoginFormValues {
 
 const Login: React.FC = () => {
   const dispatch = useTypedDispatch();
-  const initialValues: LoginFormValues = { email: "", password: "" };
+  const initialValues: LoginFormValues = { email: '', password: '' };
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleSubmit = async (user: LoginFormValues) => {
+    setLoading(true);
+    const hasSignInSucceed = await dispatch(signIn(user));
+    if (hasSignInSucceed) {
+      const hasFetchSucceed = await dispatch(fetchUserInfo());
+      hasFetchSucceed && navigate(location?.state?.prevPath || '/');
+    } else {
+      setLoading(false);
+    }
+  };
 
   const formik = useFormik({
     initialValues,
@@ -37,24 +48,13 @@ const Login: React.FC = () => {
     validateOnBlur: true,
   });
 
-  const handleSubmit = async (user: LoginFormValues) => {
-    setLoading(true);
-    const hasSignInSucceed = await dispatch(signIn(user));
-    if (hasSignInSucceed) {
-      const hasFetchSucceed = await dispatch(fetchUserInfo());
-      hasFetchSucceed && navigate(location?.state?.prevPath || "/");
-    } else {
-      setLoading(false);
-    }
-  };
-
   return (
     <div
-      style={{ height: "calc(100vh - 72px)" }}
+      style={{ height: 'calc(100vh - 72px)' }}
       className="u-flex u-justifyContentCenter"
     >
       <div
-        style={{ minWidth: "28rem", maxWidth: "32rem" }}
+        style={{ minWidth: '28rem', maxWidth: '32rem' }}
         className=" u-flex u-flexColumn u-justifyContentCenter u-alignItemsCenter u-paddingLarge u-marginLarge u-backgroundPrimaryLight u-roundedLarge"
       >
         <form
@@ -71,7 +71,7 @@ const Login: React.FC = () => {
               name="email"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-            ></Form.Input>
+            />
             {formik.touched.email && formik.errors.email && (
               <Form.Feedback type="invalid">
                 {formik.errors.email}
@@ -82,14 +82,14 @@ const Login: React.FC = () => {
             <Form.Label>Password</Form.Label>
             <Form.Input
               isInvalid={Boolean(
-                formik.touched.password && formik.errors.password
+                formik.touched.password && formik.errors.password,
               )}
               type="password"
               placeholder="Enter password"
               name="password"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-            ></Form.Input>
+            />
             {formik.touched.password && formik.errors.password && (
               <Form.Feedback type="invalid">
                 {formik.errors.password}
@@ -105,7 +105,8 @@ const Login: React.FC = () => {
           )}
         </form>
         <p className="u-marginTopSmall u-text100 text-center text-gray-400">
-          Don't have an account yet?{" "}
+          {'Don\'t have an account yet?'}
+          {' '}
           <Link
             to="/register"
             className="text-blue-500 focus:outline-none focus:underline hover:underline"

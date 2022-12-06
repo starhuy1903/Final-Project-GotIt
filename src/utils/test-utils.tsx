@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from "react";
-import { render } from "@testing-library/react";
-import type { RenderOptions } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
-import { rootReducer } from "../store";
-import { BrowserRouter } from "react-router-dom";
+import React, { PropsWithChildren } from 'react';
+import { render } from '@testing-library/react';
+import type { RenderOptions } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom';
+import { rootReducer } from '../store';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -14,7 +14,7 @@ import { BrowserRouter } from "react-router-dom";
 //   store?: AppStore;
 // }
 
-export function renderWithProviders(
+export default function renderWithProviders(
   ui: React.ReactElement,
   initState = {},
   // Automatically create a store instance if no store was passed in

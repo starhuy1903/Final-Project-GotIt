@@ -1,12 +1,12 @@
-import api from "api";
-import { ItemPayload } from "types/item";
-import { convertCamelCaseToSnakeCase } from "utils/convertObject";
+import api from 'api';
+import { ItemPayload } from 'types/item';
+import { convertCamelCaseToSnakeCase } from 'utils/convertObject';
 
 const itemAPI = {
   fetchItemsList: (offset: number, limit: number, categoryId: number) => (
-     api.request({
+    api.request({
       url: `/categories/${categoryId}/items`,
-      method: "GET",
+      method: 'GET',
       params: {
         offset,
         limit,
@@ -15,9 +15,9 @@ const itemAPI = {
   ),
 
   createItem: (categoryId: number, item: ItemPayload) => (
-     api.request({
+    api.request({
       url: `/categories/${categoryId}/items`,
-      method: "POST",
+      method: 'POST',
       data: JSON.stringify(convertCamelCaseToSnakeCase(item)),
     })
   ),
@@ -25,7 +25,7 @@ const itemAPI = {
   updateItem: (itemId: number, categoryId: number, item: ItemPayload) => (
     api.request({
       url: `/categories/${categoryId}/items/${itemId}`,
-      method: "PUT",
+      method: 'PUT',
       data: JSON.stringify(convertCamelCaseToSnakeCase(item)),
     })
   ),
@@ -33,16 +33,16 @@ const itemAPI = {
   deleteItem: (itemId: number, categoryId: number) => (
     api.request({
       url: `/categories/${categoryId}/items/${itemId}`,
-      method: "DELETE",
+      method: 'DELETE',
     })
   ),
 
   fetchItemDetail: (itemId: number, categoryId: number) => (
-     api.request({
+    api.request({
       url: `/categories/${categoryId}/items/${itemId}`,
-      method: "GET",
+      method: 'GET',
     })
-  )
+  ),
 };
 
 export default itemAPI;

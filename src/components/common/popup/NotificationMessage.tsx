@@ -11,7 +11,7 @@ export type NotificationMessageProps = {
 const NotificationMessage :React.FC<NotificationMessageProps> = ({
   title,
   closeHandler,
-  onSubmit
+  onSubmit,
 }) => (
   <PopupWrapper title={title} closeHandler={closeHandler}>
     <div className="u-flex u-flexColumn u-alignItemsCenter u-widthFull">

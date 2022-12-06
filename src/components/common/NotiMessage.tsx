@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { selectNotiMsg } from 'store/reducers/notiMsgReducer';
-import { useAppSelector } from '../../hooks';
+import useAppSelector from 'hooks/useAppSelector';
 
 const NotiMessage: React.FC = () => {
   const notiMsg = useAppSelector(selectNotiMsg);

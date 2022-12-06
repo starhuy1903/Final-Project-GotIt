@@ -1,5 +1,5 @@
-import { RootState } from "../store";
-import { PopupActionType } from "../actions/popupActions";
+import { RootState } from '../store';
+import { PopupActionType } from '../actions/popupActions';
 
 type PopupPropsType = {
   title: string;
@@ -9,11 +9,11 @@ type PopupPropsType = {
 };
 
 export enum PopupType {
-  CATEGORY_FORM = "Category Form",
-  ITEM_FORM = "Item Form",
-  LOGIN_CONFIRM = "Login Confirm",
-  DELETE_CONFIRM = "Delete Confirm",
-  NOTIFICATION_MESSAGE = "Notification Message",
+  CATEGORY_FORM = 'Category Form',
+  ITEM_FORM = 'Item Form',
+  LOGIN_CONFIRM = 'Login Confirm',
+  DELETE_CONFIRM = 'Delete Confirm',
+  NOTIFICATION_MESSAGE = 'Notification Message',
 }
 export interface PopupState {
   popupKey: string;
@@ -26,9 +26,9 @@ type PopupAction = {
 };
 
 export const initialState: PopupState = {
-  popupKey: "",
+  popupKey: '',
   popupProps: {
-    title: "",
+    title: '',
     closeHandler: () => null,
     onSubmit: () => null,
   },

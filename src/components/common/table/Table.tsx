@@ -7,9 +7,9 @@ type TableProps = {
 };
 
 const Table: React.FC<TableProps> = ({ list, cols }) => {
-  if(!list?.length) return <div>No data</div>
+  if (!list?.length) return <div>No data</div>;
 
-    return (
+  return (
     <div>
       <table
         width="100%"
@@ -33,7 +33,7 @@ const Table: React.FC<TableProps> = ({ list, cols }) => {
         </tbody>
       </table>
     </div>
-    )
+  );
 };
 
 export default Table;

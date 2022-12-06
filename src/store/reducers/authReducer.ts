@@ -1,5 +1,5 @@
-import { RootState } from "store/store";
-import { AuthActionType, AuthAction } from "../actions/authActions";
+import { RootState } from 'store/store';
+import { AuthActionType, AuthAction } from '../actions/authActions';
 
 interface AuthState {
   token: string | null;
@@ -18,8 +18,8 @@ const reducer = (state = initialState, action: AuthAction) => {
     case AuthActionType.AUTH_TOKEN:
       return { ...state, token: action.payload };
     case AuthActionType.AUTH_USER: {
-      const {id, name} = action.payload;
-      return {...state, name, id}
+      const { id, name } = action.payload;
+      return { ...state, name, id };
     }
     case AuthActionType.AUTH_RESET:
       return initialState;

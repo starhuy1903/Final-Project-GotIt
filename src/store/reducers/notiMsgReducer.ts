@@ -1,5 +1,5 @@
-import { NotiMsgAction, NotiMsgType } from "../actions/notiMsgActions";
-import { RootState } from "store/store";
+import { RootState } from 'store/store';
+import { NotiMsgAction, NotiMsgType } from '../actions/notiMsgActions';
 
 export interface NotiMsgState {
   status: number | null;
@@ -11,7 +11,7 @@ export interface NotiMsgState {
 }
 
 const initialState: NotiMsgState = {
-  msg: "",
+  msg: '',
   error: null,
   status: null,
 };
@@ -21,7 +21,7 @@ const reducer = (state = initialState, action: NotiMsgAction) => {
     case NotiMsgType.SET_MSG:
       return { ...state, ...action.payload };
     case NotiMsgType.CLEAR_MSG:
-      return { msg: "", error: null, status: null };
+      return { msg: '', error: null, status: null };
     default:
       return state;
   }

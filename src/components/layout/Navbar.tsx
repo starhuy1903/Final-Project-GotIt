@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import {
   Header, Logo, TopMenu, Dropdown, Icon, Button,
 } from '@ahaui/react';
-import { useAppSelector, useTypedDispatch } from 'hooks';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'store/actions';
 import { selectToken } from 'store/reducers/authReducer';
+import useAppSelector from 'hooks/useAppSelector';
+import useTypedDispatch from 'hooks/useTypedDispatch';
 
 const Navbar: React.FC = () => {
   const [current, setCurrent] = useState('/');

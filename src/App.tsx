@@ -1,25 +1,25 @@
-import { Route, Routes } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import React from "react";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import AuthRoute from "./AuthRoute";
-import NotiMessage from "./components/common/NotiMessage";
-import CategoryList from "pages/CategoryList";
-import CustomPopup from "components/common/popup/index";
-import ItemList from "pages/ItemList";
-import ItemDetail from "pages/ItemDetail";
-import { TOKEN_KEY } from "./constants";
-import { useTypedDispatch } from "hooks";
-import { AuthActionType, fetchUserInfo } from "store/actions";
+import { Route, Routes } from 'react-router-dom';
+import React from 'react';
+import CategoryList from 'pages/CategoryList';
+import CustomPopup from 'components/common/popup/index';
+import ItemList from 'pages/ItemList';
+import ItemDetail from 'pages/ItemDetail';
+import { AuthActionType, fetchUserInfo } from 'store/actions';
+import useTypedDispatch from 'hooks/useTypedDispatch';
+import Layout from './components/layout/Layout';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import AuthRoute from './AuthRoute';
+import NotiMessage from './components/common/NotiMessage';
+import { TOKEN_KEY } from './constants';
 
 const App: React.FC = () => {
-  const token = localStorage.getItem(TOKEN_KEY)
+  const token = localStorage.getItem(TOKEN_KEY);
   const dispatch = useTypedDispatch();
-  if(token) {
-    dispatch({type: AuthActionType.AUTH_TOKEN, payload: token})
-    dispatch(fetchUserInfo())
+  if (token) {
+    dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
+    dispatch(fetchUserInfo());
   }
   return (
     <>

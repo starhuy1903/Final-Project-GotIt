@@ -55,7 +55,7 @@ const PaginationTable: React.FC<PaginationTableProps> = ({
 
               {/* Pagination section */}
               <Pagination
-                totalCount={data?.totalItems || 0}
+                totalCount={200 || 0}
                 currentPage={currentPage}
                 onPageChange={setCurrentPage}
                 pageSize={pageSize}

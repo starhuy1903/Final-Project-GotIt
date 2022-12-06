@@ -1,9 +1,9 @@
-import { NotiMsgState } from "../reducers/notiMsgReducer";
-import { Dispatch } from "redux";
+import { Dispatch } from 'redux';
+import { NotiMsgState } from '../reducers/notiMsgReducer';
 
 export enum NotiMsgType {
-  SET_MSG = "set_msg",
-  CLEAR_MSG = "clear_msg",
+  SET_MSG = 'set_msg',
+  CLEAR_MSG = 'clear_msg',
 }
 
 interface SetMsgAction {
@@ -19,7 +19,7 @@ interface ClearMsgAction {
 export type NotiMsgAction = SetMsgAction | ClearMsgAction;
 
 export const setNotiMsg = (msg: string) => (dispatch: Dispatch) => {
-  console.log("error 2");
+  console.log('error 2');
 
   dispatch({
     type: NotiMsgType.SET_MSG,
@@ -29,5 +29,5 @@ export const setNotiMsg = (msg: string) => (dispatch: Dispatch) => {
 
 export const clearNotiMsg = () => ({
   type: NotiMsgType.CLEAR_MSG,
-  payload: "",
+  payload: '',
 });

@@ -1,10 +1,11 @@
-import { useAppSelector } from "hooks";
-import { popupSelector, PopupType } from "store/reducers/popupReducer";
-import CategoryForm, { CategoryFormProps } from "./CategoryForm";
-import DeleteConfirm, { DeleteConfirmProps } from "./DeleteConfirm";
-import ItemForm, { ItemFormProps } from "./ItemForm";
-import LoginConfirm, { LoginConfirmProps } from "./LoginConfirm";
-import NotificationMessage, { NotificationMessageProps } from "./NotificationMessage";
+import useAppSelector from 'hooks/useAppSelector';
+import React from 'react';
+import { popupSelector, PopupType } from 'store/reducers/popupReducer';
+import CategoryForm, { CategoryFormProps } from './CategoryForm';
+import DeleteConfirm, { DeleteConfirmProps } from './DeleteConfirm';
+import ItemForm, { ItemFormProps } from './ItemForm';
+import LoginConfirm, { LoginConfirmProps } from './LoginConfirm';
+import NotificationMessage, { NotificationMessageProps } from './NotificationMessage';
 
 type PopupMapType = {
   [PopupType.CATEGORY_FORM]: React.FC<CategoryFormProps>;
@@ -24,7 +25,7 @@ const PopupMap: PopupMapType = {
 
 const CustomPopup = () => {
   const { popupKey, popupProps } = useAppSelector(popupSelector);
-  if(!popupKey) return null;
+  if (!popupKey) return null;
 
   const Popup = PopupMap[popupKey as keyof PopupMapType];
 

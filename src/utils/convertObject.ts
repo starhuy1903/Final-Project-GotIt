@@ -1,10 +1,8 @@
-import lodash from "lodash";
+import lodash from 'lodash';
 
 export const convertSnakeCaseToCamelCase = (data: any) => {
   if (lodash.isArray(data)) {
-    const newDataArr: any[] = data.map((item) =>
-      convertSnakeCaseToCamelCase(item)
-    );
+    const newDataArr: any[] = data.map((item) => convertSnakeCaseToCamelCase(item));
     return newDataArr;
   }
 
@@ -23,9 +21,7 @@ export const convertSnakeCaseToCamelCase = (data: any) => {
 
 export const convertCamelCaseToSnakeCase = (data: any) => {
   if (lodash.isArray(data)) {
-    const newDataArr: any[] = data.map((item) =>
-      convertCamelCaseToSnakeCase(item)
-    );
+    const newDataArr: any[] = data.map((item) => convertCamelCaseToSnakeCase(item));
     return newDataArr;
   }
 

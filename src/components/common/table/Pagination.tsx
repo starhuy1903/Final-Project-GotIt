@@ -1,6 +1,6 @@
-import { DOTS, usePagination } from "hooks/usePagination";
-import React from "react";
-import { Pagination as AhaPagination } from "@ahaui/react";
+import React from 'react';
+import { Pagination as AhaPagination } from '@ahaui/react';
+import usePagination, { DOTS } from 'hooks/usePagination';
 
 type PaginationProps = {
   onPageChange: (page: number) => void;
@@ -15,15 +15,14 @@ const Pagination: React.FC<PaginationProps> = ({
   totalCount,
   siblingCount = 1,
   currentPage,
-  pageSize
+  pageSize,
 }) => {
-  const paginationRange =
-    usePagination({
-      currentPage,
-      totalCount,
-      siblingCount,
-      pageSize,
-    }) || [];
+  const paginationRange = usePagination({
+    currentPage,
+    totalCount,
+    siblingCount,
+    pageSize,
+  }) || [];
 
   // If there are less than 2 times in pagination range we shall not render the component
   if (currentPage === 0 || paginationRange.length < 2) {
@@ -45,13 +44,13 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <AhaPagination className="u-textRight">
       <AhaPagination.Prev disabled={currentPage === 1} onClick={onPrevious} />
-      {paginationRange.map((pageNumber, index) => {
+      {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
-          return <AhaPagination.Ellipsis key={index} />;
+          return <AhaPagination.Ellipsis key={pageNumber} />;
         }
         return (
           <AhaPagination.Item
-            key={index}
+            key={pageNumber}
             active={pageNumber === currentPage}
             onClick={() => onPageChange(+pageNumber)}
           >

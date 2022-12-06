@@ -1,8 +1,8 @@
-import { PopupState } from "store/reducers/popupReducer";
+import { PopupState } from 'store/reducers/popupReducer';
 
 export enum PopupActionType {
-  CLOSE_POPUP = "close popup",
-  OPEN_POPUP = "open popup",
+  CLOSE_POPUP = 'close popup',
+  OPEN_POPUP = 'open popup',
 }
 
 export const openPopup = (popup: PopupState) => ({

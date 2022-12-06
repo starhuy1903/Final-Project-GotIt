@@ -1,9 +1,9 @@
-import axios from "axios";
-import { TOKEN_KEY } from "../constants";
+import axios from 'axios';
+import { TOKEN_KEY } from '../constants';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  headers: { "Content-Type": "application/json" },
+  headers: { 'Content-Type': 'application/json' },
 });
 
 api.interceptors.request.use((config) => {

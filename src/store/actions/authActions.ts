@@ -1,13 +1,13 @@
-import { convertSnakeCaseToCamelCase } from './../../utils/convertObject';
-import { TOKEN_KEY } from "../../constants";
-import { Dispatch } from "redux";
-import authAPI from "../../api/authAPI";
-import { NotiMsgType } from "./notiMsgActions";
+import { Dispatch } from 'redux';
+import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
+import { TOKEN_KEY } from '../../constants';
+import authAPI from '../../api/authAPI';
+import { NotiMsgType } from './notiMsgActions';
 
 export enum AuthActionType {
-  AUTH_TOKEN = "auth_token",
-  AUTH_USER = "auth_user",
-  AUTH_RESET = "auth_reset",
+  AUTH_TOKEN = 'auth_token',
+  AUTH_USER = 'auth_user',
+  AUTH_RESET = 'auth_reset',
 }
 
 interface AuthSuccessAction {
@@ -27,71 +27,80 @@ interface AuthResetAction {
 
 export type AuthAction = AuthSuccessAction | AuthUserInfoAction | AuthResetAction;
 
-export const signIn =
-  ({ email, password }: { email: string; password: string }) =>
-  async (dispatch: Dispatch) => {
-    try {
-      const res = await authAPI.signIn(email, password);
-      const { accessToken: token } = convertSnakeCaseToCamelCase(res.data);
-      localStorage.setItem(TOKEN_KEY, token);
-      dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
-      return res.status === 200;
-    } catch (err: any) {
-      dispatch({
-        type: NotiMsgType.SET_MSG,
-        payload: {
-          error: { message: err.response.data.message },
-          status: err.response.status,
-        },
-      });
-    }
-  };
+export const signIn = ({ email, password }: { email: string; password: string }) => async (dispatch: Dispatch) => {
+  try {
+    const res = await authAPI.signIn(email, password);
+    const { accessToken: token } = convertSnakeCaseToCamelCase(res.data);
+    localStorage.setItem(TOKEN_KEY, token);
+    dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
+    return res.status === 200;
+  } catch (err: any) {
+    dispatch({
+      type: NotiMsgType.SET_MSG,
+      payload: {
+        error: { message: err.response.data.message },
+        status: err.response.status,
+      },
+    });
+    return null;
+  }
+};
 
-export const signUp =
-  ({
-    email,
-    password,
-    name,
-  }: {
+export const signUp = ({
+  email,
+  password,
+  name,
+}: {
     email: string;
     password: string;
     name: string;
-  }) =>
-  async (dispatch: Dispatch) => {
-    try {
-      const res = await authAPI.signUp(email, password, name);
-      return res.status === 201;
-    } catch (err: any) {
-      dispatch({
-        type: NotiMsgType.SET_MSG,
-        payload: {
-          error: { message: err.response.data.message },
-          status: err.response.status,
-        },
-      });
-    }
-  };
+  }) => async (dispatch: Dispatch) => {
+  try {
+    const res = await authAPI.signUp(email, password, name);
+    return res.status === 201;
+  } catch (err: any) {
+    dispatch({
+      type: NotiMsgType.SET_MSG,
+      payload: {
+        error: { message: err.response.data.message },
+        status: err.response.status,
+      },
+    });
+    return null;
+  }
+};
 
-  export const fetchUserInfo =
-  () =>
-  async (dispatch: Dispatch) => {
-    try {
-      const res = await authAPI.fetchUserInfo();
-      const {id, name} = res.data;
-      dispatch({type: AuthActionType.AUTH_USER, payload: {id, name}})
-      return res.status === 200;
-    } catch (err: any) {
-      dispatch({
-        type: NotiMsgType.SET_MSG,
-        payload: {
-          error: { message: err.response.data.message },
-          status: err.response.status,
-        },
-      });
-    }
-  };
+export const fetchUserInfo = () => async (dispatch: Dispatch) => {
+  try {
+    const res = await authAPI.fetchUserInfo();
+    const { id, name } = res.data;
+    dispatch({ type: AuthActionType.AUTH_USER, payload: { id, name } });
+    return res.status === 200;
+  } catch (err: any) {
+    dispatch({
+      type: NotiMsgType.SET_MSG,
+      payload: {
+        error: { message: err.response.data.message },
+        status: err.response.status,
+      },
+    });
+    return null;
+  }
+};
 
 export const signOut = () => (dispatch: Dispatch) => {
   localStorage.removeItem(TOKEN_KEY);
   dispatch({ type: AuthActionType.AUTH_RESET });
 };
+
+// export const login = ({ email, password }: { email: string; password: string }) => (dispatch: Dispatch) => {
+//     // dispatch(actions.apiRequest());
+//     authAPI.signIn(email, password).then(res => {
+//         dispatch(actions.addTodoSuccess(res.data));
+//         return res;
+//     })
+//         .catch(error => {
+//             dispatch(actions.addTodoFail(error));
+//             return error
+//         })
+// }
