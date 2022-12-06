@@ -3,12 +3,12 @@ import {
   applyMiddleware,
   combineReducers,
   AnyAction,
-} from "redux";
-import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-import authReducer from "./reducers/authReducer";
-import notiMsgReducer from "./reducers/notiMsgReducer";
-import popupReducer from "./reducers/popupReducer";
+} from 'redux';
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import authReducer from './reducers/authReducer';
+import notiMsgReducer from './reducers/notiMsgReducer';
+import popupReducer from './reducers/popupReducer';
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -16,11 +16,13 @@ export const rootReducer = combineReducers({
   popup: popupReducer,
 });
 
-export const store = createStore(
+export const configureStore = (preloadedState = {}) => createStore(
   rootReducer,
-  {},
-  composeWithDevTools(applyMiddleware(thunk))
+  preloadedState,
+  composeWithDevTools(applyMiddleware((thunk as any).default || thunk)),
 );
+
+export const store = configureStore();
 
 export type AppDispatch = typeof store.dispatch;
 export type ReduxState = ReturnType<typeof rootReducer>;

@@ -1,23 +1,21 @@
-import axios from 'axios'
-import MockerAdapter from 'axios-mock-adapter'
-import * as actions from '../authActions'
-import mockStore from "../../../utils/mockStore"
+import axios from 'axios';
+import MockerAdapter from 'axios-mock-adapter';
+import { configureStore } from '../../store';
+import  * as authAction from '../authActions';
 
-
-describe("authActions", () => {
-  let store: ReturnType<typeof mockStore>
+describe('authActions', () => {
+  let store: null | ReturnType<typeof configureStore> = null;
   const mock = new MockerAdapter(axios);
 
   beforeEach(() => {
-    store = mockStore()
-  })
+    store = configureStore();
+  });
 
-  it("sign in success", async () => {
-    mock.onPost('/auth').reply(200, {access_token: "token"})
+  it('sign in success', async () => {
+    // if (store) {
+    //   mock.onPost('/auth').reply(200, { access_token: 'token' });
 
-    store.dispatch(actions.signIn({email: 'email', password: 'password'})).then(() => {});
-
-    // console.log(store.getActions());
-
-  })
-})
+    //   store.dispatch(authAction.signIn({ email: 'email', password: 'password' }));
+    // }
+  });
+});
