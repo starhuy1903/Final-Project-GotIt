@@ -20,12 +20,12 @@ export interface PopupState {
   popupProps: PopupPropsType;
 }
 
-type Action = {
+type PopupAction = {
   type: string;
   payload?: PopupState;
 };
 
-const initialState: PopupState = {
+export const initialState: PopupState = {
   popupKey: "",
   popupProps: {
     title: "",
@@ -34,7 +34,7 @@ const initialState: PopupState = {
   },
 };
 
-const popupReducer = (state = initialState, action: Action): PopupState => {
+const popupReducer = (state = initialState, action: PopupAction): PopupState => {
   switch (action.type) {
     case PopupActionType.OPEN_POPUP:
       return {
@@ -43,9 +43,7 @@ const popupReducer = (state = initialState, action: Action): PopupState => {
       };
 
     case PopupActionType.CLOSE_POPUP:
-      return {
-        ...initialState,
-      };
+      return initialState;
 
     default:
       return state;

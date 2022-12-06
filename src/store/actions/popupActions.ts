@@ -5,12 +5,11 @@ export enum PopupActionType {
   OPEN_POPUP = "open popup",
 }
 
-export const openPopup = (payload: PopupState) => ({
+export const openPopup = (popup: PopupState) => ({
   type: PopupActionType.OPEN_POPUP,
-  payload,
+  payload: popup,
 });
 
 export const closePopup = () => ({
   type: PopupActionType.CLOSE_POPUP,
 });
-

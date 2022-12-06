@@ -1,4 +1,4 @@
-import { NotiMsgState } from "store/reducers/notiMsgReducer";
+import { NotiMsgState } from "../reducers/notiMsgReducer";
 import { Dispatch } from "redux";
 
 export enum NotiMsgType {

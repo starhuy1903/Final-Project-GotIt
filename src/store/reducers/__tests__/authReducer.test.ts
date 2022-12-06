@@ -1,4 +1,4 @@
-import { AuthActionType } from './../../actions/authActions';
+import { AuthActionType } from '../../actions/authActions';
 import authReducer, { initialState } from '../authReducer';
 
 describe('authReducer', () => {

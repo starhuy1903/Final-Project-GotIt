@@ -1,4 +1,4 @@
-import { NotiMsgAction, NotiMsgType } from "store/actions/notiMsgActions";
+import { NotiMsgAction, NotiMsgType } from "../actions/notiMsgActions";
 import { RootState } from "store/store";
 
 export interface NotiMsgState {

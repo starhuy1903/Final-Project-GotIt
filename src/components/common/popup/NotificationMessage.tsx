@@ -4,7 +4,7 @@ import PopupWrapper from './PopupWrapper';
 
 export type NotificationMessageProps = {
   title: string,
-  onSubmit: (...params: any[]) => void;
+  onSubmit: () => void;
   closeHandler: () => void;
 }
 
@@ -19,7 +19,7 @@ const NotificationMessage :React.FC<NotificationMessageProps> = ({
         You do not have permission to do this action!
       </p>
       <div className="u-flex u-alignItemsCenter u-justifyContentCenter u-widthFull">
-        <Button variant="primary" onClick={() => onSubmit()}>
+        <Button variant="primary" onClick={onSubmit}>
           <Button.Label>OK</Button.Label>
         </Button>
       </div>
