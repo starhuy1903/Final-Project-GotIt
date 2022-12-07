@@ -1,73 +1,75 @@
-import categoryAPI from 'api/categoryAPI';
 import { Dispatch } from 'redux';
 import { CategoryPayload } from 'types/category';
-import { convertSnakeCaseToCamelCase } from 'utils/convertObject';
+import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
+import categoryAPI from '../../api/categoryAPI';
 import { NotiMsgType } from './notiMsgActions';
 
-export const fetchCategoriesList = (offset: number, limit: number) => async (dispatch: Dispatch) => {
-  try {
-    const res = await categoryAPI.fetchCategoriesList(offset, limit);
-    const data = convertSnakeCaseToCamelCase(res?.data);
-    return data;
-  } catch (err: any) {
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        error: { message: 'Fetch category failed' },
-        status: err.response.status,
-      },
-    });
-    return null;
-  }
-};
+export const fetchCategoriesList =
+  (offset: number, limit: number) => async (dispatch: Dispatch) => {
+    try {
+      const res = await categoryAPI.fetchCategoriesList(offset, limit);
+      const data = convertSnakeCaseToCamelCase(res?.data);
+      return data;
+    } catch (err: any) {
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          error: { message: 'Fetch category failed' },
+          status: err.response.status,
+        },
+      });
+      return null;
+    }
+  };
 
-export const createCategory = (item: CategoryPayload) => async (dispatch: Dispatch) => {
-  try {
-    const res = await categoryAPI.createCategory(item);
+export const createCategory =
+  (item: CategoryPayload) => async (dispatch: Dispatch) => {
+    try {
+      const res = await categoryAPI.createCategory(item);
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          msg: 'Create Successfully',
+          status: res.status,
+        },
+      });
+      return res.status === 201;
+    } catch (err: any) {
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          error: { message: 'Create failed' },
+          status: err.response.status,
+        },
+      });
+      return false;
+    }
+  };
 
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        msg: 'Create Successfully',
-        status: res.status,
-      },
-    });
-    return res.status === 201;
-  } catch (err: any) {
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        error: { message: 'Create failed' },
-        status: err.response.status,
-      },
-    });
-    return null;
-  }
-};
+export const updateCategory =
+  (id: number, item: CategoryPayload) => async (dispatch: Dispatch) => {
+    try {
+      const res = await categoryAPI.updateCategory(id, item);
 
-export const updateCategory = (id: number, item: CategoryPayload) => async (dispatch: Dispatch) => {
-  try {
-    const res = await categoryAPI.updateCategory(id, item);
-
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        msg: 'Update Successfully',
-        status: res.status,
-      },
-    });
-    return res.status === 200;
-  } catch (err: any) {
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        error: { message: 'Update failed' },
-        status: err.response.status,
-      },
-    });
-    return null;
-  }
-};
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          msg: 'Update Successfully',
+          status: res.status,
+        },
+      });
+      return res.status === 200;
+    } catch (err: any) {
+      dispatch({
+        type: NotiMsgType.SET_MSG,
+        payload: {
+          error: { message: 'Update failed' },
+          status: err.response.status,
+        },
+      });
+      return false;
+    }
+  };
 
 export const deleteCategory = (id: number) => async (dispatch: Dispatch) => {
   try {
@@ -89,6 +91,6 @@ export const deleteCategory = (id: number) => async (dispatch: Dispatch) => {
         status: err.response.status,
       },
     });
-    return null;
+    return false;
   }
 };

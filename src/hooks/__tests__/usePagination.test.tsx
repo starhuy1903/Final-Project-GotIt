@@ -63,7 +63,7 @@ describe('usePagination', () => {
   /*
     Case 4: Both left and right dots to be shown
     */
-  it.only('should return case 4 of pagination', async () => {
+  it('should return case 4 of pagination', async () => {
     const { result } = renderHook(() => usePagination({
       totalCount: 200,
       pageSize: 20,

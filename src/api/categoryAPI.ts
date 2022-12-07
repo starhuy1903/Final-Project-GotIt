@@ -1,5 +1,5 @@
 import { CategoryPayload } from 'types/category';
-import { convertCamelCaseToSnakeCase } from 'utils/convertObject';
+import { convertCamelCaseToSnakeCase } from '../utils/convertObject';
 import api from '.';
 
 const categoryAPI = {
