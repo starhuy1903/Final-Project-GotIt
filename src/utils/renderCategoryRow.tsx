@@ -1,13 +1,13 @@
 import { Icon } from '@ahaui/react';
 import { Link } from 'react-router-dom';
-import { Category, CategoryPayload } from 'types/category';
+import { Category } from 'types/category';
 import { TableColumnType } from 'types/table';
 import React from 'react';
 
 // This is the table constant/settings which needed to render table elements
 const categoryTableConstants = (
-  handleUpdate: (id: number, item: CategoryPayload) => void,
-  handleDelete: (item: CategoryPayload) => void,
+  handleUpdate: (item: Category) => void,
+  handleDelete: (item: Category) => void,
 ): TableColumnType[] => [
   {
     title: 'ID',
@@ -43,10 +43,7 @@ const categoryTableConstants = (
       <>
         <div
           className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
-          onClick={() => {
-            const { id, ...others } = rowData;
-            handleUpdate(id, others);
-          }}
+          onClick={() => handleUpdate(rowData)}
           onKeyPress={() => null}
           role="button"
           tabIndex={0}

@@ -1,6 +1,6 @@
-import api from 'api';
 import { ItemPayload } from 'types/item';
-import { convertCamelCaseToSnakeCase } from 'utils/convertObject';
+import { convertCamelCaseToSnakeCase } from '../utils/convertObject';
+import api from '.';
 
 const itemAPI = {
   fetchItemsList: (offset: number, limit: number, categoryId: number) => (

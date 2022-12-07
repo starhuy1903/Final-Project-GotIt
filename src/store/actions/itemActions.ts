@@ -1,7 +1,7 @@
-import itemAPI from 'api/itemAPI';
 import { Dispatch } from 'redux';
 import { ItemPayload } from 'types/item';
-import { convertSnakeCaseToCamelCase } from 'utils/convertObject';
+import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
+import itemAPI from '../../api/itemAPI';
 import { NotiMsgType } from './notiMsgActions';
 
 export const fetchItemsList = (offset: number, limit: number, categoryId: number) => async (dispatch: Dispatch) => {
@@ -10,11 +10,13 @@ export const fetchItemsList = (offset: number, limit: number, categoryId: number
     const data = convertSnakeCaseToCamelCase(res?.data);
     return data;
   } catch (err: any) {
+    const { status, data } = err.response;
+    const { message: errMessage, data: errData } = data;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: 'Fetch item failed' },
-        status: err.response.status,
+        error: { message: errMessage, data: errData },
+        status,
       },
     });
     return null;
@@ -33,14 +35,16 @@ export const createItem = (categoryId: number, item: ItemPayload) => async (disp
     });
     return res.status === 201;
   } catch (err: any) {
+    const { status, data } = err.response;
+    const { message: errMessage, data: errData } = data;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: 'Create Item failed' },
-        status: err.response.status,
+        error: { message: errMessage, data: errData },
+        status,
       },
     });
-    return null;
+    return false;
   }
 };
 
@@ -56,14 +60,16 @@ export const updateItem = (itemId: number, categoryId: number, item: ItemPayload
     });
     return res.status === 200;
   } catch (err: any) {
+    const { status, data } = err.response;
+    const { message: errMessage, data: errData } = data;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: 'Update Item failed' },
-        status: err.response.status,
+        error: { message: errMessage, data: errData },
+        status,
       },
     });
-    return null;
+    return false;
   }
 };
 
@@ -79,14 +85,16 @@ export const deleteItem = (itemId: number, categoryId: number) => async (dispatc
     });
     return res.status === 200;
   } catch (err: any) {
+    const { status, data } = err.response;
+    const { message: errMessage, data: errData } = data;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: 'Delete Item failed' },
-        status: err.response.status,
+        error: { message: errMessage, data: errData },
+        status,
       },
     });
-    return null;
+    return false;
   }
 };
 
@@ -96,11 +104,13 @@ export const fetchItemDetail = (itemId: number, categoryId: number) => async (di
     const data = convertSnakeCaseToCamelCase(res?.data);
     return data;
   } catch (err: any) {
+    const { status, data } = err.response;
+    const { message: errMessage, data: errData } = data;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: 'Fetch item detail failed' },
-        status: err.response.status,
+        error: { message: errMessage, data: errData },
+        status,
       },
     });
     return null;

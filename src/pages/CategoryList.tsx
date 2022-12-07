@@ -10,7 +10,7 @@ import {
 import { closePopup, openPopup } from 'store/actions/popupActions';
 import { selectToken } from 'store/reducers/authReducer';
 import { PopupType } from 'store/reducers/popupReducer';
-import { CategoryPayload } from 'types/category';
+import { Category, CategoryPayload } from 'types/category';
 import { DataTable } from 'types/table';
 import categoryTableConstants from 'utils/renderCategoryRow';
 
@@ -90,7 +90,7 @@ const CategoryList: React.FC = () => {
     );
   };
 
-  const openUpdatePopup = (id: number, category: CategoryPayload) => {
+  const openUpdatePopup = (category: Category) => {
     if (!token) {
       openLoginPopup();
       return;
@@ -102,13 +102,13 @@ const CategoryList: React.FC = () => {
           title: 'Update Category',
           item: category,
           closeHandler: closePopupHandler,
-          onSubmit: (category) => handleUpdate(id, category),
+          onSubmit: (updatedCategory: CategoryPayload) => handleUpdate(category.id, updatedCategory),
         },
       }),
     );
   };
 
-  const openDeleteConfirmPopup = (category: CategoryPayload) => {
+  const openDeleteConfirmPopup = (category: Category) => {
     if (!token) {
       openLoginPopup();
       return;

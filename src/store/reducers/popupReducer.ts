@@ -1,9 +1,11 @@
 import { RootState } from '../store';
 import { PopupActionType } from '../actions/popupActions';
+import { Item } from '../../types/item';
+import { Category } from '../../types/category';
 
 type PopupPropsType = {
   title: string;
-  item?: any;
+  item?: Item | Category;
   closeHandler: () => void;
   onSubmit: (...params: any[]) => void,
 };

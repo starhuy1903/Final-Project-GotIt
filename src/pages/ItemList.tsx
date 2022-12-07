@@ -114,7 +114,6 @@ const ItemList:React.FC = () => {
 
   const openUpdatePopup = (item: Item) => {
     if (!checkCreatorPermission(item.author.id)) return;
-
     dispatch(
       openPopup({
         popupKey: PopupType.ITEM_FORM,
@@ -122,7 +121,7 @@ const ItemList:React.FC = () => {
           title: 'Update Item',
           item,
           closeHandler: closePopupHandler,
-          onSubmit: (item) => handleUpdate(item.id, item),
+          onSubmit: (updatedItem: ItemPayload) => handleUpdate(item.id, updatedItem),
         },
       }),
     );

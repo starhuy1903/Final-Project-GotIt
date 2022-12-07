@@ -27,10 +27,12 @@ const ItemForm: React.FC<ItemFormProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
 
+  const itemForm = item ? { description: item.description, imageUrl: item.imageUrl } : null;
+
   const formik = useFormik({
-    initialValues: item || initialValues,
-    onSubmit: (item) => {
-      handleSubmit(item);
+    initialValues: itemForm || initialValues,
+    onSubmit: (submittedItem) => {
+      handleSubmit(submittedItem);
     },
 
     validationSchema: schema,
@@ -38,10 +40,10 @@ const ItemForm: React.FC<ItemFormProps> = ({
     validateOnBlur: true,
   });
 
-  const handleSubmit = async (item: ItemPayload) => {
+  const handleSubmit = async (submittedItem: ItemPayload) => {
     try {
       setLoading(true);
-      await onSubmit(item);
+      await onSubmit(submittedItem);
       setLoading(false);
       formik.resetForm({ values: initialValues });
     } catch (err: any) {

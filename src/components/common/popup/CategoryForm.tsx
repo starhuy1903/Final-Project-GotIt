@@ -29,10 +29,16 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
 
+  const categoryForm = item ? {
+    name: item.name,
+    description: item.description,
+    imageUrl: item.imageUrl
+  } : null;
+
   const formik = useFormik({
-    initialValues: item || initialValues,
-    onSubmit: (category) => {
-      handleSubmit(category);
+    initialValues: categoryForm || initialValues,
+    onSubmit: (submittedCategory) => {
+      handleSubmit(submittedCategory);
     },
 
     validationSchema: schema,
@@ -40,10 +46,10 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
     validateOnBlur: true,
   });
 
-  const handleSubmit = async (category: CategoryPayload) => {
+  const handleSubmit = async (submittedCategory: CategoryPayload) => {
     try {
       setLoading(true);
-      await onSubmit(category);
+      await onSubmit(submittedCategory);
       setLoading(false);
       formik.resetForm({ values: initialValues });
     } catch (err: any) {
