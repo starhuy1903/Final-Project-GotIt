@@ -18,14 +18,11 @@ interface ClearMsgAction {
 
 export type NotiMsgAction = SetMsgAction | ClearMsgAction;
 
-export const setNotiMsg = (msg: string) => (dispatch: Dispatch) => {
-  console.log('error 2');
-
+export const setNotiMsg = (msg: string) => (dispatch: Dispatch) =>
   dispatch({
     type: NotiMsgType.SET_MSG,
     payload: msg,
   });
-};
 
 export const clearNotiMsg = () => ({
   type: NotiMsgType.CLEAR_MSG,
