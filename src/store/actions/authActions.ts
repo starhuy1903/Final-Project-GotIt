@@ -35,11 +35,12 @@ export const signIn = ({ email, password }: { email: string; password: string })
     dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
     return res.status === 200;
   } catch (err: any) {
+    const { data, status } = err.response;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: err.response.data.message },
-        status: err.response.status,
+        error: { message: data.message },
+        status
       },
     });
     return null;
@@ -59,11 +60,12 @@ export const signUp = ({
     const res = await authAPI.signUp(email, password, name);
     return res.status === 201;
   } catch (err: any) {
+    const { data, status } = err.response;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: err.response.data.message },
-        status: err.response.status,
+        error: { message: data.message },
+        status,
       },
     });
     return null;
@@ -77,11 +79,12 @@ export const fetchUserInfo = () => async (dispatch: Dispatch) => {
     dispatch({ type: AuthActionType.AUTH_USER, payload: { id, name } });
     return res.status === 200;
   } catch (err: any) {
+    const { data, status } = err.response;
     dispatch({
       type: NotiMsgType.SET_MSG,
       payload: {
-        error: { message: err.response.data.message },
-        status: err.response.status,
+        error: { message: data.message },
+        status,
       },
     });
     return null;
@@ -92,15 +95,3 @@ export const signOut = () => (dispatch: Dispatch) => {
   localStorage.removeItem(TOKEN_KEY);
   dispatch({ type: AuthActionType.AUTH_RESET });
 };
-
-// export const login = ({ email, password }: { email: string; password: string }) => (dispatch: Dispatch) => {
-//     // dispatch(actions.apiRequest());
-//     authAPI.signIn(email, password).then(res => {
-//         dispatch(actions.addTodoSuccess(res.data));
-//         return res;
-//     })
-//         .catch(error => {
-//             dispatch(actions.addTodoFail(error));
-//             return error
-//         })
-// }
