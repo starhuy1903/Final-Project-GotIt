@@ -1,14 +1,9 @@
 import { Button } from '@ahaui/react';
 import React from 'react';
+import { PopupPropsType } from 'store/reducers/popupReducer';
 import PopupWrapper from './PopupWrapper';
 
-export type LoginConfirmProps = {
-  title: string;
-  onSubmit: () => void;
-  closeHandler: () => void;
-}
-
-const LoginConfirm :React.FC<LoginConfirmProps> = ({
+const LoginConfirm :React.FC<PopupPropsType> = ({
   title, onSubmit, closeHandler,
 }) => (
   <PopupWrapper title={title} closeHandler={closeHandler}>
@@ -20,7 +15,7 @@ const LoginConfirm :React.FC<LoginConfirmProps> = ({
         <Button variant="secondary" onClick={closeHandler}>
           <Button.Label>Cancel</Button.Label>
         </Button>
-        <Button variant="primary" onClick={onSubmit}>
+        <Button variant="primary" onClick={() => onSubmit()}>
           <Button.Label>Login</Button.Label>
         </Button>
       </div>

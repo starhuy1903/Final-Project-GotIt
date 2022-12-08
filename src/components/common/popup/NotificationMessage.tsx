@@ -1,14 +1,9 @@
 import { Button } from '@ahaui/react';
 import React from 'react';
+import { PopupPropsType } from 'store/reducers/popupReducer';
 import PopupWrapper from './PopupWrapper';
 
-export type NotificationMessageProps = {
-  title: string,
-  onSubmit: () => void;
-  closeHandler: () => void;
-}
-
-const NotificationMessage :React.FC<NotificationMessageProps> = ({
+const NotificationMessage :React.FC<PopupPropsType> = ({
   title,
   closeHandler,
   onSubmit,
@@ -19,7 +14,7 @@ const NotificationMessage :React.FC<NotificationMessageProps> = ({
         You do not have permission to do this action!
       </p>
       <div className="u-flex u-alignItemsCenter u-justifyContentCenter u-widthFull">
-        <Button variant="primary" onClick={onSubmit}>
+        <Button variant="primary" onClick={() => onSubmit()}>
           <Button.Label>OK</Button.Label>
         </Button>
       </div>

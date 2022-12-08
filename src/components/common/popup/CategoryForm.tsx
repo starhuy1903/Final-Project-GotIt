@@ -3,14 +3,8 @@ import { Form, Loader, Button } from '@ahaui/react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { CategoryPayload } from 'types/category';
+import { PopupPropsType } from 'store/reducers/popupReducer';
 import PopupWrapper from './PopupWrapper';
-
-export type CategoryFormProps = {
-  item?: CategoryPayload;
-  title: string;
-  onSubmit: (...params: any[]) => void;
-  closeHandler: () => void;
-};
 
 const schema = yup.object().shape({
   name: yup.string().required('No name provided.'),
@@ -24,7 +18,7 @@ const initialValues: CategoryPayload = {
   imageUrl: '',
 };
 
-const CategoryForm: React.FC<CategoryFormProps> = ({
+const CategoryForm: React.FC<PopupPropsType> = ({
   item, title, onSubmit, closeHandler,
 }) => {
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CategoryList from 'pages/CategoryList';
 import CustomPopup from 'components/common/popup/index';
 import ItemList from 'pages/ItemList';
@@ -17,10 +17,13 @@ import { TOKEN_KEY } from './constants';
 const App: React.FC = () => {
   const token = localStorage.getItem(TOKEN_KEY);
   const dispatch = useTypedDispatch();
-  if (token) {
-    dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
-    dispatch(fetchUserInfo());
-  }
+
+  useEffect(() => {
+    if (token) {
+      dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
+      dispatch(fetchUserInfo());
+    }
+  }, [token]);
   return (
     <>
       <NotiMessage />

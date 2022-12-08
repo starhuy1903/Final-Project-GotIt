@@ -1,17 +1,9 @@
 import { Button } from '@ahaui/react';
 import React from 'react';
-import { Category } from 'types/category';
-import { Item } from 'types/item';
+import { PopupPropsType } from 'store/reducers/popupReducer';
 import PopupWrapper from './PopupWrapper';
 
-export type DeleteConfirmProps = {
-  item?: Category | Item;
-  title: string;
-  onSubmit: (...params: any[]) => void;
-  closeHandler: () => void;
-}
-
-const DeleteConfirm :React.FC<DeleteConfirmProps> = ({
+const DeleteConfirm :React.FC<PopupPropsType> = ({
   item, title, onSubmit, closeHandler,
 }) => (
   <PopupWrapper title={title} closeHandler={closeHandler}>

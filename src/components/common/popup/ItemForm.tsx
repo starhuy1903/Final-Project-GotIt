@@ -3,14 +3,8 @@ import { Form, Loader, Button } from '@ahaui/react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { ItemPayload } from 'types/item';
+import { PopupPropsType } from 'store/reducers/popupReducer';
 import PopupWrapper from './PopupWrapper';
-
-export type ItemFormProps = {
-  item?: ItemPayload;
-  title: string;
-  onSubmit: (...params: any[]) => void;
-  closeHandler: () => void;
-};
 
 const schema = yup.object().shape({
   description: yup.string().required('No password provided.'),
@@ -22,7 +16,7 @@ const initialValues: ItemPayload = {
   imageUrl: '',
 };
 
-const ItemForm: React.FC<ItemFormProps> = ({
+const ItemForm: React.FC<PopupPropsType> = ({
   item, title, onSubmit, closeHandler,
 }) => {
   const [loading, setLoading] = useState(false);

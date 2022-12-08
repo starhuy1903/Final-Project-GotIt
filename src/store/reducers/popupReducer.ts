@@ -3,7 +3,7 @@ import { PopupActionType } from '../actions/popupActions';
 import { Item } from '../../types/item';
 import { Category } from '../../types/category';
 
-type PopupPropsType = {
+export type PopupPropsType = {
   title: string;
   item?: Item | Category;
   closeHandler: () => void;
