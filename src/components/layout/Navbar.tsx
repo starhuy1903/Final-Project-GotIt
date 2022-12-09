@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
           {token ? (
             <Dropdown alignRight className="u-marginLeftExtraSmall">
               <Dropdown.Toggle className="u-textLight u-lineHeightNone">
-                <Icon name="contact" size="large" />
+                <Icon style={{ height: '40px', width: '40px' }} name="contact" size="large" />
               </Dropdown.Toggle>
               <Dropdown.Container className="u-paddingVerticalExtraSmall">
                 <Dropdown.Item>

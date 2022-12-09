@@ -102,7 +102,7 @@ const CategoryList: React.FC = () => {
           title: 'Update Category',
           item: category,
           closeHandler: closePopupHandler,
-          onSubmit: (updatedCategory: CategoryPayload) => handleUpdate(category.id, updatedCategory),
+          onSubmit: (updatedCategory) => handleUpdate(category.id, updatedCategory),
         },
       }),
     );

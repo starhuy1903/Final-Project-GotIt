@@ -4,6 +4,10 @@ import { Item } from 'types/item';
 import { TableColumnType } from 'types/table';
 import React from 'react';
 
+const centerCell = {
+  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%'
+};
+
 // This is the table constant/settings which needed to render table elements
 const itemTableConstants = (
   handleUpdate: (item: Item) => void,
@@ -11,15 +15,16 @@ const itemTableConstants = (
 ): TableColumnType[] => [
   {
     title: 'ID',
-    render: (rowData: Item) => <Link to={`items/${rowData.id}`}>{rowData.id}</Link>,
+    width: '5%',
+    render: (rowData: Item) => <Link style={centerCell} to={`items/${rowData.id}`}>{rowData.id}</Link>,
   },
   {
     title: 'Image',
-    width: '10%',
+    width: '8%',
     render: (rowData: Item) => (
       <img
-        width="100%"
-        height="auto"
+        width="50px"
+        height="50px"
         style={{ objectFit: 'cover' }}
         src={rowData.imageUrl}
         alt="image1"

@@ -18,8 +18,8 @@ const categoryTableConstants = (
     width: '10%',
     render: (rowData: Category) => (
       <img
-        width="100%"
-        height="auto"
+        width="50px"
+        height="50px"
         style={{ objectFit: 'cover' }}
         src={rowData.imageUrl}
         alt="image1"
@@ -42,7 +42,7 @@ const categoryTableConstants = (
     render: (rowData: Category) => (
       <>
         <div
-          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
+          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer u-textWarning"
           onClick={() => handleUpdate(rowData)}
           onKeyPress={() => null}
           role="button"
@@ -53,7 +53,7 @@ const categoryTableConstants = (
         </div>
 
         <div
-          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
+          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer u-textNegative"
           onClick={() => handleDelete(rowData)}
           onKeyPress={() => null}
           role="button"

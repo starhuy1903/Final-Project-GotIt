@@ -71,7 +71,7 @@ const ItemForm: React.FC<PopupPropsType> = ({
           </Form.Feedback>
           )}
         </Form.Group>
-        <Form.Group controlId="img-control">
+        <Form.Group controlId="img-control" className="u-widthFull">
           <Form.Label>Image URL</Form.Label>
           <Form.Input
             isInvalid={Boolean(formik.touched.imageUrl && formik.errors.imageUrl)}
@@ -87,16 +87,17 @@ const ItemForm: React.FC<PopupPropsType> = ({
         {loading ? (
           <Loader duration={500} />
         ) : (
-          <div className="u-flex u-alignItemsCenter u-justifyContentBetween u-widthFull">
+          <div className="u-flex u-alignItemsCenter u-justifyContentEnd u-widthFull">
             <Button
               type="button"
               onClick={() => formik.resetForm({ values: initialValues })}
               variant="secondary"
+              className="u-marginRightSmall"
             >
-              <Button.Label>Reset</Button.Label>
+              <Button.Label className="u-paddingTiny">Reset</Button.Label>
             </Button>
             <Button variant="primary">
-              <Button.Label>Submit</Button.Label>
+              <Button.Label className="u-paddingVerticalTiny u-paddingHorizontalExtraSmall">Submit</Button.Label>
             </Button>
           </div>
         )}

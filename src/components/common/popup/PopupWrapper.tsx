@@ -21,9 +21,9 @@ const PopupWrapper: React.FC<PopupWrapperProps> = ({
       styles.popupWrapper,
     )}
   >
-    <Modal size="extraLarge" relative style={{ zIndex: '999' }}>
+    <Modal size="extraLarge" relative style={{ zIndex: '999', minWidth: '500px' }}>
       <Modal.Header closeButton onHide={() => closeHandler()}>
-        <Modal.Title>{title}</Modal.Title>
+        <Modal.Title className="u-fontMedium u-text800">{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
     </Modal>
