@@ -2,13 +2,12 @@ import { ItemPayload } from 'types/item';
 import { apiWrapper } from '../../api';
 import { showSuccessMes } from '.';
 import { TypedDispatch } from '../store';
-import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
 import itemAPI from '../../api/itemAPI';
 
 export const fetchItemsList = (offset: number, limit: number, categoryId: number) => async (dispatch: TypedDispatch) => {
   const result = await dispatch(apiWrapper(itemAPI.fetchItemsList(offset, limit, categoryId)));
   if (result.success) {
-    return convertSnakeCaseToCamelCase(result.data.data);
+    return result.data.data;
   }
   return null;
 };
@@ -40,7 +39,7 @@ export const deleteItem = (itemId: number, categoryId: number) => async (dispatc
 export const fetchItemDetail = (itemId: number, categoryId: number) => async (dispatch: TypedDispatch) => {
   const result = await dispatch(apiWrapper(itemAPI.fetchItemDetail(itemId, categoryId)));
   if (result.success) {
-    return convertSnakeCaseToCamelCase(result.data.data);
+    return result.data.data;
   }
   return null;
 };

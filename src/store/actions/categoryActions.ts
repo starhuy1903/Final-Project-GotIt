@@ -1,7 +1,6 @@
 import { CategoryPayload } from 'types/category';
 import { TypedDispatch } from 'store/store';
 import { apiWrapper } from '../../api';
-import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
 import categoryAPI from '../../api/categoryAPI';
 import { showSuccessMes } from '.';
 
@@ -9,7 +8,7 @@ export const fetchCategoriesList =
   (offset: number, limit: number) => async (dispatch: TypedDispatch) => {
     const result = await dispatch(apiWrapper(categoryAPI.fetchCategoriesList(offset, limit)));
     if (result.success) {
-      return convertSnakeCaseToCamelCase(result.data.data);
+      return result.data.data;
     }
     return null;
   };

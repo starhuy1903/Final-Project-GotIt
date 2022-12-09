@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 import { apiWrapper } from '../../api';
 import { TypedDispatch } from '../store';
-import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
 import { TOKEN_KEY } from '../../constants';
 import authAPI from '../../api/authAPI';
 
@@ -31,7 +30,7 @@ export type AuthAction = AuthSuccessAction | AuthUserInfoAction | AuthResetActio
 export const signIn = ({ email, password }: { email: string; password: string }) => async (dispatch: TypedDispatch) => {
   const result = await dispatch(apiWrapper(authAPI.signIn(email, password)));
   if (result.success) {
-    const { accessToken: token } = convertSnakeCaseToCamelCase(result.data.data);
+    const { accessToken: token } = result.data.data;
     localStorage.setItem(TOKEN_KEY, token);
     dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
   }
@@ -54,7 +53,7 @@ export const signUp = ({
 export const fetchUserInfo = () => async (dispatch: TypedDispatch) => {
   const result = await dispatch(apiWrapper(authAPI.fetchUserInfo()));
   if (result.success) {
-    const { id, name } = convertSnakeCaseToCamelCase(result.data.data);
+    const { id, name } = result.data.data;
     dispatch({ type: AuthActionType.AUTH_USER, payload: { id, name } });
   }
   return result.success;

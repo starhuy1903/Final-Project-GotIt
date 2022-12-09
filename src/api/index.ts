@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { convertSnakeCaseToCamelCase } from 'utils/convertObject';
 import { NotiMsgType } from '../store/actions/notiMsgActions';
 import { TOKEN_KEY } from '../constants';
 
@@ -24,7 +25,7 @@ export const apiWrapper = (axiosRequest: any) => async (dispatch: Dispatch) => {
     const result = await axiosRequest;
     return {
       success: true,
-      data: result
+      data: convertSnakeCaseToCamelCase(result)
     };
   } catch (err: any) {
     const { status, data } = err.response;

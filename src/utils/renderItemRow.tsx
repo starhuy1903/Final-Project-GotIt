@@ -47,7 +47,7 @@ const itemTableConstants = (
     render: (rowData: Item) => (
       <>
         <div
-          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
+          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer u-textWarning"
           onClick={() => handleUpdate(rowData)}
           onKeyPress={() => null}
           role="button"
@@ -58,7 +58,7 @@ const itemTableConstants = (
         </div>
 
         <div
-          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer"
+          className="u-inlineBlock u-paddingExtraSmall u-roundedCircle hover:u-backgroundLightest hover:u-textPrimary u-cursorPointer u-textNegative"
           onClick={() => handleDelete(rowData)}
           onKeyPress={() => null}
           role="button"
