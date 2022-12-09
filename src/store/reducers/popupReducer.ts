@@ -18,7 +18,7 @@ export enum PopupType {
   NOTIFICATION_MESSAGE = 'Notification Message',
 }
 export interface PopupState {
-  popupKey: string;
+  popupKey: PopupType | null;
   popupProps: PopupPropsType;
 }
 
@@ -28,7 +28,7 @@ type PopupAction = {
 };
 
 export const initialState: PopupState = {
-  popupKey: '',
+  popupKey: null,
   popupProps: {
     title: '',
     closeHandler: () => null,

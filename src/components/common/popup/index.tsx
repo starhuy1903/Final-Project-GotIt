@@ -21,7 +21,7 @@ const CustomPopup = () => {
   const { popupKey, popupProps } = useAppSelector(popupSelector);
   if (!popupKey) return null;
 
-  const Popup = PopupMap[popupKey as keyof PopupMapType];
+  const Popup = PopupMap[popupKey];
 
   return <Popup {...popupProps} />;
 };

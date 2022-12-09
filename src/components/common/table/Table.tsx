@@ -2,7 +2,7 @@ import React from 'react';
 import { TableColumnType } from 'types/table';
 
 type TableProps = {
-  list: Array<any> | undefined;
+  list?: Array<any>;
   cols: TableColumnType[];
 };
 

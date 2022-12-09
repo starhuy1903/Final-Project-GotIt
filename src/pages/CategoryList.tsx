@@ -1,9 +1,9 @@
 import { Button, Icon } from '@ahaui/react';
+import { useNavigate } from 'react-router-dom';
 import PaginationTable from 'components/common/table/PaginationTable';
 import useAppSelector from 'hooks/useAppSelector';
 import useTypedDispatch from 'hooks/useTypedDispatch';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   createCategory, deleteCategory, fetchCategoriesList, updateCategory,
 } from 'store/actions/categoryActions';
