@@ -14,7 +14,7 @@ const NotificationMessage :React.FC<PopupPropsType> = ({
         You do not have permission to do this action!
       </p>
       <div className="u-flex u-alignItemsCenter u-justifyContentCenter u-widthFull">
-        <Button variant="primary" onClick={() => onSubmit()}>
+        <Button variant="primary" onClick={onSubmit}>
           <Button.Label>OK</Button.Label>
         </Button>
       </div>

@@ -54,15 +54,23 @@ const Login: React.FC = () => {
       className="u-flex u-justifyContentCenter"
     >
       <div
-        style={{ minWidth: '28rem', maxWidth: '32rem' }}
-        className=" u-flex u-flexColumn u-justifyContentCenter u-alignItemsCenter u-paddingLarge u-marginLarge u-backgroundPrimaryLight u-roundedLarge"
+        style={{
+          backgroundImage:
+              'url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
+          backgroundSize: 'cover',
+          flex: '3'
+        }}
+      />
+      <div
+        style={{ minWidth: '26rem', maxWidth: '32rem', flex: '1' }}
+        className=" u-flex u-flexColumn u-justifyContentCenter u-alignItemsCenter u-paddingHorizontalMedium u-backgroundPrimaryLight"
       >
         <form
           onSubmit={formik.handleSubmit}
-          className=" u-flex u-flexColumn u-alignItemsCenter"
+          className="u-flex u-flexColumn u-alignItemsCenter u-widthFull"
         >
-          <h1 className="u-text700 u-marginBottomSmall">Sign in</h1>
-          <Form.Group controlId="email-control">
+          <h1 className="u-text900 u-fontBold u-marginBottomSmall">Sign in</h1>
+          <Form.Group controlId="email-control" className="u-widthFull">
             <Form.Label>Email</Form.Label>
             <Form.Input
               isInvalid={Boolean(formik.touched.email && formik.errors.email)}
@@ -78,7 +86,7 @@ const Login: React.FC = () => {
               </Form.Feedback>
             )}
           </Form.Group>
-          <Form.Group controlId="password-control">
+          <Form.Group controlId="password-control" className="u-widthFull">
             <Form.Label>Password</Form.Label>
             <Form.Input
               isInvalid={Boolean(
@@ -99,8 +107,8 @@ const Login: React.FC = () => {
           {loading ? (
             <Loader duration={500} />
           ) : (
-            <Button variant="primary">
-              <Button.Label>Login</Button.Label>
+            <Button variant="primary" className="u-marginTopSmall">
+              <Button.Label className="u-paddingHorizontalSmall u-paddingVerticalExtraSmall">Login</Button.Label>
             </Button>
           )}
         </form>

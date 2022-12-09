@@ -7,12 +7,13 @@ import useTypedDispatch from 'hooks/useTypedDispatch';
 import { fetchUserInfo, signIn, signUp } from '../store/actions';
 
 const schema = yup.object().shape({
-  email: yup.string().email('The email is not valid'),
+  email: yup.string().required('No email provided.').email('The email is not valid'),
   password: yup
     .string()
     .required('No password provided.')
     .min(8, 'Password is too short - should be 8 chars minimum.')
     .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+  name: yup.string().required('No name provided.'),
 });
 
 interface SignUpFormValues {
@@ -59,15 +60,23 @@ const Register = () => {
       className="u-flex u-justifyContentCenter"
     >
       <div
-        style={{ minWidth: '28rem', maxWidth: '32rem' }}
-        className=" u-flex u-flexColumn u-justifyContentCenter u-alignItemsCenter u-paddingLarge u-marginLarge u-backgroundPrimaryLight u-roundedLarge"
+        style={{
+          backgroundImage:
+              'url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
+          backgroundSize: 'cover',
+          flex: '3'
+        }}
+      />
+      <div
+        style={{ minWidth: '26rem', maxWidth: '32rem', flex: 1 }}
+        className=" u-flex u-flexColumn u-justifyContentCenter u-alignItemsCenter u-paddingHorizontalMedium  u-backgroundPrimaryLight"
       >
         <form
           onSubmit={formik.handleSubmit}
-          className=" u-flex u-flexColumn u-alignItemsCenter"
+          className=" u-flex u-flexColumn u-alignItemsCenter u-widthFull"
         >
-          <h1 className="u-text700 u-marginBottomSmall">Sign up</h1>
-          <Form.Group controlId="email-control">
+          <h1 className="u-text900 u-fontBold u-marginBottomSmall">Sign up</h1>
+          <Form.Group controlId="email-control" className="u-widthFull">
             <Form.Label>Email</Form.Label>
             <Form.Input
               isInvalid={Boolean(formik.touched.email && formik.errors.email)}
@@ -83,7 +92,7 @@ const Register = () => {
               </Form.Feedback>
             )}
           </Form.Group>
-          <Form.Group controlId="password-control">
+          <Form.Group controlId="password-control" className="u-widthFull">
             <Form.Label>Password</Form.Label>
             <Form.Input
               isInvalid={Boolean(
@@ -101,7 +110,7 @@ const Register = () => {
               </Form.Feedback>
             )}
           </Form.Group>
-          <Form.Group controlId="name-control">
+          <Form.Group controlId="name-control" className="u-widthFull">
             <Form.Label>Name</Form.Label>
             <Form.Input
               isInvalid={Boolean(formik.touched.name && formik.errors.name)}
@@ -117,8 +126,8 @@ const Register = () => {
           {loading ? (
             <Loader duration={500} />
           ) : (
-            <Button variant="primary">
-              <Button.Label>Sign up</Button.Label>
+            <Button variant="primary" className="u-marginTopSmall">
+              <Button.Label className="u-paddingHorizontalSmall u-paddingVerticalExtraSmall">Sign up</Button.Label>
             </Button>
           )}
         </form>

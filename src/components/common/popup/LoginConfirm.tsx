@@ -15,7 +15,7 @@ const LoginConfirm :React.FC<PopupPropsType> = ({
         <Button variant="secondary" onClick={closeHandler}>
           <Button.Label>Cancel</Button.Label>
         </Button>
-        <Button variant="primary" onClick={() => onSubmit()}>
+        <Button variant="primary" onClick={onSubmit}>
           <Button.Label>Login</Button.Label>
         </Button>
       </div>
