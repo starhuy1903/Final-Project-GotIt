@@ -1,8 +1,9 @@
 import { Dispatch } from 'redux';
+import { apiWrapper } from '../../api';
+import { TypedDispatch } from '../store';
 import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
 import { TOKEN_KEY } from '../../constants';
 import authAPI from '../../api/authAPI';
-import { NotiMsgType } from './notiMsgActions';
 
 export enum AuthActionType {
   AUTH_TOKEN = 'auth_token',
@@ -27,24 +28,14 @@ interface AuthResetAction {
 
 export type AuthAction = AuthSuccessAction | AuthUserInfoAction | AuthResetAction;
 
-export const signIn = ({ email, password }: { email: string; password: string }) => async (dispatch: Dispatch) => {
-  try {
-    const res = await authAPI.signIn(email, password);
-    const { accessToken: token } = convertSnakeCaseToCamelCase(res.data);
+export const signIn = ({ email, password }: { email: string; password: string }) => async (dispatch: TypedDispatch) => {
+  const result = await dispatch(apiWrapper(authAPI.signIn(email, password)));
+  if (result.success) {
+    const { accessToken: token } = convertSnakeCaseToCamelCase(result.data.data);
     localStorage.setItem(TOKEN_KEY, token);
     dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
-    return res.status === 200;
-  } catch (err: any) {
-    const { data, status } = err.response;
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        error: { message: data.message },
-        status
-      },
-    });
-    return null;
   }
+  return result.success;
 };
 
 export const signUp = ({
@@ -55,40 +46,18 @@ export const signUp = ({
     email: string;
     password: string;
     name: string;
-  }) => async (dispatch: Dispatch) => {
-  try {
-    const res = await authAPI.signUp(email, password, name);
-    return res.status === 201;
-  } catch (err: any) {
-    const { data, status } = err.response;
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        error: { message: data.message },
-        status,
-      },
-    });
-    return null;
-  }
+  }) => async (dispatch: TypedDispatch) => {
+  const result = await dispatch(apiWrapper(authAPI.signUp(email, password, name)));
+  return result.success;
 };
 
-export const fetchUserInfo = () => async (dispatch: Dispatch) => {
-  try {
-    const res = await authAPI.fetchUserInfo();
-    const { id, name } = res.data;
+export const fetchUserInfo = () => async (dispatch: TypedDispatch) => {
+  const result = await dispatch(apiWrapper(authAPI.fetchUserInfo()));
+  if (result.success) {
+    const { id, name } = convertSnakeCaseToCamelCase(result.data.data);
     dispatch({ type: AuthActionType.AUTH_USER, payload: { id, name } });
-    return res.status === 200;
-  } catch (err: any) {
-    const { data, status } = err.response;
-    dispatch({
-      type: NotiMsgType.SET_MSG,
-      payload: {
-        error: { message: data.message },
-        status,
-      },
-    });
-    return null;
   }
+  return result.success;
 };
 
 export const signOut = () => (dispatch: Dispatch) => {

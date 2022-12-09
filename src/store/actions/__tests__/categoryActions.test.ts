@@ -78,7 +78,6 @@ describe('categoryActions', () => {
       expect(result).toEqual(true);
 
       // check store
-      expect(store.getState().notiMsg.msg).toEqual('Create Successfully');
       expect(store.getState().notiMsg.status).toEqual(statusCode);
     }
   });
@@ -106,7 +105,6 @@ describe('categoryActions', () => {
       expect(result).toBeFalsy;
 
       // check store
-      expect(store.getState().notiMsg.error?.message).toEqual('Create failed');
       expect(store.getState().notiMsg.status).toEqual(statusCode);
     }
   });
@@ -135,7 +133,6 @@ describe('categoryActions', () => {
       expect(result).toEqual(true);
 
       // check store
-      expect(store.getState().notiMsg.msg).toEqual('Update Successfully');
       expect(store.getState().notiMsg.status).toEqual(statusCode);
     }
   });
@@ -162,7 +159,6 @@ describe('categoryActions', () => {
       expect(result).toBeFalsy;
 
       // check store
-      expect(store.getState().notiMsg.error?.message).toEqual('Update failed');
       expect(store.getState().notiMsg.status).toEqual(statusCode);
     }
   });
@@ -182,7 +178,6 @@ describe('categoryActions', () => {
       expect(result).toEqual(true);
 
       // check store
-      expect(store.getState().notiMsg.msg).toEqual('Delete Successfully');
       expect(store.getState().notiMsg.status).toEqual(statusCode);
     }
   });
@@ -202,7 +197,6 @@ describe('categoryActions', () => {
       expect(result).toBeFalsy;
 
       // check store
-      expect(store.getState().notiMsg.error?.message).toEqual('Delete failed');
       expect(store.getState().notiMsg.status).toEqual(statusCode);
     }
   });

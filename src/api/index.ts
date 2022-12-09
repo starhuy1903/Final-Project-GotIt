@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import { NotiMsgType } from 'store/actions/notiMsgActions';
+import { NotiMsgType } from '../store/actions/notiMsgActions';
 import { TOKEN_KEY } from '../constants';
 
 const api = axios.create({

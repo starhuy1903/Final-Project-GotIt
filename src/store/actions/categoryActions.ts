@@ -1,20 +1,9 @@
 import { CategoryPayload } from 'types/category';
 import { TypedDispatch } from 'store/store';
-import { apiWrapper } from 'api';
+import { apiWrapper } from '../../api';
 import { convertSnakeCaseToCamelCase } from '../../utils/convertObject';
 import categoryAPI from '../../api/categoryAPI';
-import { NotiMsgType } from './notiMsgActions';
-
-const showSuccessMes = (data: any, dispatch: TypedDispatch) => {
-  const { statusText, status } = data;
-  dispatch({
-    type: NotiMsgType.SET_MSG,
-    payload: {
-      msg: statusText,
-      status,
-    },
-  });
-};
+import { showSuccessMes } from '.';
 
 export const fetchCategoriesList =
   (offset: number, limit: number) => async (dispatch: TypedDispatch) => {

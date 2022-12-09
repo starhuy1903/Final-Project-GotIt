@@ -20,11 +20,18 @@ describe('popupReducer', () => {
   });
 
   it('should update close popup correctly', () => {
-    const popupState = popupReducer(initialState, {
+    const popupState = popupReducer({
+      popupKey: PopupType.CATEGORY_FORM,
+      popupProps: {
+        title: 'Add Category',
+        closeHandler: () => null,
+        onSubmit: () => null,
+      },
+    }, {
       type: PopupActionType.CLOSE_POPUP,
     });
 
-    expect(popupState.popupKey).toBe('');
+    expect(popupState.popupKey).toBe(null);
     expect(popupState.popupProps.title).toBe('');
   });
 });
