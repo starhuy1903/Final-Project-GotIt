@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { render } from '@testing-library/react';
-import type { RenderOptions } from '@testing-library/react';
+// import type { RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';

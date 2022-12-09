@@ -20,9 +20,7 @@ const NotiMessage: React.FC = () => {
       if (!error.data) {
         toast.error(`${status}: ${error.message}`);
       } else {
-        for (const keys in error.data) {
-          toast.error(`${status}: ${error.data[keys][0]}`);
-        }
+        Object.keys(error.data).map((value) => toast.error(`${status}: ${error.data[value][0]}`));
       }
     } else if (!status && error) {
       toast.error(error.message);

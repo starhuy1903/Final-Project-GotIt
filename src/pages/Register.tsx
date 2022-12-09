@@ -28,7 +28,7 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleSubmit = async (user: any) => {
+  const handleSubmit = async (user: SignUpFormValues) => {
     setLoading(true);
     const hasSignUpSucceed = await dispatch(signUp(user));
     if (hasSignUpSucceed) {
