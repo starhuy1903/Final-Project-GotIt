@@ -1,3 +1,4 @@
+// import { MouseEvent } from 'react';
 import { RootState } from '../store';
 import { PopupActionType } from '../actions/popupActions';
 import { Item } from '../../types/item';
@@ -6,8 +7,8 @@ import { Category } from '../../types/category';
 export type PopupPropsType = {
   title: string;
   item?: Item | Category;
-  closeHandler: () => void;
-  onSubmit: (...params: any[]) => void,
+  closeHandler: (() => void) | null;
+  onSubmit: ((...params: any[]) => void) | null,
 };
 
 export enum PopupType {
@@ -31,8 +32,8 @@ export const initialState: PopupState = {
   popupKey: null,
   popupProps: {
     title: '',
-    closeHandler: () => null,
-    onSubmit: () => null,
+    closeHandler: null,
+    onSubmit: null,
   },
 };
 

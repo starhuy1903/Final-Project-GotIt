@@ -6,7 +6,7 @@ import styles from './Popup.module.css';
 type PopupWrapperProps = {
   title: string;
   children: React.ReactNode;
-  closeHandler: () => void;
+  closeHandler: (() => void) | null;
 };
 
 const PopupWrapper: React.FC<PopupWrapperProps> = ({
@@ -22,7 +22,7 @@ const PopupWrapper: React.FC<PopupWrapperProps> = ({
     )}
   >
     <Modal size="extraLarge" relative style={{ zIndex: '999', minWidth: '500px' }}>
-      <Modal.Header closeButton onHide={() => closeHandler()}>
+      <Modal.Header closeButton onHide={() => closeHandler?.()}>
         <Modal.Title className="u-fontMedium u-text800">{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>

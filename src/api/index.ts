@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { convertSnakeCaseToCamelCase } from 'utils/convertObject';
 import { NotiMsgType } from '../store/actions/notiMsgActions';
@@ -20,7 +20,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const apiWrapper = (axiosRequest: any) => async (dispatch: Dispatch) => {
+export const apiWrapper = (axiosRequest: Promise<AxiosResponse<any, any>>) => async (dispatch: Dispatch) => {
   try {
     const result = await axiosRequest;
     return {

@@ -43,7 +43,7 @@ const CategoryForm: React.FC<PopupPropsType> = ({
   const handleSubmit = async (submittedCategory: CategoryPayload) => {
     try {
       setLoading(true);
-      await onSubmit(submittedCategory);
+      await onSubmit?.(submittedCategory);
       setLoading(false);
       formik.resetForm({ values: initialValues });
     } catch (err: any) {
@@ -53,7 +53,7 @@ const CategoryForm: React.FC<PopupPropsType> = ({
   };
 
   return (
-    <PopupWrapper title={title} closeHandler={closeHandler}>
+    <PopupWrapper title={title} closeHandler={() => closeHandler?.()}>
       <form
         onSubmit={formik.handleSubmit}
         className=" u-flex u-flexColumn u-alignItemsStart u-widthFull"
