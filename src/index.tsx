@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import "@ahaui/css/dist/index.min.css";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { store } from "./store";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import '@ahaui/css/dist/index.min.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './store';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-const root = document.getElementById("root") as HTMLElement;
+const root = document.getElementById('root') as HTMLElement;
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +18,7 @@ ReactDOM.render(
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
-  root
+  root,
 );
 
 // If you want to start measuring performance in your app, pass a function

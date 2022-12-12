@@ -1,26 +1,35 @@
-import { ActionType, AuthAction } from "../actions/authActions";
+import { RootState } from 'store/store';
+import { AuthActionType, AuthAction } from '../actions/authActions';
 
 interface AuthState {
-  errorMsg: string | null;
-  authenticated: boolean;
   token: string | null;
+  name: string | null;
+  id: number | null;
 }
 
-const initialState = {
-  errorMsg: null,
-  authenticated: false,
+export const initialState: AuthState = {
   token: null,
+  name: null,
+  id: null,
 };
 
-const reducer = (state: AuthState = initialState, action: AuthAction) => {
+const reducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {
-    case ActionType.AUTH_USER:
-      return { authenticated: action.payload, errorMsg: null };
-    case ActionType.AUTH_ERROR:
-      return { authenticated: null, errorMsg: action.payload };
+    case AuthActionType.AUTH_TOKEN:
+      return { ...state, token: action.payload };
+    case AuthActionType.AUTH_USER: {
+      const { id, name } = action.payload;
+      return { ...state, name, id };
+    }
+    case AuthActionType.AUTH_RESET:
+      return initialState;
     default:
       return state;
   }
 };
+
+export const selectToken = (state: RootState) => state.auth.token;
+export const selectName = (state: RootState) => state.auth.name;
+export const selectUserId = (state: RootState) => state.auth.id;
 
 export default reducer;

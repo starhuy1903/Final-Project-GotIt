@@ -1,50 +1,65 @@
-import { Dispatch } from "redux";
-import authAPI from "../../api/authAPI";
+import { Dispatch } from 'redux';
+import { apiWrapper } from '../../api';
+import { TypedDispatch } from '../store';
+import { TOKEN_KEY } from '../../constants';
+import authAPI from '../../api/authAPI';
 
-export enum ActionType {
-  AUTH_USER = "auth_user",
-  AUTH_ERROR = "auth_error",
+export enum AuthActionType {
+  AUTH_TOKEN = 'auth_token',
+  AUTH_USER = 'auth_user',
+  AUTH_RESET = 'auth_reset',
 }
 
 interface AuthSuccessAction {
-  type: ActionType.AUTH_USER;
+  type: AuthActionType.AUTH_TOKEN;
   payload: string;
 }
 
-interface AuthErrorAction {
-  type: ActionType.AUTH_ERROR;
+interface AuthUserInfoAction {
+  type: AuthActionType.AUTH_USER;
+  payload: {name: string, id: number};
+}
+
+interface AuthResetAction {
+  type: AuthActionType.AUTH_RESET;
   payload: string;
 }
 
-export type AuthAction = AuthSuccessAction | AuthErrorAction;
+export type AuthAction = AuthSuccessAction | AuthUserInfoAction | AuthResetAction;
 
-export const signIn =
-  ({ email, password }: { email: string; password: string }) =>
-  async (dispatch: Dispatch<AuthAction>) => {
-    try {
-      const token = await authAPI.signIn(email, password);
-      dispatch({ type: ActionType.AUTH_USER, payload: token });
-    } catch (err: any) {
-      dispatch({ type: ActionType.AUTH_ERROR, payload: err.message });
-    }
-  };
+export const signIn = ({ email, password }: { email: string; password: string }) => async (dispatch: TypedDispatch) => {
+  const result = await dispatch(apiWrapper(authAPI.signIn(email, password)));
+  if (result.success) {
+    const { accessToken: token } = result.data.data;
+    localStorage.setItem(TOKEN_KEY, token);
+    dispatch({ type: AuthActionType.AUTH_TOKEN, payload: token });
+  }
+  return result.success;
+};
 
-export const signUp =
-  ({
-    email,
-    password,
-    name,
-  }: {
+export const signUp = ({
+  email,
+  password,
+  name,
+}: {
     email: string;
     password: string;
     name: string;
-  }) =>
-  async (dispatch: Dispatch<AuthAction>) => {
-    try {
-      await authAPI.signUp(email, password, name);
-      const token = await authAPI.signIn(email, password);
-      dispatch({ type: ActionType.AUTH_USER, payload: token });
-    } catch (err: any) {
-      dispatch({ type: ActionType.AUTH_ERROR, payload: err.message });
-    }
-  };
+  }) => async (dispatch: TypedDispatch) => {
+  const result = await dispatch(apiWrapper(authAPI.signUp(email, password, name)));
+  return result.success;
+};
+
+export const fetchUserInfo = () => async (dispatch: TypedDispatch) => {
+  const result = await dispatch(apiWrapper(authAPI.fetchUserInfo()));
+  if (result.success) {
+    const { id, name } = result.data.data;
+    dispatch({ type: AuthActionType.AUTH_USER, payload: { id, name } });
+  }
+  return result.success;
+};
+
+export const signOut = () => (dispatch: Dispatch) => {
+  localStorage.removeItem(TOKEN_KEY);
+  dispatch({ type: AuthActionType.AUTH_RESET });
+};

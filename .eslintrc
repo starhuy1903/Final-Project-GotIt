@@ -3,8 +3,43 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "extends": [
-    "eslint:recommended",
+    "airbnb",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
-  ]
+  ],
+  "rules": {
+    "import/no-unresolved": 0,
+    "import/no-named-as-default": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/function-component-definition": 0,
+    "react/jsx-props-no-multi-spaces": 0,
+    "react/jsx-props-no-spreading": 0,
+    "import/extensions": 0,
+    "react/require-default-props": 0,
+    "no-param-reassign": 0,
+    "react/jsx-no-useless-fragment": "warn",
+    "default-param-last": 0,
+    "@typescript-eslint/no-explicit-any": "warn",
+    "max-len": 0,
+    "linebreak-style": 0,
+    "no-shadow": 0,
+    "no-unused-expressions": 0,
+    "no-use-before-define": 0,
+    "no-restricted-syntax": 0,
+    "comma-dangle": 0,
+    "implicit-arrow-linebreak": 0,
+    "operator-linebreak": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {"argsIgnorePattern": "^_"}],
+  }
 }
