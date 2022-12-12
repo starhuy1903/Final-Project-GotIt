@@ -6,11 +6,13 @@ import Pagination from './Pagination';
 import Table from './Table';
 
 type PaginationTableProps = {
-  data: DataTable | undefined;
+  data?: DataTable;
   tableName: string;
   cols: TableColumnType[];
-  fetchData: (offset: number) => void;
+  fetchData: (page: number) => void;
   pageSize: number;
+  page: number;
+  setPage: (page: number) => void;
   CreateButton: React.ReactNode;
 };
 
@@ -20,20 +22,21 @@ const PaginationTable: React.FC<PaginationTableProps> = ({
   cols,
   fetchData,
   pageSize,
+  page,
+  setPage,
   CreateButton,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFetchData = async () => {
     setIsLoading(true);
-    await fetchData((currentPage - 1) * pageSize);
+    await fetchData(page);
     setIsLoading(false);
   };
 
   useEffect(() => {
     handleFetchData();
-  }, [currentPage]);
+  }, [page]);
 
   return (
     <div>
@@ -56,8 +59,8 @@ const PaginationTable: React.FC<PaginationTableProps> = ({
               {/* Pagination section */}
               <Pagination
                 totalCount={data?.totalItems || 0}
-                currentPage={currentPage}
-                onPageChange={setCurrentPage}
+                currentPage={page}
+                onPageChange={setPage}
                 pageSize={pageSize}
               />
             </>

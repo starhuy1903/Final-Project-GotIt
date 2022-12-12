@@ -1,8 +1,3 @@
-export type TableColumn = {
-  id: string;
-  name: string;
-};
-
 export type DataTable = {
   totalItems: number;
   items: Array<any>;

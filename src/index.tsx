@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { QueryParamProvider } from 'use-query-params';
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 import './index.css';
 import '@ahaui/css/dist/index.min.css';
 import { Provider } from 'react-redux';
@@ -14,7 +16,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <QueryParamProvider adapter={ReactRouter6Adapter}>
+          <App />
+        </QueryParamProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

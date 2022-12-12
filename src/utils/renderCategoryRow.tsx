@@ -11,7 +11,7 @@ const categoryTableConstants = (
 ): TableColumnType[] => [
   {
     title: 'ID',
-    render: (rowData: Category) => <Link to={`${rowData.id}`}>{rowData.id}</Link>,
+    render: (rowData: Category) => <Link to={`${rowData.id}/items`}>{rowData.id}</Link>,
   },
   {
     title: 'Image',

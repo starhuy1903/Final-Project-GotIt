@@ -16,7 +16,7 @@ const itemTableConstants = (
   {
     title: 'ID',
     width: '5%',
-    render: (rowData: Item) => <Link style={centerCell} to={`items/${rowData.id}`}>{rowData.id}</Link>,
+    render: (rowData: Item) => <Link style={centerCell} to={`${rowData.id}`}>{rowData.id}</Link>,
   },
   {
     title: 'Image',

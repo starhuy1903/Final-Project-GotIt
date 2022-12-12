@@ -1,9 +1,10 @@
+import React, { useState } from 'react';
 import { Button, Icon } from '@ahaui/react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useQueryParam, NumberParam } from 'use-query-params';
 import PaginationTable from 'components/common/table/PaginationTable';
 import useAppSelector from 'hooks/useAppSelector';
 import useTypedDispatch from 'hooks/useTypedDispatch';
-import React, { useState } from 'react';
 import {
   createCategory, deleteCategory, fetchCategoriesList, updateCategory,
 } from 'store/actions/categoryActions';
@@ -21,42 +22,57 @@ const CategoryList: React.FC = () => {
   const [data, setData] = useState<DataTable>();
   const navigate = useNavigate();
   const token = useAppSelector(selectToken);
+  const [page = 1, setPage] = useQueryParam('p', NumberParam);
+  const location = useLocation();
 
   const closePopupHandler = () => {
     dispatch(closePopup());
   };
 
-  const fetchData = async (offset: number) => {
+  const fetchData = async (page: number) => {
+    const offset = ((page - 1) * LIMIT);
     const data = await dispatch(fetchCategoriesList(offset, LIMIT));
     const { totalItems, items } = data;
     setData({ totalItems, items });
   };
 
   const handleNavigateLogin = () => {
-    navigate('/login', { state: { prevPath: '/categories' } });
+    navigate('/login', { state: { prevPath: location.pathname } });
     dispatch(closePopup());
   };
 
   const handleCreate = async (category: CategoryPayload) => {
     const hasSucceeded = await dispatch(createCategory(category));
-    if (hasSucceeded) {
-      fetchData(0);
+    if (hasSucceeded && page && data) {
+      const lastPage = Math.ceil(data.totalItems / LIMIT);
+      if (Math.ceil(data.totalItems % LIMIT) === 0) {
+        setPage(lastPage + 1);
+      } else if (page !== lastPage) {
+        setPage(lastPage);
+      } else {
+        fetchData(page);
+      }
     }
   };
 
   const handleUpdate = async (id: number, category: CategoryPayload) => {
     const hasSucceeded = await dispatch(updateCategory(id, category));
-    if (hasSucceeded) {
+    if (hasSucceeded && page) {
       closePopupHandler();
-      fetchData(0);
+      fetchData(page);
     }
   };
 
   const handleDelete = async (id: number) => {
     const hasSucceeded = await dispatch(deleteCategory(id));
-    if (hasSucceeded) {
+    if (hasSucceeded && page && data) {
       closePopupHandler();
-      fetchData(0);
+      const lastPage = Math.ceil(data.totalItems / LIMIT);
+      if ((data.totalItems % LIMIT) === 1 && page === lastPage) {
+        setPage(page - 1);
+      } else {
+        fetchData(page);
+      }
     }
   };
 
@@ -134,6 +150,8 @@ const CategoryList: React.FC = () => {
         cols={categoryTableConstants(openUpdatePopup, openDeleteConfirmPopup)}
         fetchData={fetchData}
         pageSize={LIMIT}
+        page={page || 1}
+        setPage={setPage}
         CreateButton={(
           <Button onClick={openCreatePopup}>
             <Button.Icon>
