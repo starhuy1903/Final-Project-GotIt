@@ -36,6 +36,3 @@ This is a management app about categories and items. The main features are that 
 ## Demo
 
 https://user-images.githubusercontent.com/75841541/207206530-d09ac8d6-bb57-44ef-b210-fac624df66ed.mp4
-
-
-
