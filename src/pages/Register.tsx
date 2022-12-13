@@ -126,7 +126,7 @@ const Register = () => {
             <Loader duration={500} />
           ) : (
             <Button variant="primary" className="u-marginTopSmall">
-              <Button.Label className="u-paddingHorizontalSmall u-paddingVerticalExtraSmall">Sign up</Button.Label>
+              <Button.Label className="u-paddingHorizontalLarge">Sign up</Button.Label>
             </Button>
           )}
         </form>

@@ -108,7 +108,7 @@ const Login: React.FC = () => {
             <Loader duration={500} />
           ) : (
             <Button variant="primary" className="u-marginTopSmall">
-              <Button.Label className="u-paddingHorizontalSmall u-paddingVerticalExtraSmall">Login</Button.Label>
+              <Button.Label className="u-paddingHorizontalLarge">Login</Button.Label>
             </Button>
           )}
         </form>

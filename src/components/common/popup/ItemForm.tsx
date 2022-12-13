@@ -35,14 +35,11 @@ const ItemForm: React.FC<PopupPropsType> = ({
   });
 
   const handleSubmit = async (submittedItem: ItemPayload) => {
-    try {
-      setLoading(true);
-      await onSubmit?.(submittedItem);
+    setLoading(true);
+    const hasSucceeded = await onSubmit?.(submittedItem);
+    if (!hasSucceeded) {
       setLoading(false);
       formik.resetForm({ values: initialValues });
-    } catch (err: any) {
-      setLoading(false);
-      formik.resetForm({ values: formik.values });
     }
   };
 

@@ -52,16 +52,22 @@ const CategoryList: React.FC = () => {
 
   const handleCreate = async (category: CategoryPayload) => {
     const hasSucceeded = await dispatch(createCategory(category));
-    if (hasSucceeded && page && data) {
-      const lastPage = Math.ceil(data.totalItems / LIMIT);
-      if (data.totalItems % LIMIT === 0) {
-        setPage(lastPage + 1);
-      } else if (page !== lastPage) {
-        setPage(lastPage);
+    if (hasSucceeded) {
+      closePopupHandler();
+      if (data && page) {
+        const lastPage = Math.ceil(data.totalItems / LIMIT) || 1;
+        if (data.totalItems !== 0 && data.totalItems % LIMIT === 0) {
+          setPage(lastPage + 1);
+        } else if (page !== lastPage) {
+          setPage(lastPage);
+        } else {
+          fetchData(1);
+        }
       } else {
-        fetchData(page);
+        fetchData(1);
       }
     }
+    return hasSucceeded;
   };
 
   const handleUpdate = async (id: number, category: CategoryPayload) => {
@@ -70,19 +76,21 @@ const CategoryList: React.FC = () => {
       closePopupHandler();
       fetchData(page);
     }
+    return hasSucceeded;
   };
 
   const handleDelete = async (id: number) => {
     const hasSucceeded = await dispatch(deleteCategory(id));
-    if (hasSucceeded && page && data) {
+    if (hasSucceeded && data && page) {
       closePopupHandler();
       const lastPage = Math.ceil(data.totalItems / LIMIT);
-      if ((data.totalItems % LIMIT) === 1 && page === lastPage) {
+      if (data.totalItems - 1 !== 0 && (data.totalItems % LIMIT) === 1 && page === lastPage) {
         setPage(page - 1);
       } else {
         fetchData(page);
       }
     }
+    return hasSucceeded;
   };
 
   const openLoginPopup = () => {

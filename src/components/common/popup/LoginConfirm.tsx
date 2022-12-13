@@ -11,12 +11,12 @@ const LoginConfirm :React.FC<PopupPropsType> = ({
       <p>
         You need to login to perform this action!
       </p>
-      <div className="u-flex u-alignItemsCenter u-justifyContentBetween u-widthFull">
+      <div className="u-flex u-alignItemsCenter u-justifyContentCenter u-widthFull" style={{ gap: '15px' }}>
         <Button variant="secondary" onClick={() => closeHandler?.()}>
-          <Button.Label>Cancel</Button.Label>
+          <Button.Label className="u-paddingHorizontalMedium">Cancel</Button.Label>
         </Button>
         <Button variant="primary" onClick={() => onSubmit?.()}>
-          <Button.Label>Login</Button.Label>
+          <Button.Label className="u-paddingHorizontalLarge">Login</Button.Label>
         </Button>
       </div>
     </div>

@@ -82,7 +82,7 @@ const Navbar: React.FC = () => {
           ) : (
             <>
               <Button variant="primary_outline" className="u-marginRightSmall">
-                <Button.Label>
+                <Button.Label className="u-paddingHorizontalExtraSmall">
                   <Link
                     onClick={() => setCurrent('')}
                     to="/register"
@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
                 </Button.Label>
               </Button>
               <Button variant="primary">
-                <Button.Label>
+                <Button.Label className="u-paddingHorizontalSmall">
                   <Link
                     onClick={() => setCurrent('')}
                     to="/login"
