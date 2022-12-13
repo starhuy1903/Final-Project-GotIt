@@ -1,9 +1,10 @@
 import { Button, Icon } from '@ahaui/react';
+import { useQueryParam, NumberParam } from 'use-query-params';
 import PaginationTable from 'components/common/table/PaginationTable';
 import useAppSelector from 'hooks/useAppSelector';
 import useTypedDispatch from 'hooks/useTypedDispatch';
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   createItem, deleteItem, fetchItemsList, updateItem,
 } from 'store/actions/itemActions';
@@ -24,42 +25,73 @@ const ItemList:React.FC = () => {
   const navigate = useNavigate();
   const token = useAppSelector(selectToken);
   const userId = useAppSelector(selectUserId);
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [page = 1, setPage] = useQueryParam('p', NumberParam);
 
   const closePopupHandler = () => {
     dispatch(closePopup());
   };
 
-  const fetchData = async (offset: number) => {
+  const fetchData = async (page: number) => {
+    setIsLoading(true);
+    const offset = ((page - 1) * LIMIT);
     const data = await dispatch(fetchItemsList(offset, LIMIT, categoryIdNum));
     const { totalItems, items } = data;
     setData({ totalItems, items });
+    setIsLoading(false);
   };
 
+  useEffect(() => {
+    if (page) {
+      fetchData(page);
+    }
+  }, [page]);
+
   const handleNavigateLogin = () => {
-    navigate('/login', { state: { prevPath: `/categories/${categoryIdNum}` } });
+    navigate('/login', { state: { prevPath: location.pathname } });
     dispatch(closePopup());
   };
 
   const handleCreate = async (item: ItemPayload) => {
     const hasSucceeded = await dispatch(createItem(categoryIdNum, item));
     if (hasSucceeded) {
-      fetchData(0);
+      closePopupHandler();
+      if (data && page) {
+        const lastPage = Math.ceil(data.totalItems / LIMIT) || 1;
+        if (data.totalItems !== 0 && data.totalItems % LIMIT === 0) {
+          setPage(lastPage + 1);
+        } else if (page !== lastPage) {
+          setPage(lastPage);
+        } else {
+          fetchData(1);
+        }
+      } else {
+        fetchData(1);
+      }
     }
+    return hasSucceeded;
   };
 
   const handleUpdate = async (itemId: number, item: ItemPayload) => {
     const hasSucceeded = await dispatch(updateItem(itemId, categoryIdNum, item));
-    if (hasSucceeded) {
+    if (hasSucceeded && page) {
       closePopupHandler();
-      fetchData(0);
+      fetchData(page);
     }
+    return hasSucceeded;
   };
 
   const handleDelete = async (id: number) => {
     const hasSucceeded = await dispatch(deleteItem(id, categoryIdNum));
-    if (hasSucceeded) {
+    if (hasSucceeded && data && page) {
       closePopupHandler();
-      fetchData(0);
+      const lastPage = Math.ceil(data.totalItems / LIMIT);
+      if (data.totalItems - 1 !== 0 && (data.totalItems % LIMIT) === 1 && page === lastPage) {
+        setPage(page - 1);
+      } else {
+        fetchData(page);
+      }
     }
   };
 
@@ -149,8 +181,10 @@ const ItemList:React.FC = () => {
         data={data}
         tableName="Item"
         cols={itemTableConstants(openUpdatePopup, openDeleteConfirmPopup)}
-        fetchData={fetchData}
+        isLoading={isLoading}
         pageSize={LIMIT}
+        page={page || 1}
+        setPage={setPage}
         CreateButton={(
           <Button onClick={openCreatePopup}>
             <Button.Icon>

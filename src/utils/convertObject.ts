@@ -6,7 +6,7 @@ export const convertSnakeCaseToCamelCase = (data: any) => {
     return newDataArr;
   }
 
-  if (lodash.isObject(data)) {
+  if (lodash.isObject(data) && typeof data !== 'function') {
     const dataCopy: Record<string, unknown> = { ...data };
     const newData: Record<string, unknown> = {};
     Object.keys(data).forEach((key: string) => {

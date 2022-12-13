@@ -10,4 +10,3 @@ export type CategoryPayload = {
   imageUrl: string;
   name: string;
 };
-

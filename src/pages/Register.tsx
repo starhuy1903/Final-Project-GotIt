@@ -11,8 +11,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+    .min(6, 'Password is too short - should be 6 chars minimum.'),
   name: yup.string().required('No name provided.'),
 });
 
@@ -127,7 +126,7 @@ const Register = () => {
             <Loader duration={500} />
           ) : (
             <Button variant="primary" className="u-marginTopSmall">
-              <Button.Label className="u-paddingHorizontalSmall u-paddingVerticalExtraSmall">Sign up</Button.Label>
+              <Button.Label className="u-paddingHorizontalLarge">Sign up</Button.Label>
             </Button>
           )}
         </form>

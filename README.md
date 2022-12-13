@@ -32,3 +32,7 @@ This is a management app about categories and items. The main features are that 
 - [formik](https://formik.org/) and [yup](https://www.npmjs.com/package/yup)
 - [react-toastify](https://www.npmjs.com/package/react-toastify)
 - [axios](https://axios-http.com/)
+
+## Demo
+
+https://user-images.githubusercontent.com/75841541/207206530-d09ac8d6-bb57-44ef-b210-fac624df66ed.mp4
