@@ -15,7 +15,7 @@ const DeleteConfirm :React.FC<PopupPropsType> = ({
         <Button variant="secondary" onClick={() => closeHandler?.()} className="u-marginRightSmall">
           <Button.Label className="u-paddingHorizontalMedium">Cancel</Button.Label>
         </Button>
-        <Button variant="primary" onClick={() => onSubmit?.(item?.id)}>
+        <Button variant="negative" onClick={() => onSubmit?.(item?.id)}>
           <Button.Label className="u-paddingHorizontalLarge">Delete</Button.Label>
         </Button>
       </div>
