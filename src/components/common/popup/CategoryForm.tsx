@@ -100,23 +100,23 @@ const CategoryForm: React.FC<PopupPropsType> = ({
           <Form.Feedback type="invalid">{formik.errors.imageUrl}</Form.Feedback>
           )}
         </Form.Group>
-        {loading ? (
-          <Loader duration={500} />
-        ) : (
-          <div className="u-flex u-alignItemsCenter u-justifyContentEnd u-widthFull">
-            <Button
-              type="button"
-              onClick={() => formik.resetForm({ values: initialValues })}
-              variant="secondary"
-              className="u-marginRightSmall"
-            >
-              <Button.Label className="u-paddingTiny">Reset</Button.Label>
-            </Button>
-            <Button variant="primary">
-              <Button.Label className="u-paddingVerticalTiny u-paddingHorizontalExtraSmall">Submit</Button.Label>
-            </Button>
-          </div>
-        )}
+        <div className="u-flex u-alignItemsCenter u-justifyContentEnd u-widthFull">
+          {loading ? <Loader duration={500} /> : (
+            <>
+              <Button
+                type="button"
+                onClick={() => formik.resetForm({ values: initialValues })}
+                variant="secondary"
+                className="u-marginRightSmall"
+              >
+                <Button.Label className="u-paddingTiny">Reset</Button.Label>
+              </Button>
+              <Button variant="primary">
+                <Button.Label className="u-paddingVerticalTiny u-paddingHorizontalExtraSmall">Submit</Button.Label>
+              </Button>
+            </>
+          )}
+        </div>
       </form>
     </PopupWrapper>
   );
