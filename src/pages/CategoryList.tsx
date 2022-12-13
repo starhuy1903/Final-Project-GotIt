@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Icon } from '@ahaui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQueryParam, NumberParam } from 'use-query-params';
@@ -24,17 +24,26 @@ const CategoryList: React.FC = () => {
   const token = useAppSelector(selectToken);
   const [page = 1, setPage] = useQueryParam('p', NumberParam);
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const closePopupHandler = () => {
     dispatch(closePopup());
   };
 
   const fetchData = async (page: number) => {
+    setIsLoading(true);
     const offset = ((page - 1) * LIMIT);
     const data = await dispatch(fetchCategoriesList(offset, LIMIT));
     const { totalItems, items } = data;
     setData({ totalItems, items });
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (page) {
+      fetchData(page);
+    }
+  }, [page]);
 
   const handleNavigateLogin = () => {
     navigate('/login', { state: { prevPath: location.pathname } });
@@ -45,7 +54,7 @@ const CategoryList: React.FC = () => {
     const hasSucceeded = await dispatch(createCategory(category));
     if (hasSucceeded && page && data) {
       const lastPage = Math.ceil(data.totalItems / LIMIT);
-      if (Math.ceil(data.totalItems % LIMIT) === 0) {
+      if (data.totalItems % LIMIT === 0) {
         setPage(lastPage + 1);
       } else if (page !== lastPage) {
         setPage(lastPage);
@@ -148,7 +157,7 @@ const CategoryList: React.FC = () => {
         data={data}
         tableName="Category"
         cols={categoryTableConstants(openUpdatePopup, openDeleteConfirmPopup)}
-        fetchData={fetchData}
+        isLoading={isLoading}
         pageSize={LIMIT}
         page={page || 1}
         setPage={setPage}

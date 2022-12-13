@@ -3,7 +3,7 @@ import { useQueryParam, NumberParam } from 'use-query-params';
 import PaginationTable from 'components/common/table/PaginationTable';
 import useAppSelector from 'hooks/useAppSelector';
 import useTypedDispatch from 'hooks/useTypedDispatch';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   createItem, deleteItem, fetchItemsList, updateItem,
@@ -26,7 +26,7 @@ const ItemList:React.FC = () => {
   const token = useAppSelector(selectToken);
   const userId = useAppSelector(selectUserId);
   const location = useLocation();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [page = 1, setPage] = useQueryParam('p', NumberParam);
 
   const closePopupHandler = () => {
@@ -34,11 +34,19 @@ const ItemList:React.FC = () => {
   };
 
   const fetchData = async (page: number) => {
+    setIsLoading(true);
     const offset = ((page - 1) * LIMIT);
     const data = await dispatch(fetchItemsList(offset, LIMIT, categoryIdNum));
     const { totalItems, items } = data;
     setData({ totalItems, items });
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (page) {
+      fetchData(page);
+    }
+  }, [page]);
 
   const handleNavigateLogin = () => {
     navigate('/login', { state: { prevPath: location.pathname } });
@@ -51,8 +59,10 @@ const ItemList:React.FC = () => {
       const lastPage = Math.ceil(data.totalItems / LIMIT);
       if (data.totalItems % LIMIT === 0) {
         setPage(lastPage + 1);
-      } else {
+      } else if (page !== lastPage) {
         setPage(lastPage);
+      } else {
+        fetchData(page);
       }
     }
   };
@@ -164,7 +174,7 @@ const ItemList:React.FC = () => {
         data={data}
         tableName="Item"
         cols={itemTableConstants(openUpdatePopup, openDeleteConfirmPopup)}
-        fetchData={fetchData}
+        isLoading={isLoading}
         pageSize={LIMIT}
         page={page || 1}
         setPage={setPage}
