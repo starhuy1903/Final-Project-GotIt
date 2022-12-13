@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { convertSnakeCaseToCamelCase } from 'utils/convertObject';
-import { NotiMsgType } from '../store/actions/notiMsgActions';
+import { NotiMsgType } from '../store/actions/notiMsg';
 import { TOKEN_KEY } from '../constants';
 
 const api = axios.create({

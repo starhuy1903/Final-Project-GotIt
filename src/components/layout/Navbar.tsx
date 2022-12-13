@@ -4,7 +4,7 @@ import {
 } from '@ahaui/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'store/actions';
-import { selectToken } from 'store/reducers/authReducer';
+import { selectToken } from 'store/reducers/auth';
 import useAppSelector from 'hooks/useAppSelector';
 import useTypedDispatch from 'hooks/useTypedDispatch';
 

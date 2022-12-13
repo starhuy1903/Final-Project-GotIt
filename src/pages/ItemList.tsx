@@ -7,10 +7,10 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   createItem, deleteItem, fetchItemsList, updateItem,
-} from 'store/actions/itemActions';
-import { closePopup, openPopup } from 'store/actions/popupActions';
-import { selectToken, selectUserId } from 'store/reducers/authReducer';
-import { PopupType } from 'store/reducers/popupReducer';
+} from 'store/actions/item';
+import { closePopup, openPopup } from 'store/actions/popup';
+import { selectToken, selectUserId } from 'store/reducers/auth';
+import { PopupType } from 'store/reducers/popup';
 import { Item, ItemPayload } from 'types/item';
 import { DataTable } from 'types/table';
 import itemTableConstants from 'utils/renderItemRow';

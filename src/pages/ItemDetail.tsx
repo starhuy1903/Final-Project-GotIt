@@ -2,7 +2,7 @@ import { Loader } from '@ahaui/react';
 import useTypedDispatch from 'hooks/useTypedDispatch';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchItemDetail } from 'store/actions/itemActions';
+import { fetchItemDetail } from 'store/actions/item';
 import { Item } from 'types/item';
 
 const ItemDetail = () => {

@@ -1,5 +1,5 @@
 import { RootState } from '../store';
-import { PopupActionType } from '../actions/popupActions';
+import { PopupActionType } from '../actions/popup';
 import { Item } from '../../types/item';
 import { Category } from '../../types/category';
 

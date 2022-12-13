@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useTypedDispatch from 'hooks/useTypedDispatch';
-import { fetchUserInfo, signIn } from '../store/actions/authActions';
+import { fetchUserInfo, signIn } from '../store/actions/auth';
 
 const schema = yup.object().shape({
   email: yup

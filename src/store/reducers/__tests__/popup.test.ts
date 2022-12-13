@@ -1,5 +1,5 @@
-import { PopupActionType } from '../../actions/popupActions';
-import popupReducer, { initialState, PopupType } from '../popupReducer';
+import { PopupActionType } from '../../actions/popup';
+import popupReducer, { initialState, PopupType } from '../popup';
 
 describe('popupReducer', () => {
   it('should update open popup correctly', () => {

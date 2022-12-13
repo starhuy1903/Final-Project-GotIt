@@ -1,5 +1,5 @@
 import { RootState } from 'store/store';
-import { AuthActionType, AuthAction } from '../actions/authActions';
+import { AuthActionType, AuthAction } from '../actions/auth';
 
 interface AuthState {
   token: string | null;

@@ -1,7 +1,7 @@
 import MockerAdapter from 'axios-mock-adapter';
 import api from '../../../api';
 import { TypedDispatch, configureStore } from '../../store';
-import * as authAction from '../authActions';
+import * as authAction from '../auth';
 
 describe('authActions', () => {
   let store: null | ReturnType<typeof configureStore> = null;

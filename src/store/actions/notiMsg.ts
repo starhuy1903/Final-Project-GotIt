@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { NotiMsgState } from '../reducers/notiMsgReducer';
+import { NotiMsgState } from '../reducers/notiMsg';
 
 export enum NotiMsgType {
   SET_MSG = 'set_msg',

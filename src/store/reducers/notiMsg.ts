@@ -1,5 +1,5 @@
 import { RootState } from 'store/store';
-import { NotiMsgAction, NotiMsgType } from '../actions/notiMsgActions';
+import { NotiMsgAction, NotiMsgType } from '../actions/notiMsg';
 
 export interface NotiMsgState {
   status: number | null;

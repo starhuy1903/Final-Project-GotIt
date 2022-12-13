@@ -2,7 +2,7 @@ import MockerAdapter from 'axios-mock-adapter';
 import { convertSnakeCaseToCamelCase } from '../../../utils/convertObject';
 import api from '../../../api';
 import { TypedDispatch, configureStore } from '../../store';
-import * as categoryActions from '../categoryActions';
+import * as categoryActions from '../category';
 
 describe('categoryActions', () => {
   let store: null | ReturnType<typeof configureStore> = null;

@@ -3,7 +3,7 @@ import { Form, Loader, Button } from '@ahaui/react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { ItemPayload } from 'types/item';
-import { PopupPropsType } from 'store/reducers/popupReducer';
+import { PopupPropsType } from 'store/reducers/popup';
 import PopupWrapper from './PopupWrapper';
 
 const schema = yup.object().shape({

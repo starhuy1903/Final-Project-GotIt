@@ -1,6 +1,6 @@
 import { Button } from '@ahaui/react';
 import React from 'react';
-import { PopupPropsType } from 'store/reducers/popupReducer';
+import { PopupPropsType } from 'store/reducers/popup';
 import PopupWrapper from './PopupWrapper';
 
 const DeleteConfirm :React.FC<PopupPropsType> = ({

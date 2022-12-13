@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { NotiMsgType } from './notiMsgActions';
+import { NotiMsgType } from './notiMsg';
 
 type Message = {
   status: number;
@@ -17,4 +17,4 @@ export const showSuccessMes = (data: Message, dispatch: Dispatch) => {
   });
 };
 
-export * from './authActions';
+export * from './auth';

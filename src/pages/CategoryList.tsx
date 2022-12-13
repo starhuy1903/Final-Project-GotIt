@@ -7,10 +7,10 @@ import useAppSelector from 'hooks/useAppSelector';
 import useTypedDispatch from 'hooks/useTypedDispatch';
 import {
   createCategory, deleteCategory, fetchCategoriesList, updateCategory,
-} from 'store/actions/categoryActions';
-import { closePopup, openPopup } from 'store/actions/popupActions';
-import { selectToken } from 'store/reducers/authReducer';
-import { PopupType } from 'store/reducers/popupReducer';
+} from 'store/actions/category';
+import { closePopup, openPopup } from 'store/actions/popup';
+import { selectToken } from 'store/reducers/auth';
+import { PopupType } from 'store/reducers/popup';
 import { Category, CategoryPayload } from 'types/category';
 import { DataTable } from 'types/table';
 import categoryTableConstants from 'utils/renderCategoryRow';

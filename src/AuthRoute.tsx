@@ -1,7 +1,7 @@
 import useAppSelector from 'hooks/useAppSelector';
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { selectToken } from './store/reducers/authReducer';
+import { selectToken } from './store/reducers/auth';
 
 const AuthRoute = () => {
   const token = useAppSelector(selectToken);

@@ -1,5 +1,5 @@
-import { AuthActionType } from '../../actions/authActions';
-import authReducer, { initialState } from '../authReducer';
+import { AuthActionType } from '../../actions/auth';
+import authReducer, { initialState } from '../auth';
 
 describe('authReducer', () => {
   it('should update token correctly', () => {

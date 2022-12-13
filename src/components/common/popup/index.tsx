@@ -1,6 +1,6 @@
 import useAppSelector from 'hooks/useAppSelector';
 import React from 'react';
-import { PopupPropsType, popupSelector, PopupType } from 'store/reducers/popupReducer';
+import { PopupPropsType, popupSelector, PopupType } from 'store/reducers/popup';
 import CategoryForm from './CategoryForm';
 import DeleteConfirm from './DeleteConfirm';
 import ItemForm from './ItemForm';
