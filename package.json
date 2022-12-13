@@ -17,15 +17,20 @@
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
+    "use-query-params": "^2.1.2",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch ./src",
+    "test:e2e": "cypress run --headed --config-file \"./cypress/config/cypress-base.json\"",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "tsc:check": "npm run tsc:check-app && npm run tsc:check-cypress",
+    "tsc:check-app": "tsc --noEmit --project \"./tsconfig.json\"",
+    "tsc:check-cypress": "tsc --noEmit --project \"./cypress/tsconfig.json\""
   },
   "browserslist": {
     "production": [
@@ -61,6 +66,7 @@
     "@typescript-eslint/parser": "^5.42.1",
     "axios-mock-adapter": "^1.21.2",
     "babel-jest": "^29.3.1",
+    "cypress": "^9.7.0",
     "eslint": "^8.27.0",
     "eslint-config-airbnb": "^19.0.4",
     "jest": "^29.3.1",

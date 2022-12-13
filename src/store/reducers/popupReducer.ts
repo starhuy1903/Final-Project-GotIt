@@ -1,4 +1,3 @@
-// import { MouseEvent } from 'react';
 import { RootState } from '../store';
 import { PopupActionType } from '../actions/popupActions';
 import { Item } from '../../types/item';
