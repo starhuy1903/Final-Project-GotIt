@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Icon } from '@ahaui/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQueryParam, NumberParam } from 'use-query-params';
@@ -30,14 +30,14 @@ const CategoryList: React.FC = () => {
     dispatch(closePopup());
   };
 
-  const fetchData = async (page: number) => {
+  const fetchData = useCallback(async (page: number) => {
     setIsLoading(true);
     const offset = ((page - 1) * LIMIT);
     const data = await dispatch(fetchCategoriesList(offset, LIMIT));
     const { totalItems, items } = data;
     setData({ totalItems, items });
     setIsLoading(false);
-  };
+  }, [LIMIT, dispatch, fetchCategoriesList]);
 
   useEffect(() => {
     if (page) {

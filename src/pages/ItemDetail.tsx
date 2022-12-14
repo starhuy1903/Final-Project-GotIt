@@ -1,6 +1,6 @@
 import { Loader } from '@ahaui/react';
 import useTypedDispatch from 'hooks/useTypedDispatch';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchItemDetail } from 'store/actions/item';
 import { Item } from 'types/item';
@@ -13,12 +13,12 @@ const ItemDetail = () => {
   const categoryIdNum = Number(categoryId);
   const itemIdNum = Number(itemId);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     const res = await dispatch(fetchItemDetail(itemIdNum, categoryIdNum));
     setData(res);
     setLoading(false);
-  };
+  }, [dispatch, fetchItemDetail, itemIdNum, categoryIdNum]);
 
   useEffect(() => {
     fetchData();

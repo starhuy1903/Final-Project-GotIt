@@ -3,7 +3,7 @@ import { useQueryParam, NumberParam } from 'use-query-params';
 import PaginationTable from 'components/common/table/PaginationTable';
 import useAppSelector from 'hooks/useAppSelector';
 import useTypedDispatch from 'hooks/useTypedDispatch';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   createItem, deleteItem, fetchItemsList, updateItem,
@@ -33,14 +33,14 @@ const ItemList:React.FC = () => {
     dispatch(closePopup());
   };
 
-  const fetchData = async (page: number) => {
+  const fetchData = useCallback(async (page: number) => {
     setIsLoading(true);
     const offset = ((page - 1) * LIMIT);
     const data = await dispatch(fetchItemsList(offset, LIMIT, categoryIdNum));
     const { totalItems, items } = data;
     setData({ totalItems, items });
     setIsLoading(false);
-  };
+  }, [LIMIT, dispatch, fetchItemsList]);
 
   useEffect(() => {
     if (page) {
