@@ -26,6 +26,8 @@
     "build": "react-scripts build",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch ./src",
     "test:e2e": "cypress run --headed --config-file \"./cypress/config/cypress-base.json\"",
+    "test:e2e-open": "cypress open --config-file \"./cypress/config/cypress-base.json\"",
+    "test:e2e-local": "./scripts/run-local-e2e.sh",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts",
     "tsc:check": "npm run tsc:check-app && npm run tsc:check-cypress",

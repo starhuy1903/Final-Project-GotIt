@@ -69,7 +69,7 @@ const Login: React.FC = () => {
           onSubmit={formik.handleSubmit}
           className="u-flex u-flexColumn u-alignItemsCenter u-widthFull"
         >
-          <h1 className="u-text900 u-fontBold u-marginBottomSmall">Sign in</h1>
+          <h1 className="u-text900 u-fontBold u-marginBottomSmall" data-test-id="title">Sign in</h1>
           <Form.Group controlId="email-control" className="u-widthFull">
             <Form.Label>Email</Form.Label>
             <Form.Input
@@ -81,7 +81,7 @@ const Login: React.FC = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.email && formik.errors.email && (
-              <Form.Feedback type="invalid">
+              <Form.Feedback type="invalid" data-test-id="email-feedback">
                 {formik.errors.email}
               </Form.Feedback>
             )}
@@ -99,7 +99,7 @@ const Login: React.FC = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.password && formik.errors.password && (
-              <Form.Feedback type="invalid">
+              <Form.Feedback type="invalid" data-test-id="password-feedback">
                 {formik.errors.password}
               </Form.Feedback>
             )}
@@ -108,7 +108,7 @@ const Login: React.FC = () => {
             <Loader duration={500} />
           ) : (
             <Button variant="primary" className="u-marginTopSmall">
-              <Button.Label className="u-paddingHorizontalLarge">Login</Button.Label>
+              <Button.Label className="u-paddingHorizontalLarge" data-test-id="btn-control">Login</Button.Label>
             </Button>
           )}
         </form>
