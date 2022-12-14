@@ -1,7 +1,7 @@
 import { CategoryPayload } from 'types/category';
 import { TypedDispatch } from 'store/store';
 import { apiWrapper } from '../../api';
-import categoryAPI from '../../api/categoryAPI';
+import categoryAPI from '../../api/category';
 import { showSuccessMes } from '.';
 
 export const fetchCategoriesList =

@@ -2,7 +2,7 @@ import { ItemPayload } from 'types/item';
 import { apiWrapper } from '../../api';
 import { showSuccessMes } from '.';
 import { TypedDispatch } from '../store';
-import itemAPI from '../../api/itemAPI';
+import itemAPI from '../../api/item';
 
 export const fetchItemsList = (offset: number, limit: number, categoryId: number) => async (dispatch: TypedDispatch) => {
   const result = await dispatch(apiWrapper(itemAPI.fetchItemsList(offset, limit, categoryId)));

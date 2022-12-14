@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { apiWrapper } from '../../api';
 import { TypedDispatch } from '../store';
 import { TOKEN_KEY } from '../../constants';
-import authAPI from '../../api/authAPI';
+import authAPI from '../../api/auth';
 
 export enum AuthActionType {
   AUTH_TOKEN = 'auth_token',
