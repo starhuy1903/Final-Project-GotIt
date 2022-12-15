@@ -1,0 +1,53 @@
+{
+  "categoryList": {
+  "total_items":2,
+  "items":[
+    {
+      "id":21,
+      "name":"category name",
+      "description":"category description",
+      "image_url":"https://static.toiimg.com/photo/msid-58515713,width-96,height-65.cms"
+    },
+    {
+      "id":22,
+      "name":"category name",
+      "description":"category description",
+      "image_url":"https://static.toiimg.com/photo/msid-58515713,width-96,height-65.cms"
+    }
+  ]
+},
+  "addedCategoryList": {
+    "total_items":3,
+  "items":[
+    {
+      "id":21,
+      "name":"category name 1",
+      "description":"category description",
+      "image_url":"https://static.toiimg.com/photo/msid-58515713,width-96,height-65.cms"
+    },
+    {
+      "id":22,
+      "name":"category name 2",
+      "description":"category description",
+      "image_url":"https://static.toiimg.com/photo/msid-58515713,width-96,height-65.cms"
+    },
+    {
+      "id":23,
+      "name":"category name 3",
+      "description":"category description",
+      "image_url":"https://static.toiimg.com/photo/msid-58515713,width-96,height-65.cms"
+    }
+  ]
+  },
+  "newCategory": {
+    "name":"category name 3",
+    "description":"category description",
+    "image_url":"https://static.toiimg.com/photo/msid-58515713,width-96,height-65.cms"
+  },
+  "addedNewCategory": {
+    "id":23,
+    "name":"category name 3",
+    "description":"category description",
+    "image_url":"https://static.toiimg.com/photo/msid-58515713,width-96,height-65.cms"
+  }
+}

@@ -54,6 +54,7 @@ const CategoryForm: React.FC<PopupPropsType> = ({
       <form
         onSubmit={formik.handleSubmit}
         className=" u-flex u-flexColumn u-alignItemsStart u-widthFull"
+        data-test-id="category-form"
       >
         <Form.Group controlId="name-control" className="u-widthFull">
           <Form.Label>Name</Form.Label>
@@ -63,6 +64,7 @@ const CategoryForm: React.FC<PopupPropsType> = ({
             value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            data-test-id="name-input-control"
           />
           {formik.touched.name && formik.errors.name && (
           <Form.Feedback type="invalid">{formik.errors.name}</Form.Feedback>
@@ -80,6 +82,7 @@ const CategoryForm: React.FC<PopupPropsType> = ({
             rows={3}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            data-test-id="description-input-control"
           />
           {formik.touched.description && formik.errors.description && (
           <Form.Feedback type="invalid">
@@ -95,6 +98,7 @@ const CategoryForm: React.FC<PopupPropsType> = ({
             value={formik.values.imageUrl}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            data-test-id="image-input-control"
           />
           {formik.touched.imageUrl && formik.errors.imageUrl && (
           <Form.Feedback type="invalid">{formik.errors.imageUrl}</Form.Feedback>
@@ -108,10 +112,11 @@ const CategoryForm: React.FC<PopupPropsType> = ({
                 onClick={() => formik.resetForm({ values: initialValues })}
                 variant="secondary"
                 className="u-marginRightSmall"
+                data-test-id="reset-btn"
               >
                 <Button.Label className="u-paddingTiny">Reset</Button.Label>
               </Button>
-              <Button variant="primary">
+              <Button variant="primary" data-test-id="submit-btn">
                 <Button.Label className="u-paddingVerticalTiny u-paddingHorizontalExtraSmall">Submit</Button.Label>
               </Button>
             </>

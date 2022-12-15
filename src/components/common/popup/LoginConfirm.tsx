@@ -8,14 +8,14 @@ const LoginConfirm :React.FC<PopupPropsType> = ({
 }) => (
   <PopupWrapper title={title} closeHandler={() => closeHandler?.()}>
     <div className="u-flex u-flexColumn u-alignItemsCenter u-widthFull">
-      <p>
+      <p data-test-id="login-confirm-msg">
         You need to login to perform this action!
       </p>
       <div className="u-flex u-alignItemsCenter u-justifyContentCenter u-widthFull" style={{ gap: '15px' }}>
-        <Button variant="secondary" onClick={() => closeHandler?.()}>
+        <Button variant="secondary" data-test-id="cancel-btn" onClick={() => closeHandler?.()}>
           <Button.Label className="u-paddingHorizontalMedium">Cancel</Button.Label>
         </Button>
-        <Button variant="primary" onClick={() => onSubmit?.()}>
+        <Button variant="primary" data-test-id="confirm-btn" onClick={() => onSubmit?.()}>
           <Button.Label className="u-paddingHorizontalLarge">Login</Button.Label>
         </Button>
       </div>

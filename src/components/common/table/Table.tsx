@@ -14,6 +14,7 @@ const Table: React.FC<TableProps> = ({ list, cols }) => {
       <table
         width="100%"
         className="Table Table--stickyHeader Table--bordered  u-backgroundWhite u-textDark u-text200"
+        data-test-id="data-table"
       >
         <thead>
           <tr>

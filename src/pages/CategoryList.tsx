@@ -170,7 +170,7 @@ const CategoryList: React.FC = () => {
         page={page || 1}
         setPage={setPage}
         CreateButton={(
-          <Button onClick={openCreatePopup}>
+          <Button data-test-id="create-btn" onClick={openCreatePopup}>
             <Button.Icon>
               <Icon size="medium" name="plus" />
             </Button.Icon>

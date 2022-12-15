@@ -38,25 +38,21 @@ const PaginationTable: React.FC<PaginationTableProps> = ({
       </header>
 
       <div className="u-paddingHorizontalMedium u-paddingVerticalSmall">
-        {!isLoading && (
-        <>
-          {/* Table section  */}
-          <Table cols={cols} list={data?.items} />
+        {isLoading ? (
+          <Loader data-test-id="spinner" size="medium" />
+        ) : (
+          <>
+            {/* Table section  */}
+            <Table cols={cols} list={data?.items} />
 
-          {/* Pagination section */}
-          <Pagination
-            totalCount={data?.totalItems || 0}
-            currentPage={page}
-            onPageChange={setPage}
-            pageSize={pageSize}
-          />
-        </>
-        )}
-
-        {isLoading && (
-        <div id="loader">
-          <Loader size="medium" />
-        </div>
+            {/* Pagination section */}
+            <Pagination
+              totalCount={data?.totalItems || 0}
+              currentPage={page}
+              onPageChange={setPage}
+              pageSize={pageSize}
+            />
+          </>
         )}
       </div>
     </div>

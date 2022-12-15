@@ -2,7 +2,7 @@
 
 describe('tests login screen', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/login');
+    cy.visit('/login');
     cy.intercept('POST', '/auth').as('login');
   });
 
@@ -32,7 +32,7 @@ describe('tests login screen', () => {
     cy.get('[data-test-id="btn-control"]').click();
     cy.wait('@login');
 
-    cy.url().should('eq', 'http://localhost:3000/');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/`);
   });
 
   it('should fail when submit wrong email or password', () => {
@@ -41,7 +41,7 @@ describe('tests login screen', () => {
     cy.get('[data-test-id="btn-control"]').click();
     cy.wait('@login');
 
-    cy.url().should('eq', 'http://localhost:3000/login');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/login`);
     cy.get('[role="alert"]').should('contain', 'Invalid email or password');
   });
 });
